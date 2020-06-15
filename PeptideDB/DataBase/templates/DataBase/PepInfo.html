@@ -1,0 +1,51 @@
+{% extends 'DataBase/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/table.css' %}">
+
+<style>
+div.ex1 {
+  width:70%;
+  border: 3px;
+  margin: auto; 
+  margin-top: 20px; 
+}
+</style>
+
+
+<div class="ex1">
+
+  <table>
+
+      <thead>
+        <tr>
+          <th> Input Sequence  </th>         
+          <th> Protein found </th>
+          <th> Protein Name </th>
+          <th> Species </th>
+          <th> Chromosome </th>
+          <th> Accession </th>
+          <th> Position  </th>
+          <th> Proteases </th>
+        </tr>
+      <thead>
+
+  <tbody>
+         {% for C in Ps %}
+         <tr>
+            <td><a href="{% url 'ProtView' %}/?uniprotID={{C.Accession}}"> {{C.Input_Sequence}} </a></td>
+            <td> {{C.Protein_found }} </td>
+            <td>{{C.Recommended_Protein_Name }} </td>
+            <td> {{C.Species }} </td>
+            <td>  {{C.Chromosome_year }}</td>
+            <td> {{C.Accession}} </td>
+            <td> {{C.P1_Position}} </td>
+         </tr>
+        {% endfor %}
+
+   </tbody>
+  <table/>
+</div>
+
+{% endblock %}

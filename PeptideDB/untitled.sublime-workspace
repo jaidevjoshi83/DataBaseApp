@@ -1,0 +1,1361 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"mean",
+				"mean_hydropathy\tstatement"
+			],
+			[
+				"i",
+				"indentifiers\tstatement"
+			],
+			[
+				"plo",
+				"plot_aa_distr"
+			],
+			[
+				"plot",
+				"plot_profile"
+			],
+			[
+				"des",
+				"descriptor"
+			],
+			[
+				"Ig",
+				"IgnorIndex\tparam"
+			],
+			[
+				"to",
+				"to_csv"
+			],
+			[
+				"tax",
+				"taxonomy_OTS\tstatement"
+			],
+			[
+				"max",
+				"max_fun"
+			],
+			[
+				"pow",
+				"power_t"
+			],
+			[
+				"v",
+				"version"
+			],
+			[
+				"se",
+				"seaborn"
+			],
+			[
+				"Re",
+				"Remove_corr_features\tfunction"
+			],
+			[
+				"Y",
+				"y_score\tstatement"
+			],
+			[
+				"l",
+				"label"
+			],
+			[
+				"int",
+				"integer"
+			],
+			[
+				"boo",
+				"boolean"
+			],
+			[
+				"min",
+				"min_impurity_decrease"
+			],
+			[
+				"n",
+				"name"
+			],
+			[
+				"h",
+				"help"
+			],
+			[
+				"f",
+				"float"
+			],
+			[
+				"ML_algo",
+				"ml_algo_II"
+			],
+			[
+				"file",
+				"file_name"
+			],
+			[
+				"a",
+				"argv\tinstance"
+			],
+			[
+				"el",
+				"elif"
+			],
+			[
+				"Out",
+				"OutDir"
+			],
+			[
+				"pre",
+				"predict"
+			],
+			[
+				"Test",
+				"TestData\tparam"
+			],
+			[
+				"X",
+				"X_test\tparam"
+			],
+			[
+				"In",
+				"InAlgo\tparam"
+			],
+			[
+				"y",
+				"y_test\tstatement"
+			],
+			[
+				"def",
+				"default"
+			],
+			[
+				"Dat",
+				"DataBaseType"
+			],
+			[
+				"glo",
+				"Global"
+			],
+			[
+				"pro",
+				"prof_type"
+			],
+			[
+				"Des",
+				"DesType\tparam"
+			],
+			[
+				"df",
+				"dfOut\tstatement"
+			],
+			[
+				"inp",
+				"inputfile\tparam"
+			],
+			[
+				"out",
+				"out_df\tstatement"
+			],
+			[
+				"li",
+				"list_pep_name\tstatement"
+			],
+			[
+				"T",
+				"GetTPComp"
+			],
+			[
+				"pep",
+				"peptide\tmodule"
+			],
+			[
+				"fra",
+				"frag_size\tparam"
+			],
+			[
+				"Win",
+				"window_size"
+			],
+			[
+				"Le",
+				"lenth"
+			],
+			[
+				"ind",
+				"index_list\tstatement"
+			],
+			[
+				"index",
+				"index_list\tparam"
+			],
+			[
+				"re",
+				"replacements\tstatement"
+			],
+			[
+				"rea",
+				"readline\tfunction"
+			],
+			[
+				"inpu",
+				"input_seq\tstatement"
+			],
+			[
+				"sl",
+				"slidingWindow\tfunction"
+			],
+			[
+				"hy",
+				"hyd_gra\tparam"
+			],
+			[
+				"Ra",
+				"Random_seq"
+			],
+			[
+				"dir",
+				"dir_path\tstatement"
+			],
+			[
+				"svc",
+				"svc_p\tstatement"
+			],
+			[
+				"in",
+				"in_method"
+			],
+			[
+				"accu",
+				"accuracy_score_l\tstatement"
+			],
+			[
+				"class",
+				"class_label"
+			],
+			[
+				"D",
+				"DecisionTreeClassifier"
+			],
+			[
+				"cl",
+				"close\tfunction"
+			],
+			[
+				"part",
+				"part_2\tstatement"
+			],
+			[
+				"pl",
+				"pl\tmodule"
+			],
+			[
+				"k",
+				"KNeighborsClassifier"
+			],
+			[
+				"gr",
+				"grid_perams"
+			],
+			[
+				"Gr",
+				"GridSearchCV\tmodule"
+			],
+			[
+				"lin",
+				"linear"
+			],
+			[
+				"rand",
+				"random_accuracy\tstatement"
+			],
+			[
+				"Feature",
+				"Feature_dir\tstatement"
+			],
+			[
+				"fil",
+				"filter_list\tstatement"
+			],
+			[
+				"col",
+				"col_list\tstatement"
+			],
+			[
+				"all",
+				"all_fpr\tstatement"
+			],
+			[
+				"column",
+				"columns"
+			],
+			[
+				"ex",
+				"ex_FP\tstatement"
+			],
+			[
+				"get",
+				"getcwd"
+			],
+			[
+				"line",
+				"line2\tstatement"
+			],
+			[
+				"lines",
+				"lines2\tstatement"
+			],
+			[
+				"s",
+				"strip"
+			],
+			[
+				"in_file",
+				"in_files\tparam"
+			],
+			[
+				"co",
+				"corrected_file\tstatement"
+			],
+			[
+				"core",
+				"corrected_lines\tstatement"
+			],
+			[
+				"end",
+				"end_val"
+			],
+			[
+				"S",
+				"Start_val\tstatement"
+			],
+			[
+				"red",
+				"reduced_data_Frame\tstatement"
+			],
+			[
+				"No",
+				"No_of_features\tparam"
+			],
+			[
+				"tre",
+				"Tree_based_Feature_selection\tfunction"
+			],
+			[
+				"scal",
+				"scaling_option\tparam"
+			],
+			[
+				"selecte",
+				"Selected_Sclaer"
+			],
+			[
+				"c",
+				"columns"
+			],
+			[
+				"OTU",
+				"OTU_file"
+			],
+			[
+				"sv",
+				"svm_wieghts\tstatement"
+			],
+			[
+				"im",
+				"image_out_path\tparam"
+			],
+			[
+				"image",
+				"image_out_path"
+			],
+			[
+				"val",
+				"val_list\tstatement"
+			],
+			[
+				"repo",
+				"report_file_dir_path"
+			],
+			[
+				"report",
+				"report_file_name"
+			],
+			[
+				"par",
+				"part_3\tstatement"
+			],
+			[
+				"ru",
+				"Result_summarty"
+			],
+			[
+				"pa",
+				"padding-right\tproperty"
+			],
+			[
+				"daa",
+				"dataset"
+			],
+			[
+				"arg",
+				"args\tstatement"
+			],
+			[
+				"outp",
+				"output"
+			],
+			[
+				"for",
+				"format"
+			],
+			[
+				"o",
+				"output_file_name"
+			],
+			[
+				"redu",
+				"reduced_data\tstatement"
+			],
+			[
+				"id",
+				"identify_zero_value_columns\tfunction"
+			],
+			[
+				"remo",
+				"removal_ops"
+			],
+			[
+				"single_",
+				"single_unique"
+			],
+			[
+				"uni",
+				"unique_counts\tstatement"
+			],
+			[
+				"lis",
+				"listofzeros\tstatement"
+			],
+			[
+				"tx",
+				"tax_line\tstatement"
+			],
+			[
+				"read",
+				"readlines\tfunction"
+			],
+			[
+				"str",
+				"strip"
+			],
+			[
+				"ra",
+				"readlines\tfunction"
+			],
+			[
+				"mal",
+				"male_line\tstatement"
+			],
+			[
+				"male",
+				"male_lines\tstatement"
+			],
+			[
+				"w",
+				"write\tfunction"
+			],
+			[
+				"qu",
+				"query_otus\tstatement"
+			],
+			[
+				"sp",
+				"split"
+			],
+			[
+				"list",
+				"list_2\tstatement"
+			],
+			[
+				"R",
+				"R2"
+			],
+			[
+				"sum",
+				"sum_val\tstatement"
+			],
+			[
+				"drop",
+				"drop_duplicates\tfunction"
+			],
+			[
+				"m",
+				"m_lines\tstatement"
+			],
+			[
+				"s_",
+				"s_lines\tstatement"
+			],
+			[
+				"df_",
+				"df_new_T"
+			],
+			[
+				"df_n",
+				"df_new_T\tstatement"
+			],
+			[
+				"ary",
+				"ary_df\tstatement"
+			],
+			[
+				"data",
+				"data_list\tstatement"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "DataBase/views.py",
+			"settings":
+			{
+				"buffer_size": 986,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "DataBase/templates/DataBase/base.html",
+			"settings":
+			{
+				"buffer_size": 3440,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/joshij/Desktop/Git_repos/DataBaseApp/DATA/model_table.txt",
+			"settings":
+			{
+				"buffer_size": 616,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/data/Jay/MacDesktopBackup/DesktopActivity/OLD_projects/pep_web/FragBuild/templates/FragBuild/Rand_frag_Result.html",
+			"settings":
+			{
+				"buffer_size": 1919,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/data/Jay/MacDesktopBackup/DesktopActivity/OLD_projects/pep_web/FragBuild/forms.py",
+			"settings":
+			{
+				"buffer_size": 1414,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/data/Jay/MacDesktopBackup/DesktopActivity/OLD_projects/pep_web/FragBuild/templates/FragBuild/Rand_Frag.html",
+			"settings":
+			{
+				"buffer_size": 1844,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "DataBase/models.py",
+			"settings":
+			{
+				"buffer_size": 1876,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/joshij/Desktop/myproject/SeqData/admin.py",
+			"settings":
+			{
+				"buffer_size": 63,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "DataBase/templates/DataBase/PepInfo.html",
+			"settings":
+			{
+				"buffer_size": 99,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "DataBase/forms.py",
+			"settings":
+			{
+				"buffer_size": 475,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "DataBase/templates/DataBase/Form.html",
+			"settings":
+			{
+				"buffer_size": 1703,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/data/Jay/MacDesktopBackup/DesktopActivity/OLD_projects/pep_web/FragBuild/views.py",
+			"settings":
+			{
+				"buffer_size": 6932,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: i",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: git",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Preferences:Terminus Key Bindings",
+				"Preferences: Terminus Key Bindings"
+			],
+			[
+				"Terminus: Open Default Shell in View",
+				"Terminus: Open Default Shell in View"
+			],
+			[
+				"Preferences: Terminus Key Bindings",
+				"Preferences: Terminus Key Bindings"
+			],
+			[
+				"run Terminus: Open Default Shell in View",
+				"Terminus: Open Default Shell in View"
+			],
+			[
+				" run Terminus: Open Default Shell in View",
+				"Terminus: Open Default Shell in View"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: anaco",
+				"Package Control: Discover Packages"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/joshij/Desktop/Git_repos/DataBaseApp/PeptideDB",
+		"/home/joshij/Desktop/Git_repos/DataBaseApp/PeptideDB/DataBase",
+		"/home/joshij/Desktop/Git_repos/DataBaseApp/PeptideDB/DataBase/templates",
+		"/home/joshij/Desktop/Git_repos/DataBaseApp/PeptideDB/DataBase/templates/DataBase"
+	],
+	"file_history":
+	[
+		"/home/joshij/Desktop/PeptideDB/DataBase/views.py",
+		"/data/Jay/MacDesktopBackup/DesktopActivity/Sumitdata/Sumit_Example.csv",
+		"/data/Jay/MacDesktopBackup/DesktopActivity/OLD_projects/pep_web/FragBuild/views.py",
+		"/home/joshij/Microarraydata/SeparatedData/sample2/2.sample.txt",
+		"/home/joshij/Microarraydata/SeparatedData/sample1/1.sample.txt",
+		"/home/joshij/Desktop/PeptideDB/DataBase/templates/DataBase/index.html",
+		"/home/joshij/Desktop/PeptideDB/DataBase/static/data/data.json",
+		"/home/joshij/Desktop/PeptideDB/DataBase/models.py",
+		"/home/joshij/Microarraydata/SeparatedData/sample2/out.tsv",
+		"/home/joshij/Microarraydata/2.smple.txt",
+		"/home/joshij/Desktop/PeptidePaperDataAnalysis/Peptide/peptide_fisher/ACPvsNonACP/Negative.fasta",
+		"/home/joshij/Desktop/PeptidePaperDataAnalysis/Peptide/peptide_fisher/ACPvsNonACP/new_negative.fasta",
+		"/home/joshij/Desktop/PeptidePaperDataAnalysis/Peptide/peptide_fisher/ACPvsNonACP/new_Positive.fasta",
+		"/home/joshij/Desktop/PeptidePaperDataAnalysis/Peptide/peptide_fisher/ACPvsNonACP/Positive.fasta",
+		"/home/joshij/Desktop/PeptidePaperDataAnalysis/Peptide/peptide_fisher/Negative.fasta",
+		"/home/joshij/Desktop/PeptidePaperDataAnalysis/Peptide/peptide_fisher/peptide_fisher.py",
+		"/home/joshij/Desktop/PeptidePaperDataAnalysis/acpred-webserver-master/FastaToTSV.py",
+		"/home/joshij/Desktop/PeptidePaperDataAnalysis/acpred-webserver-master/Negative.fasta",
+		"/home/joshij/Desktop/PeptidePaperDataAnalysis/Peptide/peptide_fisher/AMPvsTM/Negative.fasta",
+		"/home/joshij/Desktop/PeptidePaperDataAnalysis/Peptide/peptide_fisher/Amyload_positive.fasta",
+		"/home/joshij/Desktop/PeptidePaperDataAnalysis/Peptide/peptide_fisher/Amyload_negative.fasta",
+		"/home/joshij/Desktop/PeptidePaperDataAnalysis/Peptide/peptide_fisher/new_negative.fasta",
+		"/home/joshij/Desktop/PeptidePaperDataAnalysis/Peptide/peptide_fisher/new_Positive.fasta",
+		"/home/joshij/Desktop/PeptidePaperDataAnalysis/acpred-webserver-master/Ac_training (copy).fasta",
+		"/home/joshij/Desktop/PeptidePaperDataAnalysis/acpred-webserver-master/Ac_training.fasta",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/binary_prediction/binary_prediction.py",
+		"/home/joshij/Desktop/PeptidePaperDataAnalysis/Galaxy2-[out.tsv].tabular",
+		"/home/joshij/Desktop/PeptidePaperDataAnalysis/acpred-webserver-master/acpred_training.fasta",
+		"/home/joshij/Desktop/NeuBI-master/neubi.py",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/binary_prediction/binary_prediction.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/biom_to_tsv/biom_to_tsv.py",
+		"/home/joshij/Desktop/NeuBI-master/my_wordvec_model_trembl_size_200",
+		"/home/joshij/Desktop/NeuBI-master/final_NN_model.h5",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/transform_df/transform_df.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/multi_class_prediction/multi_class_prediction.xml",
+		"/home/joshij/Desktop/galaxy/config/tool_conf.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/merge_meta_data/merge_meta_data.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/Merge_Meta_Data/MergeMetaData.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/merge_data_frame/merge_data_frame.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/heat_map/heat_map.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/feature_selection/feature_selection.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/clean_biom/clean_biom.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/biom_to_tsv/biom_to_tsv.xml",
+		"/home/joshij/Desktop/Galaxy-Workflow-Mothur_I.ga",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/feature_selection/feature_selection.py",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/transform_df/transform_df.py",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/merge_data_frame/concate_data_frame.py",
+		"/home/joshij/Desktop/b4s/RNA_summary.py",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/Merge_Meta_Data/MergeMetaData.py",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/Galaxy_tool/MergeMetaData.xml",
+		"/home/joshij/Desktop/Galaxy_tool/MergeMetaData.py",
+		"/home/joshij/Desktop/Galaxy_tool/MergeMetaData.xml",
+		"/home/joshij/galaxy/config/tool_conf.xml",
+		"/home/joshij/Desktop/galaxy.tsv",
+		"/data/PD_1_Gut_micro_data/misc/meta_Data/EGAZ00001315839_Metadata_2_Fecal_WGS_completed_2.xml.cip",
+		"/data/PD_1_Gut_micro_data/misc/meta_Data/EGAZ00001315841_Metadata_2_Mouse_completed.xml.cip",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/WrokFlowFile/Galaxy721.tsv",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/clean_biom/clean_biom.py",
+		"/home/joshij/Desktop/Galaxy1134-[1.tsv__0.03].tsv",
+		"/home/joshij/Desktop/Galaxy_tool/Galaxy721.tsv",
+		"/home/joshij/Desktop/Galaxy721.tsv",
+		"/data/PD_1_Gut_micro_data/misc/meta_Data/EGAZ00001315837_Metadata_2_Buccal_16S_completed_2.xml",
+		"/home/joshij/Desktop/2173_ Make.biom on collection 2147 and collection 2143_ biom files/Make.biom on collection 2147 and collection 2143: biom files/0.03/table.from_biom.tsv",
+		"/home/joshij/Desktop/viper/modules/scripts/virusseq_filterTranscripts.py",
+		"/home/joshij/Desktop/viper/modules/scripts/viper_report.py",
+		"/home/joshij/Desktop/viper/modules/DE.snakefile",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/heat_map/heat_map.py",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/biom_to_csv/biom_to_csv.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/datasets/data_sets.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/transform_df/trans_form_df.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/merge_meta_data/merge_meta_data.py",
+		"/home/joshij/Desktop/final_currected_data_new/AGE/correlation/Reduced_feature_data/analysis.py",
+		"/home/joshij/Desktop/final_currected_data_new/AGE/correlation/Reduced_feature_data/Sample_balence.py",
+		"/home/joshij/Desktop/final_currected_data_new/Data_without_index/bacteremia/Meta_data_Added/counter.py",
+		"/home/joshij/Desktop/Machine_learning_project_test/multi_class_fols/otutable_outtask_baby_age_out.tsv",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/test.tsv",
+		"/home/joshij/Desktop/final_currected_data_new/Data_without_index/bacteremia/Meta_data_Added/otutable_outtask_out_NO_BACT_BACK.tsv",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/CleanBiom/CleanBiom.py",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/CleanBiom/CleanBiom.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/MergeMetaData/MergeMetaData.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/MergeDataFrame/MergeDataFrame.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/MultiClassPrediction/MultiClassPrediction.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/TransFormDF/TransFormDF.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/FeatureSelection/FeatureSelection.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/BinaryPrediction/BinaryPrediction.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/BinaryPrediction/ML.py",
+		"/home/joshij/Desktop/MicroBiomMLRepo/Final_tools/TransFormDF/TransFormDF.xml",
+		"/home/joshij/Desktop/galaxy/My_tools/biomTOcsv_II/BiomToCSV.xml",
+		"/home/joshij/Desktop/galaxy/My_tools/biomTOcsv/BiomToCSV.xml",
+		"/home/joshij/Desktop/MicroBiomMLRepo/Final_tools/TransFormDF/TransFormDF.py",
+		"/data/Jay/OldGitReposandGalaxyTools/Git_repos/Microbiom_repo/TransfromCSV/ParallelTransformCSVAbundanceMatrix.py",
+		"/data/Jay/OldGitReposandGalaxyTools/Git_repos/My_tools/MergeDataFrame/MergeDataFrame.xml",
+		"/home/joshij/Desktop/Git_repos/MicroBiomML/Final_tools/HeatMap/HeatMap.xml",
+		"/home/joshij/Desktop/jai.tsv",
+		"/home/joshij/Desktop/Galaxy468-[1.tsv].tsv",
+		"/home/joshij/Desktop/MicroBiomMLRepo/Final_tools/biomTOcsv_II/BiomToCsv.py",
+		"/home/joshij/Desktop/MicroBiomMLRepo/Final_tools/biomTOcsv_II/BiomToCSV.xml",
+		"/home/joshij/Desktop/Git_repos/MyTools/biomTOcsv/BiomToCsv.py",
+		"/home/joshij/Desktop/MicroBiomMLRepo/Final_tools/MergeDataFrame/MergeDataFrame.xml",
+		"/data/Jay/OldGitReposandGalaxyTools/Git_repos/My_tools/biomTOcsv_II/BiomToCSV.xml",
+		"/home/joshij/Desktop/MicroBiomMLRepo/Final_tools/biomTOcsv/BiomToCSV.xml",
+		"/home/joshij/Desktop/galaxy/tool-data/toolshed.g2.bx.psu.edu/repos/iuc/mothur_pca/74d1b765843b/tool_data_table_conf.xml",
+		"/home/joshij/Desktop/galaxy/tool-data/toolshed.g2.bx.psu.edu/repos/iuc/mothur_merge_sfffiles/26ddda2d2462/tool_data_table_conf.xml",
+		"/home/joshij/Desktop/Git_repos/MyTools/biomTOcsv/BiomToCSV.xml",
+		"/home/joshij/Desktop/galaxy/config/shed_tool_data_table_conf.xml",
+		"/home/joshij/Desktop/galaxy/config/shed_tool_conf.xml",
+		"/home/joshij/Desktop/galaxy/tools/stats/grouping.xml",
+		"/home/joshij/Desktop/all_urls.csv",
+		"/home/joshij/Desktop/plan/galaxy/config/tool_conf.xml",
+		"/home/joshij/Desktop/Galaxy_for_tools/galaxy/config/tool_conf.xml",
+		"/home/joshij/Desktop/galaxy/tool-data/toolshed.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/152ae632ab19/tool_data_table_conf.xml",
+		"/home/joshij/Desktop/Galaxy_for_tools/galaxy/My_tools/Feature/feature_II.xml",
+		"/home/joshij/Desktop/Galaxy_for_tools/galaxy/My_tools/DATASETS/DATASETS.xml",
+		"/home/joshij/Desktop/Galaxy_for_tools/galaxy/My_tools/CleanBiomI/CleanBiomI.xml",
+		"/home/joshij/Desktop/Galaxy_for_tools/galaxy/My_tools/CleanBiom/CleanBiom.xml",
+		"/home/joshij/Desktop/Galaxy_for_tools/galaxy/My_tools/NEW_ML/ML_old.xml",
+		"/home/joshij/Desktop/Galaxy_for_tools/galaxy/My_tools/ml_algo/ML_algo.xml",
+		"/home/joshij/Desktop/Galaxy_for_tools/galaxy/My_tools/CleanBiomI/CleanBiom.py",
+		"/home/joshij/Desktop/Galaxy_for_tools/galaxy/My_tools/MultiClass/MultiClass.xml",
+		"/home/joshij/Desktop/Galaxy_for_tools/galaxy/My_tools/NEW_ML/ML.xml",
+		"/home/joshij/Desktop/MothurExampleDataSet/OutBiom/CleanBiom/CleanBiom.xml",
+		"/home/joshij/Desktop/MothurExampleDataSet/OutBiom/CleanBiom.py",
+		"/home/joshij/Desktop/Galaxy_for_tools/galaxy/My_tools/NEW_ML/ML.py",
+		"/home/joshij/Desktop/MothurExampleDataSet/OutBiom/BiomToCsv.py",
+		"/home/joshij/Desktop/MothurExampleDataSet/OutBiom/jai.tsv",
+		"/home/joshij/Desktop/Galaxy_for_tools/galaxy/My_tools/DATASETS_II/DATASETS_II.xml",
+		"/home/joshij/Desktop/MothurExampleDataSet/OutBiom/BiomToCsv (copy).py",
+		"/home/joshij/Desktop/Galaxy_for_tools/galaxy/My_tools/DATASETS_II/Data_package.py"
+	],
+	"find":
+	{
+		"height": 55.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"data",
+			"GLICESCRKIIQKLEDMVGPQPNEDTVTQAASQVCDKLKILRGLCKKIMRSFLRRISWDILTGKKPQAICVDIKICKEKTGLI",
+			"\t1",
+			"transform",
+			"class",
+			"Test",
+			"Feature_II",
+			"    gnbc.add_argument(\"",
+			"    knc.add_argument(\"--",
+			"lrc.add_argument(\"--",
+			"rfc.add_argument(\"--",
+			"    gbc.add_argument(\"--",
+			"\"",
+			"\",",
+			"    dtc.add_argument(\"--",
+			"(--)",
+			"rbf",
+			"text",
+			"kernel",
+			"  sgdc.add_argument(\"--",
+			"admin_users:",
+			"user",
+			"Mask",
+			"Scalling data"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			" <param name=\"",
+			"",
+			"\"",
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 7,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "DataBase/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 986,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								986,
+								986
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "DataBase/templates/DataBase/base.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3440,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2064,
+								2064
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1748.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/joshij/Desktop/Git_repos/DataBaseApp/DATA/model_table.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 616,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								616,
+								616
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/data/Jay/MacDesktopBackup/DesktopActivity/OLD_projects/pep_web/FragBuild/templates/FragBuild/Rand_frag_Result.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1919,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								941,
+								941
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 138.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/data/Jay/MacDesktopBackup/DesktopActivity/OLD_projects/pep_web/FragBuild/forms.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1414,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1414,
+								1414
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/data/Jay/MacDesktopBackup/DesktopActivity/OLD_projects/pep_web/FragBuild/templates/FragBuild/Rand_Frag.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1844,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								560,
+								560
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "DataBase/models.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1876,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								733,
+								733
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 276.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/home/joshij/Desktop/myproject/SeqData/admin.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 63,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "DataBase/templates/DataBase/PepInfo.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 99,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								99,
+								99
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "DataBase/forms.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 475,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								167,
+								167
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "DataBase/templates/DataBase/Form.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1703,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								551,
+								551
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 11,
+					"file": "/data/Jay/MacDesktopBackup/DesktopActivity/OLD_projects/pep_web/FragBuild/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6932,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5110,
+								5110
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4278.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 55.0
+	},
+	"input":
+	{
+		"height": 68.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.826605901487,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 139.0
+	},
+	"pinned_build_system": "",
+	"project": "untitled.sublime-project",
+	"replace":
+	{
+		"height": 106.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Desktop/rename_test/Test.sh"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 258.0,
+	"status_bar_visible": false,
+	"template_settings":
+	{
+		"max_columns": 1
+	}
+}

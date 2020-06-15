@@ -1,0 +1,67 @@
+{% extends 'protocol/base.html' %}
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+
+
+{% block content %}
+
+
+
+
+<div style=" color: #1f5a09; margin: auto; margin-top: 0px; height: 630px; border: 1px solid green; box-sizing: border-box;background: #ffbf00; width: 900px;margin-bottom: 10px; margin-top: 20px"; >
+<p align="cente" style="margin-left:3em;" > <font color="black" size="4"> <b> About  </b>  </font> </p> 
+
+<p align="cente" style="margin-left:6em;" > <font color="black" size="4">  A simple yet efficient web based tool for peptide research and screening of peptide libraries with the help of ML modelling techniques using five different ML algorithms. It also provides tool for descriptor calculation, peptide structure building and peptide library generation.   </font> </p> 
+
+<p align="cente" style="margin-left:3em;" > <font color="black" size="4"> <b> Citation  </b>  </font> </p>
+<p align="cente" style="margin-left:6em;" > <font color="black" size="4"> J.,Joshi et al. PEP_WEB_1.0, a web based tool for peptide research. 2018 (Communicated)  </font> </p> 
+
+<p align="cente" style="margin-left:3em;" > <font color="black" size="4"> <b> Group </b>  </font> </p>
+<p align="cente" style="margin-left:6em;" > <font color="black" size="4"> 
+<b> Dr. I. PremKumar, </b>Scientist"E" <br>
+Radiation Biology and Bioinformatics,<br> 
+Institute of Nuclear Medicine Allied Sciences, <br> 
+Timarpur, New Delhi-110054, India. <br> <br>   
+
+
+<b> Jayadev Joshi, </b> PhD<br>
+Radiation Biology and Bioinformatics,<br> 
+Institute of Nuclear Medicine Allied Sciences, <br> 
+Timarpur, New Delhi-110054, India<br>  
+
+<b> And </b> <br>
+
+Biomedical Informatics Center,<br> 
+National Institute of Cholera & Enteric  Diseases,<br>
+Beleghata, Kolkata, West Bengal 700054, India. <br> 
+Timarpur, New Delhi-110054, India <br> </font> </p>
+
+
+
+
+
+   <div style="margin-left: 20px">
+
+    {% for a in names %}
+  
+     {% if a %}
+      <td><a href="{% url 'Download_files' file_name=a %}"> <font color="black"> <b>{{a}}</b> </font> </a> <br></td>
+     {% endif %}
+
+    {% endfor %}
+
+   </div>
+
+</div>
+
+
+
+
+
+{% endblock %}
