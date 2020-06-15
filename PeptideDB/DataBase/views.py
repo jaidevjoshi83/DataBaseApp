@@ -41,6 +41,17 @@ def DB(request):
 
 def OutData(request):
     return render(request, 'DataBase/OutResults.html', {})
+
 def ProtView(request):
     return render(request, 'DataBase/index.html', {})
+
+def PepView(request,):
+
+    s = request.GET['s']
+    a = request.GET['a']
+
+    QurJson(a=a, p=s)
+
+    return redirect('http://127.0.0.1:8000/ProtView/?uniprotID='+a)
+
 
