@@ -22,6 +22,8 @@
   
  **6. Example Query set**
  
+    **Tools/DataBase**
+ 
   1. Only peptide sequence as input **"AAAAAAGAAGGR"**
   2. Only UniPort ID as input **"P37837"**
   3. Peptide and UniProt ID as input **"AAAAAAGAAGGR & Q86U42"**
