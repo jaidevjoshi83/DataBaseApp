@@ -29,8 +29,8 @@ def DB(request):
                 return redirect('http://127.0.0.1:8000/ProtView/?uniprotID='+accession)
 
             else:
-                Ps = PeptideSeq.objects.filter(Accession=accession, Input_Sequence=inputPeptide, )
-                return render(request, 'DataBase/PepInfo.html', {'Ps': Ps})
+                QurJson(a=accession, p=inputPeptide)
+                return redirect('http://127.0.0.1:8000/ProtView/?uniprotID='+accession)
 
     else:
         Fasta = ''
