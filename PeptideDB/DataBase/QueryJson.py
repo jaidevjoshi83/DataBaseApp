@@ -26,7 +26,7 @@ def QurJson(a=None,p=None):
       for C in Ps:
 
          seq.append(C.Input_Sequence)
-         starts_sides.append(C.P1_Position)
+         starts_sides.append(int(C.P1_Position))
          end_sides.append(int(C.P1_Position)+(len(C.Input_Sequence)-1))
          lenght.append(len(C.Input_Sequence))
 
@@ -48,7 +48,7 @@ def QurJson(a=None,p=None):
       for C in Ps:
 
          seq.append(C.Input_Sequence)
-         starts_sides.append(C.P1_Position)
+         starts_sides.append(int(C.P1_Position))
          end_sides.append(int(C.P1_Position)+(len(C.Input_Sequence)-1))
          lenght.append(len(C.Input_Sequence))
 
@@ -69,7 +69,7 @@ def QurJson(a=None,p=None):
       for C in Ps:
 
          seq.append(C.Input_Sequence)
-         starts_sides.append(C.P1_Position)
+         starts_sides.append(int(C.P1_Position))
          end_sides.append(int(C.P1_Position)+(len(C.Input_Sequence)-1))
          lenght.append(len(C.Input_Sequence))
 
