@@ -20,12 +20,12 @@ div.ex1 {
 
       <thead>
         <tr>
+          <th> Accession </th>
           <th> Input Sequence  </th>         
           <th> Protein found </th>
           <th> Protein Name </th>
           <th> Species </th>
           <th> Chromosome </th>
-          <th> Accession </th>
           <th> Position  </th>
           <th> Proteases </th>
         </tr>
@@ -34,13 +34,14 @@ div.ex1 {
   <tbody>
          {% for C in Ps %}
          <tr>
+            <td><a href="http://127.0.0.1:8000/PepView/?s={{C.Input_Sequence}}&a={{C.Accession}}"> {{C.Accession}} </a></td>
             <td><a href="http://127.0.0.1:8000/PepView/?s={{C.Input_Sequence}}&a={{C.Accession}}"> {{C.Input_Sequence}} </a></td>
             <td> {{C.Protein_found }} </td>
             <td>{{C.Recommended_Protein_Name }} </td>
             <td> {{C.Species }} </td>
-            <td>  {{C.Chromosome_year }}</td>
-            <td> {{C.Accession}} </td>
+            <td>  {{C.Chromosome }}</td>
             <td> {{C.P1_Position}} </td>
+            <td>{{C.Cleaving_proteases}}
          </tr>
         {% endfor %}
 
