@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'DB', views.DB, name='DB'),
     url(r'OutData', views.OutData, name='OutData'),
     url(r'ProtView', views.ProtView, name='ProtView'),
+    url(r'PepView', views.PepView, name='PepView'),
 
     #url(r'^DATAPLO/(?P<pk>\d+)/$', views.County_Details, name='County_Details'),
 ]
