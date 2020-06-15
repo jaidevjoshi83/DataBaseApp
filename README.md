@@ -19,6 +19,14 @@
  **5. Copy this URL to the browser**
  
   *http://127.0.0.1:8000/HomePage#*
+  
+ **6. Example Query set**
+ 
+  1. Only peptide sequence as input **"AAAAAAGAAGGR"**
+  2. Only UniPort ID as input **"P37837"**
+  3. Peptide and UniProt ID as input **"AAAAAAGAAGGR & Q86U42"**
+ 
+   
     
     
 
