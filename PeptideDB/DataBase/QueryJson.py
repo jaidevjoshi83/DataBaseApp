@@ -13,6 +13,7 @@ def QurJson(a):
    print(df)
 """
 
+# FIXME: QurJson needs to be broken up. No Files.
 def QurJson(a=None,p=None):
    seq = []
    starts_sides = []
@@ -85,6 +86,27 @@ def QurJson(a=None,p=None):
       df.to_json(Out_json_data, orient='split')
 
 
+def nti_by_accession(accession):
+  seq = []
+  starts_sides = []
+  end_sides = []
+  length = []
 
+  p = PeptideSeq.objects.filter(Accession=accession)
+
+  for c in p:
+
+     seq.append(c.Input_Sequence)
+     starts_sides.append(int(c.P1_Position))
+     end_sides.append(int(c.P1_Position)+(len(c.Input_Sequence)-1))
+     length.append(len(c.Input_Sequence))
+
+  clms = ['seq',
+    'starts_sides',
+    'end_sides',
+    'length',] # TODO: fix names
+
+  df = pd.DataFrame(list(zip(seq,starts_sides,end_sides,length)),columns=clms)
+  return df
 
 
