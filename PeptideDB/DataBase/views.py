@@ -3,6 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 from .forms import  Rand_Frag_From
 from .models import PeptideSeq
 from .QueryJson import QurJson
+from .QueryJson import nti_by_accession
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -55,3 +57,5 @@ def PepView(request,):
     return redirect('http://127.0.0.1:8000/ProtView/?uniprotID='+a)
 
 
+def api_nti_peptide(request, accession=None, version=None):
+    return JsonResponse(nti_by_accession(accession).to_dict())
