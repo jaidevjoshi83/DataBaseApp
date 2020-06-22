@@ -86,13 +86,17 @@ def QurJson(a=None,p=None):
       df.to_json(Out_json_data, orient='split')
 
 
-def nti_by_accession(accession):
+def nti_by_accession(accession, pep):
+
+  print ("New Var",pep)
+
   seq = []
   starts_sides = []
   end_sides = []
   length = []
 
-  p = PeptideSeq.objects.filter(Accession=accession)
+  p = PeptideSeq.objects.filter(Accession=accession, Input_Sequence=pep)
+  #Ps = PeptideSeq.objects.filter(Input_Sequence=p, Accession=a)
 
   for c in p:
 
