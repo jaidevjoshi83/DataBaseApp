@@ -54,8 +54,9 @@ def PepView(request,):
 
     QurJson(a=a, p=s)
 
-    return redirect('http://127.0.0.1:8000/ProtView/?uniprotID='+a)
+    return redirect('http://127.0.0.1:8000/ProtView/?Seq='+s+'&uniprotID='+a)
 
 
-def api_nti_peptide(request, accession=None, version=None):
-    return JsonResponse(nti_by_accession(accession).to_dict())
+def api_nti_peptide(request, accession=None, version=None, sequence=None):
+    print (request)
+    return JsonResponse(nti_by_accession(accession,sequence).to_dict())

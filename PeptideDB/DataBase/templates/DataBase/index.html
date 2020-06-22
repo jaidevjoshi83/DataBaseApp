@@ -88,6 +88,7 @@
 		{
 			default_uniprotID = 'P68871';
 		}
+		var seq = $_GET('Seq');
 		/* constants */
 		fetch_data(default_uniprotID);
 
@@ -107,7 +108,7 @@
 			var variation_data_url = base_url + uniprotID + '?type=json&track=variation';
 			//var peptides_data_url = 'peptides.php';
 			//var peptides_data_url = "{% static 'data/data.json' %}";
-			var peptides_data_url = '/api/0/nti/' + uniprotID;
+			var peptides_data_url = '/api/0/nti/' + uniprotID + '/' + seq;
 			$.ajax({
 				url: basic_data_url,
 				async: false,
