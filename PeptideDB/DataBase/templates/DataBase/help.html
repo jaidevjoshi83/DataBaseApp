@@ -1,30 +1,33 @@
 {% extends 'DataBase/base.html' %}
 {% load static %}
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <title></title>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    </head>
-
-
 {% block content %}
-
-<div style=" color: #1f5a09; margin: auto; margin-top: 0px; height: 200px; border: 1px solid green; box-sizing: border-box;background: #ffbf00; width: 900px;margin-bottom: 5px; margin-top: 20px"; >
-  <p align="cente" style="margin-left:3em;" > <font color="black" size="4"> <b> Help </b>  </font> </p> 
-  <p align="cente" style="margin-left:3em; margin-top:3em;" > <font color="black" size="4"> <b> Example DATASET </b>  </font> </p> 
-  <p align="cente" style="margin-left:3em; margin-top:1em;" > <font color="black" size="4">  <font color="black"> <b> Click here to download example DATASET </b> </font> </a> </p>
-
-<div style="margin-left: 20px">
-
-
-</div>
-
-</div>
-
-
-
-
-
+	<div class="site-content">
+		<div class="container">
+			<section class="section--center mdl-grid site-max-width">
+				<div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--4dp">
+					<div class="mdl-card__title">
+						<h2 class="mdl-card__title-text">Help</h2>
+					</div>
+					<div class="mdl-card__media">
+						<img class="article-image" height = "300" src="{% static 'img/about.jpg' %}" border="0" alt="">
+					</div>
+					<div class="mdl-grid portfolio-copy">
+						<h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline">Introduction</h3>
+						<div class="mdl-cell mdl-cell--12-col mdl-card__supporting-text no-padding ">
+							<p>
+								Excepteur reprehenderit sint exercitation ipsum consequat qui sit id velit elit. Velit anim eiusmod labore sit amet. Voluptate voluptate irure occaecat deserunt incididunt esse in. Sunt velit aliquip sunt elit ex nulla reprehenderit qui ut eiusmod ipsum do. Duis veniam reprehenderit laborum occaecat id proident nulla veniam. Duis enim deserunt voluptate aute veniam sint pariatur exercitation. Irure mollit est sit labore est deserunt pariatur duis aute laboris cupidatat. Consectetur consequat esse est sit veniam adipisicing ipsum enim irure.
+							</p>
+						</div>
+						<h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline">Irure mollit est sit labore</h3>
+						<div class="mdl-cell mdl-cell--12-col mdl-card__supporting-text no-padding ">
+							<p>
+								Excepteur reprehenderit sint exercitation ipsum consequat qui sit id velit elit. Velit anim eiusmod labore sit amet. Voluptate voluptate irure occaecat deserunt incididunt esse in. Sunt velit aliquip sunt elit ex nulla reprehenderit qui ut eiusmod ipsum do. Duis veniam reprehenderit laborum occaecat id proident nulla veniam. Duis enim deserunt voluptate aute veniam sint pariatur exercitation. Irure mollit est sit labore est deserunt pariatur duis aute laboris cupidatat. Consectetur consequat esse est sit veniam adipisicing ipsum enim irure.
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	
 {% endblock %}

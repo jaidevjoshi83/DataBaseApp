@@ -1,105 +1,52 @@
+{% extends 'DataBase/base.html' %}
 {% load static %}
-
-
-<!DOCTYPE html>
-<!-- Template by Quackit.com -->
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <title>Bioinformatics</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-
-    <!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->
-    <link href="{% static 'css/custom.css' %}" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-<body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+{% block content %}
+    <div class="site-content">
         <div class="container">
-            <!-- Logo and responsive toggle -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">
-                	<span class="glyphicon glyphicon-fire"></span> 
-                </a>
+            <div class="mdl-grid site-max-width">
+                <div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--4dp welcome-card portfolio-card">
+                    <div class="mdl-card__title">
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        Proteomics is the large-scale study of proteins. Proteins are vital parts of living organisms, with many functions. The proteome is the entire set of proteins that is produced or modified by an organism or system. Proteomics has enabled the identification of ever increasing numbers of protein.
+                    </div>
+                </div>
             </div>
-            <!-- Navbar links -->
-            <div class="collapse navbar-collapse" id="navbar">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="{% url 'HomePage' %}">Home</a>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Tools <span class="caret"></span></a>
-						<ul class="dropdown-menu" aria-labelledby="about-us">
-			       <li><a href="{% url 'DB' %}"><b>DataBase</b></a></li>
-				   <li><a href="#"><b>HELP</b> </a></li>
-						</ul>
-				   </li>
-                </ul>
-				<!-- Search -->
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
-	<div class="jumbotron feature">
-		<div class="container">
-			<h1><span class="glyphicon glyphicon-equalizer"></span> ProteomicsDB 1.0 </h1>
-			<p> <b> A database to retrive information of proteiolytically cleaved peptides.</b></p>
-			
-		</div>
-	</div>
-
-    <!-- Content -->
-    <div class="container">
-        <!-- Heading -->
-        <div class="row">
-            <div class="col-lg-12">
-                <a href="#">
-                    <img class="img-responsive img-rounded" src="{% static 'image/HomePage.png' %}" alt="">
-                </a>
-
-            </div>
+            <section class="section--center mdl-grid site-max-width">
+                <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src="{% static 'img/portfolio1.jpg' %}" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Proteomics</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        Proteomics is the large-scale study of proteins. Proteins are vital parts of living organisms, with many functions. The proteome is the entire set of proteins that is produced or modified by an organism or system. Proteomics has enabled the identification of ever increasing numbers of protein.
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src="{% static 'img/portfolio2.jpg' %}" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Proteomics</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        Proteomics is the large-scale study of proteins. Proteins are vital parts of living organisms, with many functions. The proteome is the entire set of proteins that is produced or modified by an organism or system. Proteomics has enabled the identification of ever increasing numbers of protein.
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src="{% static 'img/portfolio3.jpg' %}" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Proteomics</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        Proteomics is the large-scale study of proteins. Proteins are vital parts of living organisms, with many functions. The proteome is the entire set of proteins that is produced or modified by an organism or system. Proteomics has enabled the identification of ever increasing numbers of protein.
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
-    <!-- /.container -->
-
-s
-
-    <!-- jQuery -->
-    <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-	<!-- IE10 viewport bug workaround -->
-	<script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
-	<!-- Placeholder Images -->
-	<script src="{% static 'js/holder.min.js' %}"></script>
-</body>
-
-</html>
+{% endblock %}
