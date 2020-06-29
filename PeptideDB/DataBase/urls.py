@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'ProtView', views.ProtView, name='ProtView'),
     url(r'PepView', views.PepView, name='PepView'),
     path('api/<int:version>/nti/<str:accession>/<str:sequence>/', views.api_nti_peptide),
+    path('api/<int:version>/nti/<str:accession>/', views.api_nti_peptide),
 
     #url(r'^DATAPLO/(?P<pk>\d+)/$', views.County_Details, name='County_Details'),
 ]

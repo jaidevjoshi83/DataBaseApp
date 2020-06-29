@@ -20,8 +20,8 @@
           {% if Ps.count > 0 %}
           {% for C in Ps %}
             <tr>
-              <td><a href="http://127.0.0.1:8000/PepView/?s={{C.Input_Sequence}}&a={{C.Accession}}"> {{C.Accession}} </a></td>
-              <td><a href="http://127.0.0.1:8000/PepView/?s={{C.Input_Sequence}}&a={{C.Accession}}"> {{C.Input_Sequence}} </a></td>
+              <td><a href="http://127.0.0.1:8080/PepView/?s={{C.Input_Sequence}}&a={{C.Accession}}"> {{C.Accession}} </a></td>
+              <td><a href="http://127.0.0.1:8080/PepView/?s={{C.Input_Sequence}}&a={{C.Accession}}"> {{C.Input_Sequence}} </a></td>
               <td> {{C.Protein_found }} </td>
               <td>{{C.Recommended_Protein_Name }} </td>
               <td> {{C.Species }} </td>

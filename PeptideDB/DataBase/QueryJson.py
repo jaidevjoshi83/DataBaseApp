@@ -86,31 +86,32 @@ def QurJson(a=None,p=None):
       df.to_json(Out_json_data, orient='split')
 
 
-def nti_by_accession(accession, pep):
+def nti_by_accession(accession, pep=None):
 
-  print ("New Var",pep)
 
-  seq = []
-  starts_sides = []
-  end_sides = []
-  length = []
+    seq = []
+    starts_sides = []
+    end_sides = []
+    length = []
 
-  p = PeptideSeq.objects.filter(Accession=accession, Input_Sequence=pep)
+    if pep != None:
+        p = PeptideSeq.objects.filter(Accession=accession, Input_Sequence=pep)
+    else:
+        p = PeptideSeq.objects.filter(Accession=accession)
+
   #Ps = PeptideSeq.objects.filter(Input_Sequence=p, Accession=a)
 
-  for c in p:
+    for c in p:
 
-     seq.append(c.Input_Sequence)
-     starts_sides.append(int(c.P1_Position))
-     end_sides.append(int(c.P1_Position)+(len(c.Input_Sequence)-1))
-     length.append(len(c.Input_Sequence))
+        seq.append(c.Input_Sequence)
+        starts_sides.append(int(c.P1_Position))
+        end_sides.append(int(c.P1_Position)+(len(c.Input_Sequence)-1))
+        length.append(len(c.Input_Sequence))
 
-  clms = ['seq',
-    'starts_sides',
-    'end_sides',
-    'length',] # TODO: fix names
+    clms = ['seq','starts_sides','end_sides','length',] # TODO: fix names
 
-  df = pd.DataFrame(list(zip(seq,starts_sides,end_sides,length)),columns=clms)
-  return df
+    df = pd.DataFrame(list(zip(seq,starts_sides,end_sides,length)),columns=clms)
+
+    return df
 
 

@@ -102,7 +102,11 @@
           var exons_data_url = base_url + uniprotID + '?type=json&track=exons';
           var variation_data_url = base_url + uniprotID + '?type=json&track=variation';
           //var peptides_data_url = 'peptides.php';
-          var peptides_data_url = '/api/0/nti/' + uniprotID + '/' + seq;
+          var peptides_data_url = '/api/0/nti/' + uniprotID+'/';
+          if (seq != null)
+          {
+              peptides_data_url += seq;
+          }
           $.ajax({
             url: basic_data_url,
             async: false,
@@ -348,18 +352,19 @@
                 url: peptides_data_url,
                 async: false,
                 success: function(peptide_response) {
-                  var peptides = peptide_response.data;
-                  
-              if(peptides.length > 0)
+                  //var peptides = peptide_response.data;
+                  var peptides = peptide_response;//.data;
+                  var pep_len = Object.keys(peptides.length).length;
+              if(pep_len > 0)
               {
                 var peptide_title = 'Peptide';
-                var peptides_length = peptides.length;
-                if(peptides.length > 10)
+                var peptides_length = pep_len; //peptides.length;
+                if(pep_len > 10)
                 {
                   peptides_length = 10;
                   peptide_html += '<tr>';
                   peptide_html += '<td colspan = "3">';
-                  peptide_html += '<button id = "toggle-peptide" class="btn btn-warning btn-xs" data-toggle="collapse" href="#peptide" role="button" aria-expanded="false" aria-controls="peptide"><i class = "material-icons">add</i></a>';
+                  peptide_html += '<button id = "toggle-peptide" class="btn btn-warning btn-xs" data-toggle="collapse" href="#peptide" role="button" aria-expanded="false" aria-controls="peptide"><i class = "fa fa-plus"></i></a>';
                   peptide_html += '</td>';
                   peptide_html += '</tr>';
                 }
@@ -369,11 +374,14 @@
                 peptide_html += '<td width = "99%" colspan = "2">';
                 
                 peptide_html += '<table class = "table">';
-                for(var i = 0;i < peptides_length;i++){
-                  var peptide = peptides[i];
-                  var text = peptide[0];
-                  var start = peptide[1];
-                  var end = peptide[2];
+                for(var i = 0;i < pep_len;i++){
+                  var peptide = peptides['seq'][i];
+              //var text = peptide[0];
+              //var start = peptide[1];
+              //var end = peptide[2];
+              var text = peptides['seq'][i];
+              var start = peptides['starts_sides'][i];
+              var end = peptides['end_sides'][i];
                     
                   peptide_html += '<tr>';
                   peptide_html += '<th width = "9%">';
@@ -398,18 +406,21 @@
                 peptide_html += '</td>';
                 peptide_html += '</tr>';
                 
-                if(peptides.length > 10)
+                if(pep_len > 0)
                 {
                   peptide_html += '<tr class="collapse multi-collapse" id="peptide">';
                   peptide_html += '<td width = "1%" title = "'+peptide_title+'" class = "vertical-bar" data-color = "#f9484a">&nbsp;</td>';
                   peptide_html += '<td width = "99%" colspan = "2">';
                   peptide_html += '<table class = "table">';
-                  for(var i = 10;i < peptides.length;i++){
-                    var peptide = peptides[i];
-                    var text = peptide[0];
-                    var start = peptide[1];
-                    var end = peptide[2];
-                      
+                  for(var i = 10;i < pep_len;i++){
+                    var peptide = peptides['seq'][i];
+              //var text = peptide[0];
+              //var start = peptide[1];
+              //var end = peptide[2];
+              var text = peptides['seq'][i];
+              var start = peptides['starts_sides'][i];
+              var end = peptides['end_sides'][i];
+
                     peptide_html += '<tr>';
                     peptide_html += '<th width = "9%">';
                     peptide_html += '<a data-toggle="tooltip" href = "" class = "text" title = "'+text+'">'+(i+1)+'</a>';

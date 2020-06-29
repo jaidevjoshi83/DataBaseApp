@@ -34,12 +34,13 @@ def DB(request):
 
             if inputPeptide == '':
                 #QurJson(a=accession)
-                return redirect('http://127.0.0.1:8000/ProtView/?uniprotID='+accession)
+                return redirect('http://127.0.0.1:8080/ProtView/?uniprotID='+accession)
 
-            else:
+            elif accession != '' and inputPeptide != '':
                 #QurJson(a=accession, p=inputPeptide)
-                return redirect('http://127.0.0.1:8000/ProtView/?uniprotID='+accession)
-
+                return redirect('http://127.0.0.1:8080/ProtView/?Seq='+inputPeptide+'&uniprotID='+accession)
+            elif accession == '' and inputPeptide == '':
+                return HttpResponseNotFound('<h1>Page not found</h1>')
     else:
         Fasta = ''
         Acc = ''
@@ -53,15 +54,17 @@ def OutData(request):
 def ProtView(request):
     return render(request, 'DataBase/index.html', {})
 
+def Combined(request):
+    return render(request, 'DataBase/index.html', {})
+
 def PepView(request,):
 
     s = request.GET['s']
     a = request.GET['a']
-
+    
     #QurJson(a=a, p=s)
 
-    return redirect('http://127.0.0.1:8000/ProtView/?Seq='+s+'&uniprotID='+a)
-
+    return redirect('http://127.0.0.1:8080/ProtView/?Seq='+s+'&uniprotID='+a)
 
 def api_nti_peptide(request, accession=None, version=None, sequence=None):
     print (request) 
