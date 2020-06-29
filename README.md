@@ -14,11 +14,11 @@
   
  **4. Run/Activate the project**
  
-     python /DataBaseApp/PeptideDB/manage.py runserver
+     python /DataBaseApp/PeptideDB/manage.py runserver 127.0.0.1:8080
 
  **5. Copy this URL to the browser**
  
-     http://127.0.0.1:8000/HomePage#
+     http://127.0.0.1:8080/HomePage#
   
  **6. Example Query set**
  
