@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from .forms import  Rand_Frag_From
 from .models import PeptideSeq
-from .QueryJson import QurJson
+#from .QueryJson import QurJson
 from .QueryJson import nti_by_accession
 from django.http import JsonResponse
 
@@ -10,6 +10,12 @@ from django.http import JsonResponse
 
 def HomePage(request):
     return render(request, 'DataBase/home.html', {})
+
+def AboutPage(request):
+    return render(request, 'DataBase/about.html', {})
+
+def HelpPage(request):
+    return render(request, 'DataBase/help.html', {})
 
 def DB(request):
 
@@ -23,15 +29,15 @@ def DB(request):
 
             if accession =='':
                 Ps = PeptideSeq.objects.filter(Input_Sequence=inputPeptide)
-                QurJson(p=inputPeptide)
+                #QurJson(p=inputPeptide)
                 return render(request, 'DataBase/PepInfo.html', {'Ps': Ps, })
 
             if inputPeptide == '':
-                QurJson(a=accession)
+                #QurJson(a=accession)
                 return redirect('http://127.0.0.1:8000/ProtView/?uniprotID='+accession)
 
             else:
-                QurJson(a=accession, p=inputPeptide)
+                #QurJson(a=accession, p=inputPeptide)
                 return redirect('http://127.0.0.1:8000/ProtView/?uniprotID='+accession)
 
     else:
@@ -52,11 +58,11 @@ def PepView(request,):
     s = request.GET['s']
     a = request.GET['a']
 
-    QurJson(a=a, p=s)
+    #QurJson(a=a, p=s)
 
     return redirect('http://127.0.0.1:8000/ProtView/?Seq='+s+'&uniprotID='+a)
 
 
 def api_nti_peptide(request, accession=None, version=None, sequence=None):
-    print (request)
+    print (request) 
     return JsonResponse(nti_by_accession(accession,sequence).to_dict())

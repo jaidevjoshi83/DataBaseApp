@@ -1,52 +1,57 @@
 {% extends 'DataBase/base.html' %}
 {% load static %}
-
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/table.css' %}">
+  <div class="site-content">
+    <div class="mdl-grid site-max-width">
+      <table width = "100%" class="mdl-data-table mdl-js-data-table mdl-data-table__header--sorted-ascending mdl-shadow--2dp">
+        <thead>
+          <tr>
+            <th> Accession </th>
+            <th> Input Sequence  </th>
+            <th> Protein found </th>
+            <th> Protein Name </th>
+            <th> Species </th>
+            <th> Chromosome </th>
+            <th> Position  </th>
+            <th> Proteases </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if Ps.count > 0 %}
+          {% for C in Ps %}
+            <tr>
+              <td><a href="http://127.0.0.1:8000/PepView/?s={{C.Input_Sequence}}&a={{C.Accession}}"> {{C.Accession}} </a></td>
+              <td><a href="http://127.0.0.1:8000/PepView/?s={{C.Input_Sequence}}&a={{C.Accession}}"> {{C.Input_Sequence}} </a></td>
+              <td> {{C.Protein_found }} </td>
+              <td>{{C.Recommended_Protein_Name }} </td>
+              <td> {{C.Species }} </td>
+              <td>  {{C.Chromosome }}</td>
+              <td> {{C.P1_Position}} </td>
+              <td>{{C.Cleaving_proteases}}</td>
+              </tr>
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td colspan = "8">No Data Found !</td>
+              </tr>
+          {% endif %}
 
-<style>
-div.ex1 {
-  width:70%;
-  border: 3px;
-  margin: auto; 
-  margin-top: 20px; 
-}
-</style>
 
-
-<div class="ex1">
-
-  <table>
-
-      <thead>
-        <tr>
-          <th> Accession </th>
-          <th> Input Sequence  </th>         
-          <th> Protein found </th>
-          <th> Protein Name </th>
-          <th> Species </th>
-          <th> Chromosome </th>
-          <th> Position  </th>
-          <th> Proteases </th>
-        </tr>
-      <thead>
-
-  <tbody>
-         {% for C in Ps %}
-         <tr>
-            <td><a href="http://127.0.0.1:8000/PepView/?s={{C.Input_Sequence}}&a={{C.Accession}}"> {{C.Accession}} </a></td>
-            <td><a href="http://127.0.0.1:8000/PepView/?s={{C.Input_Sequence}}&a={{C.Accession}}"> {{C.Input_Sequence}} </a></td>
-            <td> {{C.Protein_found }} </td>
-            <td>{{C.Recommended_Protein_Name }} </td>
-            <td> {{C.Species }} </td>
-            <td>  {{C.Chromosome }}</td>
-            <td> {{C.P1_Position}} </td>
-            <td>{{C.Cleaving_proteases}}
-         </tr>
-        {% endfor %}
-
-   </tbody>
-  <table/>
-</div>
-
-{% endblock %}
+          
+          </tbody>
+          <tfoot>
+          <tr>
+            <th> Accession </th>
+            <th> Input Sequence  </th>
+            <th> Protein found </th>
+            <th> Protein Name </th>
+            <th> Species </th>
+            <th> Chromosome </th>
+            <th> Position  </th>
+            <th> Proteases </th>
+          </tr>
+        </tfoot>
+        </table>
+      </div>
+    </div>
+  {% endblock %}

@@ -1,22 +1,16 @@
 {% extends 'DataBase/base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title></title>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    </head>
-
-
 {% block content %}
 
-
-    <body>
-        <div class="container">
-            <h1> Retrive peptide information..</h1>
-            <div style="width:30%">
-                <form action="{%url 'DB' %}" method="post">
+<div class="site-content">
+          <div class="mdl-grid site-max-width">
+            <div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--4dp page-content">
+              
+              <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--12-col"><div class="mdl-card__supporting-text">
+                  <h2 class="mdl-card__title-text">Please enter UNIPROT ID / PEPTIDE SEQUENCE below:</h2>
+                  <form action="{%url 'DB' %}" method="POST" class="form-contact">
                     {%csrf_token%}
                     {% for error in form.non_field_errors %}
                     <div class="form-group has-errors text-danger small">
@@ -30,19 +24,25 @@
                     <div class="form-group has-errors text-danger small">
                     </div>
                     {% endfor %}
-                    <div class="form-group">
-                        <h4>Peptides:</h4> {{form.Sequence}}
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline">UNIPROT ID</h3>
+                      {{form.Accession}}
                     </div>
-                    <div class="form-group">
-                        <h4>ProteinID: </h4> {{form.Accession}}
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline">PEPTIDE SEQUENCE</h3>
+                      {{form.Sequence}}
                     </div>
- 
-                    <div class="form-group">
-                        <button class="btn btn-primary" style="width:100%; margin-bottom: 30px; margin-top: 20px ">Submit</button>
-                    </div>
+                    <p>
+                      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">
+                      Search
+                      </button>
+                    </p>
+                  </form>
+                </div></div>
+              </div>
             </div>
-            </form>
+          </div>
         </div>
-    </body>
-</html>
+
+
 {% endblock %}
