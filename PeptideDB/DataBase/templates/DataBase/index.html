@@ -1,575 +1,546 @@
 {% extends 'DataBase/base.html' %}
 {% load static %}
 {% block content %}
-<div class="site-content">
-          <div class="mdl-grid site-max-width">
-            <div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--4dp page-content">
-              
-              <div class="mdl-grid">
-                <div class="mdl-cell mdl-cell--12-col">
-                  <div class="mdl-card__supporting-text ruler-outer">
-                    <table class="table protein-table" id="main-table" border="0">
-                      <tr>
-                        <td width="1%"></td>
-                        <td width="9%"></td>
-                        <td width="90%">
-                          <ul class="ruler"></ul>
-                        </td>
-                      </tr>
-                    </table>
-                    <table class="table protein-table" id="peptide_html" border="0">
-                      
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <div class="site-content">
+    <div class="mdl-grid site-max-width">
+      <div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--4dp page-content">
+        
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__supporting-text ruler-outer">
+              <!--<table class="table protein-table" id="peptide_html" border="0">
+                
+              </table>-->
+              <table class="table protein-table" id="main-table" border="0">
+                <tr>
+                  <td width="1%"></td>
+                  <td width="9%"></td>
+                  <td width="90%">
+                  <ul class="ruler"></ul>
+                </td>
+              </tr>
+            </table>
+            
           </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-        <script>
-      $(function() {
-        /* constants */
-        var base_url = "http://www.rcsb.org/pdb/protein/";
-        var ruler_total_steps = 20;
-        
-        /*var helix_color = '#1A237E';
-        
-        var bar_color = '#448AFF';
-        var molec_process_color = '#546E7A';
-        var uniprotid_color = '#263238';
-        var uniprotid_bar_color = '#263238';
-        
-        var secstruc_bar_color = '#1A237E';
-        
-        var exon_color = '#2E7D32';
-        var exon_bar_color = '#2E7D32';
-        
-        var variation_color = '#84FFFF';
-        var variation_bar_color = '#84FFFF';
-        var upsites_color = '#01579B';
-        var upsites_bar_color = '#01579B';
-        
-        var pfam_color = '#00796B';
-        var pfam_bar_color = '#00796B';
-        
-        var peptide_color = '#C2185B';*/
-        var helix_color = '#2C69D1';
-        var bar_color = '#8bc34a';
-        var molec_process_color = '#2C69D1';
-        var uniprotid_color = '#1d2867';
-        var uniprotid_bar_color = '#f9484a';
-        var secstruc_bar_color = '#2C69D1';
-        var exon_color = '#ad4cde';
-        var exon_bar_color = '#731aa0';
-        var variation_color = '#ffc700';
-        var variation_bar_color = '#ffc700';
-        var upsites_color = '#f9484a';
-        var upsites_bar_color = '#f9484a';
-        var pfam_color = '#8bc34a';
-        var pfam_bar_color = '#8bc34a';
-        var peptide_color = '#f9484a';
-        var peptide_bar_color = '#f9484a';
-        
-        var default_uniprotID = $_GET('uniprotID');
-        if(default_uniprotID == '')
-        {
-          default_uniprotID = 'Q86U42';
-        }
-        var seq = $_GET('Seq');
-        if(seq == '')
-        {
-          seq = 'AAAAAAGAAGGR';
-        }
-        /* constants */
-        fetch_data(default_uniprotID);
-
-        function fetch_data(uniprotID) {
-          //track=exons
-          //track=pfam
-          //track=pmp
-          //track=hydropathy
-          //track=jronn
-          //track=scop
-          //track=pdbsites
-          //track=phosphorylation
-          //track=variation
-          $('#page-loader').show();
-          var basic_data_url = base_url + uniprotID + '?type=json';
-          var pfam_data_url = base_url + uniprotID + '?type=json&track=pfam';
-          var exons_data_url = base_url + uniprotID + '?type=json&track=exons';
-          var variation_data_url = base_url + uniprotID + '?type=json&track=variation';
-          //var peptides_data_url = 'peptides.php';
-          var peptides_data_url = '/api/0/nti/' + uniprotID+'/';
-          if (seq != null)
-          {
-              peptides_data_url += seq;
-          }
-          $.ajax({
-            url: basic_data_url,
-            async: false,
-            success: function(response, status, xhr) {
-              var ct = xhr.getResponseHeader("content-type") || "";
-              if (ct.indexOf('json') > -1) {
-              
-              var uniprotID = response.uniprotID;
-              var sequence = response.sequence;
-              var length = response.length;
-              var name = response.name;
-              var desc = response.desc;
-              var chains = response.chains;
-              var label = chains.label;
-              var tracks = chains.tracks;
-              var secstruc = response.secstruc;
-              var upsites = response.upsites;
-              set_ruler(0, length, ruler_total_steps);
-              var description = uniprotID + ' - ' + name + ' - ' + desc;
-              var html = '';
-              html += '<tr>';
-              html += '<td width = "1%" title = "Data from : ' + label + '" class = "vertical-bar" data-color = "' + uniprotid_bar_color + '"><a data-toggle = "tooltip" href = "" class = "text" title = "' + label + '">' + label + '</a></td>';
-              html += '<td width = "99%" colspan = "2">';
-              html += '<table class = "table">';
-              html += '<tr>';
-              html += '<th width = "9%">';
-              html += '<a data-toggle="tooltip" href = "" class = "text" title = "' + uniprotID + '">' + uniprotID + '</a>';
-              html += '</th>';
-              html += '<td width = "91%">';
-              html += '<div data-start-point = "0" data-end-point = "' + length + '" class = "horizontal-bar text" data-color = "' + uniprotid_color + '">';
-              html += '<span class = "point left" data-toggle="tooltip" title = "0"></span>';
-              html += '<a data-toggle="tooltip" href = "" title = "' + description + '">';
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+$(function() {
+/* constants */
+var base_url = "http://www.rcsb.org/pdb/protein/";
+var ruler_total_steps = 20;
+/*var helix_color = '#1A237E';
+var bar_color = '#448AFF';
+var molec_process_color = '#546E7A';
+var uniprotid_color = '#263238';
+var uniprotid_bar_color = '#263238';
+var secstruc_bar_color = '#1A237E';
+var exon_color = '#2E7D32';
+var exon_bar_color = '#2E7D32';
+var variation_color = '#84FFFF';
+var variation_bar_color = '#84FFFF';
+var upsites_color = '#01579B';
+var upsites_bar_color = '#01579B';
+var pfam_color = '#00796B';
+var pfam_bar_color = '#00796B';
+var peptide_color = '#C2185B';*/
+var helix_color = '#2C69D1';
+var bar_color = '#8bc34a';
+var molec_process_color = '#2C69D1';
+var uniprotid_color = '#1d2867';
+var uniprotid_bar_color = '#f9484a';
+var secstruc_bar_color = '#2C69D1';
+var exon_color = '#ad4cde';
+var exon_bar_color = '#731aa0';
+var variation_color = '#ffc700';
+var variation_bar_color = '#ffc700';
+var upsites_color = '#f9484a';
+var upsites_bar_color = '#f9484a';
+var pfam_color = '#8bc34a';
+var pfam_bar_color = '#8bc34a';
+var peptide_color = '#f9484a';
+var peptide_bar_color = '#f9484a';
+var default_uniprotID = $_GET('uniprotID');
+if(default_uniprotID == '')
+{
+default_uniprotID = 'Q86U42';
+}
+var seq = $_GET('Seq');
+if(seq == '')
+{
+seq = 'AAAAAAGAAGGR';
+}
+/* constants */
+fetch_data(default_uniprotID);
+function fetch_data(uniprotID) {
+//track=exons
+//track=pfam
+//track=pmp
+//track=hydropathy
+//track=jronn
+//track=scop
+//track=pdbsites
+//track=phosphorylation
+//track=variation
+$('#page-loader').show();
+var basic_data_url = base_url + uniprotID + '?type=json';
+var pfam_data_url = base_url + uniprotID + '?type=json&track=pfam';
+var exons_data_url = base_url + uniprotID + '?type=json&track=exons';
+var variation_data_url = base_url + uniprotID + '?type=json&track=variation';
+//var peptides_data_url = 'peptides.php';
+var peptides_data_url = '/api/0/nti/' + uniprotID+'/';
+if (seq != null)
+{
+peptides_data_url += seq;
+}
+$.ajax({
+url: basic_data_url,
+async: false,
+success: function(response, status, xhr) {
+var ct = xhr.getResponseHeader("content-type") || "";
+if (ct.indexOf('json') > -1) {
+var uniprotID = response.uniprotID;
+var sequence = response.sequence;
+var length = response.length;
+var name = response.name;
+var desc = response.desc;
+var chains = response.chains;
+var label = chains.label;
+var tracks = chains.tracks;
+var secstruc = response.secstruc;
+var upsites = response.upsites;
+set_ruler(0, length, ruler_total_steps);
+var description = uniprotID + ' - ' + name + ' - ' + desc;
+var html = '';
+html += '<tr id = "peptide_html"></tr>';
+html += '<tr>';
+  html += '<td width = "1%" title = "Data from : ' + label + '" class = "vertical-bar" data-color = "' + uniprotid_bar_color + '"><a data-toggle = "tooltip" href = "" class = "text" title = "' + label + '">' + label + '</a></td>';
+  html += '<td width = "99%" colspan = "2">';
+    html += '<table class = "table">';
+      html += '<tr>';
+        html += '<th width = "9%">';
+          html += '<a data-toggle="tooltip" href = "" class = "text" title = "' + uniprotID + '">' + uniprotID + '</a>';
+        html += '</th>';
+        html += '<td width = "91%">';
+          html += '<div data-start-point = "0" data-end-point = "' + length + '" class = "horizontal-bar text" data-color = "' + uniprotid_color + '">';
+            html += '<span class = "point left" data-toggle="tooltip" title = "0"></span>';
+            html += '<a data-toggle="tooltip" href = "" title = "' + description + '">';
               html += description;
-              html += '</a>';
-              html += '<span class = "point right" data-toggle="tooltip" title = "' + length + '"></span>';
-              html += '</div>';
-              html += '</td>';
-              html += '</tr>';
-              $(tracks).each(function(i, track) {
-                var track_name = track.name;
-                var track_start = track.start;
-                var track_end = track.end;
-                var track_description = track.desc;
-                var track_title = '';
-                if(track_name == 'chain') {
-                  track_title = 'Molec. Processing';
-                  color = molec_process_color;
-                }
-                else
-                {
-                  color = bar_color;
-                }
-                html += '<tr>';
-                html += '<th width = "9%">';
-                html += '<a data-toggle="tooltip" href = "" class = "text" title = "' + track_title + '">' + track_title + '</a>';
-                html += '</th>';
-                html += '<td width = "91%">';
-                html += '<div data-start-point = "' + track_start + '" data-end-point = "' + track_end + '" class = "horizontal-bar text" data-color = "' + color + '">';
-                html += '<span class = "point left" data-toggle="tooltip" title = "' + track_start + '"></span>';
-                html += '<a data-toggle="tooltip" href = "" title = "' + track_description + '">';
-                html += track_description;
-                html += '</a>';
-                html += '<span class = "point right" data-toggle="tooltip" title = "' + track_end + '"></span>';
-                html += '</div>';
-                html += '</td>';
-                html += '</tr>';
-              });
-              $(upsites).each(function(i, upsite) {
-                var tracks = upsite.tracks;
-                html += '<tr>';
-                html += '<th width = "9%">';
-                html += '<a data-toggle="tooltip" href = "" class = "text" title = "UP Sites">UP Sites</a>';
-                html += '</th>';
-                html += '<td class = "base-bar" data-color = "' + upsites_bar_color + '">';
-                $(tracks).each(function(i, track) {
-                  var description = track.name;
-                  var start = track.start;
-                  html += '<div class = "lolipop-outer" data-color = "' + upsites_color + '" data-start-point = "' + start + '" data-toggle="tooltip" title = "' + description + '">';
-                  html += '<span class = "lolipop-dot"></span>';
-                  html += '<span class = "lolipop-stick"></span>';
-                  html += '</div>';
-                });
-                html += '</td>';
-                html += '</tr>';
-              });
-              // variation
-              html += '<tr id = "variation_html"></tr>';
-              html += '</table>';
-              html += '</td>';
-              html += '</tr>';
-              html += '<tr id = "pfam_html"></tr>';
-              html += '<tr id = "exon_html"></tr>';
-              
-              
-              
-              $(secstruc).each(function(i, protein) {
-                var text = 'Secstruc';
-                var helixes = protein.tracks;
-                if($(helixes).length > 0)
-                {
-                html += '<tr>';
-                html += '<td width = "1%" title = "PDB" class = "vertical-bar" data-color = "' + secstruc_bar_color + '"><a data-toggle = "tooltip" href = "" class = "text" title = "PDB">PDB</a></td>';
-                html += '<td width = "99%" colspan = "2">';
-                html += '<table class = "table">';
-                html += '<tr>';
-                html += '<th width = "9%">';
-                html += '<a data-toggle="tooltip" href = "" class = "text" title = "' + text + '">' + text + '</a>';
-                html += '</th>';
-                html += '<td>';
-                html += '<div data-toggle="tooltip" title = "coil" class = "coil"></div>';
-                $(helixes).each(function(i, helix) {
-                  var start = helix.start;
-                  var end = helix.end;
-                  var description = helix.desc + ' ( from ' + helix.note + ') (' + start + '-' + end + ')';
-                  html += '<div data-start-point = "' + start + '" data-end-point = "' + end + '" class = "horizontal-bar text helix" data-color = "' + helix_color + '">';
-                  html += '<span class = "point left" data-toggle="tooltip" title = "' + start + '"></span>';
-                  html += '<a data-toggle="tooltip" href = "" title = "' + description + '">';
-                  html += '&nbsp;';
-                  html += '</a>';
-                  html += '<span class = "point right" data-toggle="tooltip" title = "' + end + '"></span>';
-                  html += '</div>';
-                });
-                html += '</td>';
-                html += '</tr>';
-                html += '</table>';
-                html += '</td>';
-                html += '</tr>';
-                }
-              });
-              
-              
-              //html += '<tr id = "peptide_html"></tr>';
-              $('#main-table').append(html);
-              var variation_html = '';
-              $.ajax({
-                url: variation_data_url,
-                async: false,
-                success: function(variation_response) {
-                  var variations = variation_response.variation;
-                  $(variations).each(function(i, variation) {
-                    var tracks = variation.tracks;
-                    if($(tracks).length > 0) {
-                    variation_html += '<th width = "9%">';
-                    variation_html += '<a data-toggle="tooltip" href = "" class = "text" title = "Variations">Variations</a>';
-                    variation_html += '</th>';
-                    variation_html += '<td class = "base-bar" data-color = "' + variation_bar_color + '">';
-                    $(tracks).each(function(i, track) {
-                      var description = track.name;
-                      var start = track.start;
-                      variation_html += '<div class = "lolipop-outer" data-color = "' + variation_color + '" data-start-point = "' + start + '" data-toggle="tooltip" title = "' + description + '">';
-                      variation_html += '<span class = "lolipop-dot"></span>';
-                      variation_html += '<span class = "lolipop-stick"></span>';
-                      variation_html += '</div>';
-                    });
-                    variation_html += '</td>';
-                    }
-                    $('#variation_html').html(variation_html);
-                  });
-                }
-              });
-              var pfam_html = '';
-              $.ajax({
-                url: pfam_data_url,
-                async: false,
-                success: function(pfam_response) {
-                  var pfam = pfam_response.pfam;
-                  var tracks = pfam.tracks;
-                  var label = 'Pfam';
-                  if($(tracks).length > 0) {
-                  pfam_html += '<td width = "1%" title = "' + label + '" class = "vertical-bar" data-color = "' + pfam_bar_color + '"><a data-toggle = "tooltip" href = "" class = "text" title = "' + label + '">' + label + '</a></td>';
-                  pfam_html += '<td width = "99%" colspan = "2">';
-                  pfam_html += '<table class = "table">';
-                  variation_html += '<tr>';
-                  pfam_html += '<th width = "9%">';
-                  pfam_html += '<a data-toggle="tooltip" href = "" class = "text" title = "' + label + '">' + label + '</a>';
-                  pfam_html += '</th>';
-                  pfam_html += '</th>';
-                  pfam_html += '<td width = "91%">';
-                  $(tracks).each(function(i, track) {
-                    var track_name = track.name;
-                    var track_start = track.start;
-                    var track_end = track.end;
-                    var track_description = track.desc;
-                    pfam_html += '<div data-start-point = "' + track_start + '" data-end-point = "' + track_end + '" class = "horizontal-bar text" data-color = "' + pfam_color + '">';
-                    pfam_html += '<span class = "point left" data-toggle="tooltip" title = "' + track_start + '"></span>';
-                    pfam_html += '<a data-toggle="tooltip" href = "" title = "' + track_description + '">';
-                    pfam_html += track_description;
-                    pfam_html += '</a>';
-                    pfam_html += '<span class = "point right" data-toggle="tooltip" title = "' + track_end + '"></span>';
-                    pfam_html += '</div>';
-                  });
-                  pfam_html += '</td>';
-                  pfam_html += '</tr>';
-                  pfam_html += '</table>';
-                  pfam_html += '</td>';
-                  }
-                  $('#pfam_html').html(pfam_html);
-                }
-              });
-              var exon_html = '';
-              $.ajax({
-                url: exons_data_url,
-                async: false,
-                success: function(exon_response) {
-                  var exon = exon_response.exon;
-                  var tracks = exon.tracks;
-                  if($(tracks).length > 0) {
-                  var label = 'Exon';
-                  exon_html += '<td width = "1%" title = "' + label + '" class = "vertical-bar" data-color = "' + exon_bar_color + '"><a data-toggle = "tooltip" href = "" class = "text" title = "' + label + '">' + label + '</a></td>';
-                  exon_html += '<td width = "99%" colspan = "2">';
-                  label = 'Exon Structure';
-                  exon_html += '<table class = "table">';
-                  variation_html += '<tr>';
-                  exon_html += '<th width = "9%">';
-                  exon_html += '<a data-toggle="tooltip" href = "" class = "text" title = "' + label + '">' + label + '</a>';
-                  exon_html += '</th>';
-                  exon_html += '</th>';
-                  exon_html += '<td width = "91%">';
-                  $(tracks).each(function(i, track) {
-                    var track_name = track.name;
-                    var track_start = track.start;
-                    var track_end = track.end;
-                    var track_description = track.name + ' - ' + track.desc;
-                    exon_html += '<div data-start-point = "' + track_start + '" data-end-point = "' + track_end + '" class = "horizontal-bar text" data-color = "' + exon_color + '">';
-                    exon_html += '<span class = "point left" data-toggle="tooltip" title = "' + track_start + '"></span>';
-                    exon_html += '<a data-toggle="tooltip" href = "" title = "' + track_description + '">';
-                    exon_html += track_description;
-                    exon_html += '</a>';
-                    exon_html += '<span class = "point right" data-toggle="tooltip" title = "' + track_end + '"></span>';
-                    exon_html += '</div>';
-                  });
-                  exon_html += '</td>';
-                  exon_html += '</tr>';
-                  exon_html += '</table>';
-                  exon_html += '</td>';
-                  }
-                  $('#exon_html').html(exon_html);
-                }
-              });
-          
-              var peptide_html = '';
-              $.ajax({
-                url: peptides_data_url,
-                async: false,
-                success: function(peptide_response) {
-                  //var peptides = peptide_response.data;
-                  var peptides = peptide_response;//.data;
-                  var pep_len = Object.keys(peptides.length).length;
-              if(pep_len > 0)
-              {
-                var peptide_title = 'Peptide';
-                var peptides_length = pep_len; //peptides.length;
-                if(pep_len > 10)
-                {
-                  peptides_length = 10;
-                  peptide_html += '<tr>';
-                  peptide_html += '<td colspan = "3">';
-                  peptide_html += '<button id = "toggle-peptide" class="btn btn-warning btn-xs" data-toggle="collapse" href="#peptide" role="button" aria-expanded="false" aria-controls="peptide"><i class = "fa fa-plus"></i></a>';
-                  peptide_html += '</td>';
-                  peptide_html += '</tr>';
-                }
-                
-                peptide_html += '<tr>';
-                peptide_html += '<td width = "1%" title = "'+peptide_title+'" class = "vertical-bar" data-color = "'+peptide_bar_color+'"><a data-toggle = "tooltip" href = "" class = "text" title = "'+peptide_title+'">'+peptide_title+'</a></td>';
-                peptide_html += '<td width = "99%" colspan = "2">';
-                
-                peptide_html += '<table class = "table">';
-                for(var i = 0;i < pep_len;i++){
-                  var peptide = peptides['seq'][i];
-              //var text = peptide[0];
-              //var start = peptide[1];
-              //var end = peptide[2];
-              var text = peptides['seq'][i];
-              var start = peptides['starts_sides'][i];
-              var end = peptides['end_sides'][i];
-                    
-                  peptide_html += '<tr>';
-                  peptide_html += '<th width = "9%">';
-                  peptide_html += '<a data-toggle="tooltip" href = "" class = "text" title = "'+text+'">'+(i+1)+'</a>';
-                  peptide_html += '</th>';
-                  peptide_html += '<td width = "91%">';
-                  peptide_html += '<span class = "peptide-base-bar"></span>';
-                      
-                  peptide_html += '<div data-start-point = "' + start + '" data-end-point = "' + end + '" class = "horizontal-bar text" data-color = "' + peptide_color + '">';
-                  peptide_html += '<span class = "point left" data-toggle="tooltip" title = "' + start + '"></span>';
-                  peptide_html += '<a data-toggle="tooltip" href = "" title = "' + text + '">';
-                  peptide_html += '&nbsp;';
-                  peptide_html += '</a>';
-                  peptide_html += '<span class = "point right" data-toggle="tooltip" title = "' + end + '"></span>';
-                  peptide_html += '</div>';
-                      
-                  peptide_html += '</td>';
-                  peptide_html += '</tr>';
-                }
-                
-                peptide_html += '</table>';
-                peptide_html += '</td>';
-                peptide_html += '</tr>';
-                
-                if(pep_len > 0)
-                {
-                  peptide_html += '<tr class="collapse multi-collapse" id="peptide">';
-                  peptide_html += '<td width = "1%" title = "'+peptide_title+'" class = "vertical-bar" data-color = "#f9484a">&nbsp;</td>';
-                  peptide_html += '<td width = "99%" colspan = "2">';
-                  peptide_html += '<table class = "table">';
-                  for(var i = 10;i < pep_len;i++){
-                    var peptide = peptides['seq'][i];
-              //var text = peptide[0];
-              //var start = peptide[1];
-              //var end = peptide[2];
-              var text = peptides['seq'][i];
-              var start = peptides['starts_sides'][i];
-              var end = peptides['end_sides'][i];
-
-                    peptide_html += '<tr>';
-                    peptide_html += '<th width = "9%">';
-                    peptide_html += '<a data-toggle="tooltip" href = "" class = "text" title = "'+text+'">'+(i+1)+'</a>';
-                    peptide_html += '</th>';
-                    peptide_html += '<td width = "91%">';
-                    peptide_html += '<span class = "peptide-base-bar"></span>';
-                        
-                    peptide_html += '<div data-start-point = "' + start + '" data-end-point = "' + end + '" class = "horizontal-bar text" data-color = "' + peptide_color + '">';
-                    peptide_html += '<span class = "point left" data-toggle="tooltip" title = "' + start + '"></span>';
-                    peptide_html += '<a data-toggle="tooltip" href = "" title = "' + text + '">';
-                    peptide_html += '&nbsp;';
-                    peptide_html += '</a>';
-                    peptide_html += '<span class = "point right" data-toggle="tooltip" title = "' + end + '"></span>';
-                    peptide_html += '</div>';
-                        
-                    peptide_html += '</td>';
-                    peptide_html += '</tr>';
-                  }
-                  peptide_html += '</table>';
-                  peptide_html += '</td>';
-                  peptide_html += '</tr>';
-                }
-              }
-              $('#peptide_html').html(peptide_html);
-              }
-              });
-              
-              set_bars();
-              }
-              else
-              {
-                var html = '';
-                html += '<tr><td>Invalid Protein ID</td></tr>';
-                $('#main-table').html(html);
-              }
-              $('#page-loader').hide();
-            }
-          });
-        }
-
-        function set_bars() {
-          $('.horizontal-bar').each(function(e) {
-            var color = $(this).attr('data-color');
-            if($(this).hasClass('helix')) {
-              $(this).css('background', 'repeating-linear-gradient(90deg, transparent, transparent 2px, ' + color + ' 2px, ' + color + ' 5px), linear-gradient(to bottom, ' + color + ', #fff');
-            } else {
-              $(this).css('background', color);
-              $(this).css('background-image', 'linear-gradient(315deg, '+color+' 0%, '+color+' 74%)');
-            }
-            
-            var point_width = $('.ruler').attr('data-point-width');
-            var start_point = parseInt($(this).attr('data-start-point'));
-            var end_point = parseInt($(this).attr('data-end-point'));
-            var width = (end_point - start_point) * point_width;
-            var left = start_point * point_width;
-            $(this).css('width', width + '%');
-            $(this).css('margin-left', left + '%');
-            $(this).find('.point').css('border-color', color);
-          });
-          $('.lolipop-outer').each(function(e) {
-            var color = $(this).attr('data-color');
-            $(this).find('.text').css('background', color);
-            var point_width = $('.ruler').attr('data-point-width');
-            var start_point = parseInt($(this).attr('data-start-point'));
-            var left = start_point * point_width;
-            $(this).find('.lolipop-dot').css('background', color);
-            $(this).find('.lolipop-dot').css('background-image', 'linear-gradient(315deg, '+color+' 0%, '+color+' 74%)');
-            $(this).css('left', left + '%');
-          });
-          $('.vertical-bar').each(function(e) {
-            var color = $(this).attr('data-color');
-            $(this).css('background', color);
-            $(this).css('background-image', 'linear-gradient(315deg, '+color+' 0%, '+color+' 74%)');
-          });
-          $('.base-bar').each(function(e) {
-            var color = $(this).attr('data-color');
-            $(this).css('border-bottom', '4px solid ' + color);
-          });
-        }
-
-        function set_ruler(ruler_start_point, ruler_end_point, total_steps) {
-          ruler_end_point = round_point(ruler_end_point, total_steps);
-          var ruler_width = $('.ruler-outer').width();
-          var ruler_step = (ruler_end_point - ruler_start_point) / total_steps;
-          var step_width = (ruler_width / total_steps);
-          var html = "";
-          var step_count = 1;
-          var count = 1;
-          var step_class;
-          var step_text = ruler_start_point;
-          step_width = (step_width * 100) / ruler_width;
-          var point_width = (step_width / ruler_step);
-          for(var i = 0; i <= total_steps; i++) {
-            step_class = '';
-            if(i % 2 == 0) {
-              step_class = "even";
-            } else {
-              step_class = "odd";
-            }
-            html += "<li class = '" + step_class + "' style = 'width: " + step_width + "%;'><span class = 'step-text'>" + step_text + "</span></li>";
-            step_text += ruler_step;
-          }
-          $('.ruler').html(html);
-          $('.ruler').attr('data-point-width', point_width);
-        }
-
-        function round_point(number, multiple) {
-          number = parseInt(number);
-          multiple = parseInt(multiple);
-          var modulo = number % multiple;
-          if(modulo == 0) {
-            return number;
-          } else {
-            var nearest_dividend = Math.floor(number / multiple) + 1;
-            return(multiple * nearest_dividend);
-          }
-        }
-        $(document).on('hidden.bs.collapse', '#peptide', function(e) {
-          // do something…
-          $('#toggle-peptide').addClass('btn-warning');
-          $('#toggle-peptide').removeClass('btn-default');
-          $('#toggle-peptide').html('<i class = "material-icons">add</i>');
-        });
-        $(document).on('shown.bs.collapse', '#peptide', function(e) {
-          // do something…
-          $('#toggle-peptide').removeClass('btn-default');
-          $('#toggle-peptide').addClass('btn-warning');
-          $('#toggle-peptide').html('<i class = "material-icons">remove</i>');
-        })
-        
-        $(document).on('click', '.main-table a', function(e) {
-          e.preventDefault();
-        })
-        
-        function $_GET(param) {
-          var vars = {};
-          window.location.href.replace( location.hash, '' ).replace( 
-            /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
-            function( m, key, value ) { // callback
-              vars[key] = value !== undefined ? value : '';
-            }
-          );
-
-          if ( param ) {
-            return vars[param] ? vars[param] : null;  
-          }
-          return vars;
-        }
+            html += '</a>';
+            html += '<span class = "point right" data-toggle="tooltip" title = "' + length + '"></span>';
+          html += '</div>';
+        html += '</td>';
+      html += '</tr>';
+      $(tracks).each(function(i, track) {
+      var track_name = track.name;
+      var track_start = track.start;
+      var track_end = track.end;
+      var track_description = track.desc;
+      var track_title = '';
+      if(track_name == 'chain') {
+      track_title = 'Molec. Processing';
+      color = molec_process_color;
+      }
+      else
+      {
+      color = bar_color;
+      }
+      html += '<tr>';
+        html += '<th width = "9%">';
+          html += '<a data-toggle="tooltip" href = "" class = "text" title = "' + track_title + '">' + track_title + '</a>';
+        html += '</th>';
+        html += '<td width = "91%">';
+          html += '<div data-start-point = "' + track_start + '" data-end-point = "' + track_end + '" class = "horizontal-bar text" data-color = "' + color + '">';
+            html += '<span class = "point left" data-toggle="tooltip" title = "' + track_start + '"></span>';
+            html += '<a data-toggle="tooltip" href = "" title = "' + track_description + '">';
+              html += track_description;
+            html += '</a>';
+            html += '<span class = "point right" data-toggle="tooltip" title = "' + track_end + '"></span>';
+          html += '</div>';
+        html += '</td>';
+      html += '</tr>';
       });
-      </script>
+      $(upsites).each(function(i, upsite) {
+      var tracks = upsite.tracks;
+      html += '<tr>';
+        html += '<th width = "9%">';
+          html += '<a data-toggle="tooltip" href = "" class = "text" title = "UP Sites">UP Sites</a>';
+        html += '</th>';
+        html += '<td class = "base-bar" data-color = "' + upsites_bar_color + '">';
+          $(tracks).each(function(i, track) {
+          var description = track.name;
+          var start = track.start;
+          html += '<div class = "lolipop-outer" data-color = "' + upsites_color + '" data-start-point = "' + start + '" data-toggle="tooltip" title = "' + description + '">';
+            html += '<span class = "lolipop-dot"></span>';
+            html += '<span class = "lolipop-stick"></span>';
+          html += '</div>';
+          });
+        html += '</td>';
+      html += '</tr>';
+      });
+      // variation
+    html += '<tr id = "variation_html"></tr>';
+  html += '</table>';
+html += '</td>';
+html += '</tr>';
+html += '<tr id = "pfam_html"></tr>';
+html += '<tr id = "exon_html"></tr>';
+$(secstruc).each(function(i, protein) {
+var text = 'Secstruc';
+var helixes = protein.tracks;
+if($(helixes).length > 0)
+{
+html += '<tr>';
+html += '<td width = "1%" title = "PDB" class = "vertical-bar" data-color = "' + secstruc_bar_color + '"><a data-toggle = "tooltip" href = "" class = "text" title = "PDB">PDB</a></td>';
+html += '<td width = "99%" colspan = "2">';
+html += '<table class = "table">';
+html += '<tr>';
+  html += '<th width = "9%">';
+    html += '<a data-toggle="tooltip" href = "" class = "text" title = "' + text + '">' + text + '</a>';
+  html += '</th>';
+  html += '<td>';
+    html += '<div data-toggle="tooltip" title = "coil" class = "coil"></div>';
+    $(helixes).each(function(i, helix) {
+    var start = helix.start;
+    var end = helix.end;
+    var description = helix.desc + ' ( from ' + helix.note + ') (' + start + '-' + end + ')';
+    html += '<div data-start-point = "' + start + '" data-end-point = "' + end + '" class = "horizontal-bar text helix" data-color = "' + helix_color + '">';
+      html += '<span class = "point left" data-toggle="tooltip" title = "' + start + '"></span>';
+      html += '<a data-toggle="tooltip" href = "" title = "' + description + '">';
+        html += '&nbsp;';
+      html += '</a>';
+      html += '<span class = "point right" data-toggle="tooltip" title = "' + end + '"></span>';
+    html += '</div>';
+    });
+  html += '</td>';
+html += '</tr>';
+html += '</table>';
+html += '</td>';
+html += '</tr>';
+}
+});
+//html += '<tr id = "peptide_html"></tr>';
+$('#main-table').append(html);
+var variation_html = '';
+$.ajax({
+url: variation_data_url,
+async: false,
+success: function(variation_response) {
+var variations = variation_response.variation;
+$(variations).each(function(i, variation) {
+var tracks = variation.tracks;
+if($(tracks).length > 0) {
+variation_html += '<th width = "9%">';
+variation_html += '<a data-toggle="tooltip" href = "" class = "text" title = "Variations">Variations</a>';
+variation_html += '</th>';
+variation_html += '<td class = "base-bar" data-color = "' + variation_bar_color + '">';
+$(tracks).each(function(i, track) {
+var description = track.name;
+var start = track.start;
+variation_html += '<div class = "lolipop-outer" data-color = "' + variation_color + '" data-start-point = "' + start + '" data-toggle="tooltip" title = "' + description + '">';
+variation_html += '<span class = "lolipop-dot"></span>';
+variation_html += '<span class = "lolipop-stick"></span>';
+variation_html += '</div>';
+});
+variation_html += '</td>';
+}
+$('#variation_html').html(variation_html);
+});
+}
+});
+var pfam_html = '';
+$.ajax({
+url: pfam_data_url,
+async: false,
+success: function(pfam_response) {
+var pfam = pfam_response.pfam;
+var tracks = pfam.tracks;
+var label = 'Pfam';
+if($(tracks).length > 0) {
+pfam_html += '<td width = "1%" title = "' + label + '" class = "vertical-bar" data-color = "' + pfam_bar_color + '"><a data-toggle = "tooltip" href = "" class = "text" title = "' + label + '">' + label + '</a></td>';
+pfam_html += '<td width = "99%" colspan = "2">';
+pfam_html += '<table class = "table">';
+variation_html += '<tr>';
+pfam_html += '<th width = "9%">';
+pfam_html += '<a data-toggle="tooltip" href = "" class = "text" title = "' + label + '">' + label + '</a>';
+pfam_html += '</th>';
+pfam_html += '</th>';
+pfam_html += '<td width = "91%">';
+$(tracks).each(function(i, track) {
+var track_name = track.name;
+var track_start = track.start;
+var track_end = track.end;
+var track_description = track.desc;
+pfam_html += '<div data-start-point = "' + track_start + '" data-end-point = "' + track_end + '" class = "horizontal-bar text" data-color = "' + pfam_color + '">';
+pfam_html += '<span class = "point left" data-toggle="tooltip" title = "' + track_start + '"></span>';
+pfam_html += '<a data-toggle="tooltip" href = "" title = "' + track_description + '">';
+  pfam_html += track_description;
+pfam_html += '</a>';
+pfam_html += '<span class = "point right" data-toggle="tooltip" title = "' + track_end + '"></span>';
+pfam_html += '</div>';
+});
+pfam_html += '</td>';
+pfam_html += '</tr>';
+pfam_html += '</table>';
+pfam_html += '</td>';
+}
+$('#pfam_html').html(pfam_html);
+}
+});
+var exon_html = '';
+$.ajax({
+url: exons_data_url,
+async: false,
+success: function(exon_response) {
+var exon = exon_response.exon;
+var tracks = exon.tracks;
+if($(tracks).length > 0) {
+var label = 'Exon';
+exon_html += '<td width = "1%" title = "' + label + '" class = "vertical-bar" data-color = "' + exon_bar_color + '"><a data-toggle = "tooltip" href = "" class = "text" title = "' + label + '">' + label + '</a></td>';
+exon_html += '<td width = "99%" colspan = "2">';
+label = 'Exon Structure';
+exon_html += '<table class = "table">';
+variation_html += '<tr>';
+exon_html += '<th width = "9%">';
+exon_html += '<a data-toggle="tooltip" href = "" class = "text" title = "' + label + '">' + label + '</a>';
+exon_html += '</th>';
+exon_html += '</th>';
+exon_html += '<td width = "91%">';
+$(tracks).each(function(i, track) {
+var track_name = track.name;
+var track_start = track.start;
+var track_end = track.end;
+var track_description = track.name + ' - ' + track.desc;
+exon_html += '<div data-start-point = "' + track_start + '" data-end-point = "' + track_end + '" class = "horizontal-bar text" data-color = "' + exon_color + '">';
+exon_html += '<span class = "point left" data-toggle="tooltip" title = "' + track_start + '"></span>';
+exon_html += '<a data-toggle="tooltip" href = "" title = "' + track_description + '">';
+exon_html += track_description;
+exon_html += '</a>';
+exon_html += '<span class = "point right" data-toggle="tooltip" title = "' + track_end + '"></span>';
+exon_html += '</div>';
+});
+exon_html += '</td>';
+exon_html += '</tr>';
+exon_html += '</table>';
+exon_html += '</td>';
+}
+$('#exon_html').html(exon_html);
+}
+});
+var peptide_html = '';
+$.ajax({
+url: peptides_data_url,
+async: false,
+success: function(peptide_response) {
+//var peptides = peptide_response.data;
+var peptides = peptide_response;//.data;
+var pep_len = Object.keys(peptides.length).length;
+if(pep_len > 0)
+{
+var peptide_title = 'Peptide';
+var peptides_length = pep_len; //peptides.length;
+if(pep_len > 10)
+{
+peptides_length = 10;
+peptide_html += '<tr>';
+peptide_html += '<td colspan = "3">';
+peptide_html += '<button id = "toggle-peptide" class="btn btn-warning btn-xs" data-toggle="collapse" href="#peptide" role="button" aria-expanded="false" aria-controls="peptide"><i class = "fa fa-plus"></i></a>';
+peptide_html += '</td>';
+peptide_html += '</tr>';
+}
+peptide_html += '<tr>';
+peptide_html += '<td width = "1%" title = "'+peptide_title+'" class = "vertical-bar" data-color = "'+peptide_bar_color+'"><a data-toggle = "tooltip" href = "" class = "text" title = "'+peptide_title+'">'+peptide_title+'</a></td>';
+peptide_html += '<td width = "99%" colspan = "2">';
+peptide_html += '<table class = "table">';
+for(var i = 0;i < 10;i++){
+var peptide = peptides['seq'][i];
+//var text = peptide[0];
+//var start = peptide[1];
+//var end = peptide[2];
+var text = peptides['seq'][i];
+var start = peptides['starts_sides'][i];
+var end = peptides['end_sides'][i];
+peptide_html += '<tr>';
+peptide_html += '<th width = "9%">';
+peptide_html += '<a data-toggle="tooltip" href = "" class = "text" title = "'+text+'">'+(i+1)+'</a>';
+peptide_html += '</th>';
+peptide_html += '<td width = "91%">';
+peptide_html += '<span class = "peptide-base-bar"></span>';
+peptide_html += '<div data-start-point = "' + start + '" data-end-point = "' + end + '" class = "horizontal-bar text" data-color = "' + peptide_color + '">';
+peptide_html += '<span class = "point left" data-toggle="tooltip" title = "' + start + '"></span>';
+peptide_html += '<a target = "_BLANK" href = "https://www.uniprot.org/uniprot/'+default_uniprotID+'" title = "' + text + '">';
+peptide_html += '&nbsp;';
+peptide_html += '</a>';
+peptide_html += '<span class = "point right" data-toggle="tooltip" title = "' + end + '"></span>';
+peptide_html += '</div>';
+peptide_html += '</td>';
+peptide_html += '</tr>';
+}
+peptide_html += '</table>';
+peptide_html += '</td>';
+peptide_html += '</tr>';
+if(pep_len > 10)
+{
+peptide_html += '<tr class="collapse multi-collapse" id="peptide">';
+peptide_html += '<td width = "1%" title = "'+peptide_title+'" class = "vertical-bar" data-color = "#f9484a">&nbsp;</td>';
+peptide_html += '<td width = "99%" colspan = "2">';
+peptide_html += '<table class = "table">';
+for(var i = 10;i < pep_len;i++){
+var peptide = peptides['seq'][i];
+var text = peptides['seq'][i];
+var start = peptides['starts_sides'][i];
+var end = peptides['end_sides'][i];
+peptide_html += '<tr>';
+peptide_html += '<th width = "9%">';
+peptide_html += '<a data-toggle="tooltip" href = "" class = "text" title = "'+text+'">'+(i+1)+'</a>';
+peptide_html += '</th>';
+peptide_html += '<td width = "91%">';
+peptide_html += '<span class = "peptide-base-bar"></span>';
+peptide_html += '<div data-start-point = "' + start + '" data-end-point = "' + end + '" class = "horizontal-bar text" data-color = "' + peptide_color + '">';
+peptide_html += '<span class = "point left" data-toggle="tooltip" title = "' + start + '"></span>';
+peptide_html += '<a target = "_BLANK" href = "https://www.uniprot.org/uniprot/'+default_uniprotID+'" title = "' + text + '">';
+peptide_html += '&nbsp;';
+peptide_html += '</a>';
+peptide_html += '<span class = "point right" data-toggle="tooltip" title = "' + end + '"></span>';
+peptide_html += '</div>';
+peptide_html += '</td>';
+peptide_html += '</tr>';
+}
+peptide_html += '</table>';
+peptide_html += '</td>';
+peptide_html += '</tr>';
+}
+}
 
+var p_html = "";
+p_html += "<td colspan = '3' width = '100%'>";
+p_html += '<table width = "100%" class="table protein-table" id="peptide_html" border="0">';
+p_html += peptide_html;
+p_html += "</table>";
+p_html += "</td>";
+
+$('#peptide_html').html(p_html);
+}
+});
+set_bars();
+}
+else
+{
+var html = '';
+html += '<tr><td>Invalid Protein ID</td></tr>';
+$('#main-table').html(html);
+}
+$('#page-loader').hide();
+}
+});
+}
+function set_bars() {
+$('.horizontal-bar').each(function(e) {
+var color = $(this).attr('data-color');
+if($(this).hasClass('helix')) {
+$(this).css('background', 'repeating-linear-gradient(90deg, transparent, transparent 2px, ' + color + ' 2px, ' + color + ' 5px), linear-gradient(to bottom, ' + color + ', #fff');
+} else {
+$(this).css('background', color);
+$(this).css('background-image', 'linear-gradient(315deg, '+color+' 0%, '+color+' 74%)');
+}
+var point_width = $('.ruler').attr('data-point-width');
+var start_point = parseInt($(this).attr('data-start-point'));
+var end_point = parseInt($(this).attr('data-end-point'));
+var width = (end_point - start_point) * point_width;
+var left = start_point * point_width;
+$(this).css('width', width + '%');
+$(this).css('margin-left', left + '%');
+$(this).find('.point').css('border-color', color);
+});
+$('.lolipop-outer').each(function(e) {
+var color = $(this).attr('data-color');
+$(this).find('.text').css('background', color);
+var point_width = $('.ruler').attr('data-point-width');
+var start_point = parseInt($(this).attr('data-start-point'));
+var left = start_point * point_width;
+$(this).find('.lolipop-dot').css('background', color);
+$(this).find('.lolipop-dot').css('background-image', 'linear-gradient(315deg, '+color+' 0%, '+color+' 74%)');
+$(this).css('left', left + '%');
+});
+$('.vertical-bar').each(function(e) {
+var color = $(this).attr('data-color');
+$(this).css('background', color);
+$(this).css('background-image', 'linear-gradient(315deg, '+color+' 0%, '+color+' 74%)');
+});
+$('.base-bar').each(function(e) {
+var color = $(this).attr('data-color');
+$(this).css('border-bottom', '4px solid ' + color);
+});
+}
+function set_ruler(ruler_start_point, ruler_end_point, total_steps) {
+ruler_end_point = round_point(ruler_end_point, total_steps);
+var ruler_width = $('.ruler-outer').width();
+var ruler_step = (ruler_end_point - ruler_start_point) / total_steps;
+var step_width = (ruler_width / total_steps);
+var html = "";
+var step_count = 1;
+var count = 1;
+var step_class;
+var step_text = ruler_start_point;
+step_width = (step_width * 100) / ruler_width;
+var point_width = (step_width / ruler_step);
+for(var i = 0; i <= total_steps; i++) {
+step_class = '';
+if(i % 2 == 0) {
+step_class = "even";
+} else {
+step_class = "odd";
+}
+html += "<li class = '" + step_class + "' style = 'width: " + step_width + "%;'><span class = 'step-text'>" + step_text + "</span></li>";
+step_text += ruler_step;
+}
+$('.ruler').html(html);
+$('.ruler').attr('data-point-width', point_width);
+}
+function round_point(number, multiple) {
+number = parseInt(number);
+multiple = parseInt(multiple);
+var modulo = number % multiple;
+if(modulo == 0) {
+return number;
+} else {
+var nearest_dividend = Math.floor(number / multiple) + 1;
+return(multiple * nearest_dividend);
+}
+}
+$(document).on('hidden.bs.collapse', '#peptide', function(e) {
+// do something…
+$('#toggle-peptide').addClass('btn-warning');
+$('#toggle-peptide').removeClass('btn-default');
+$('#toggle-peptide').html('<i class = "material-icons">add</i>');
+});
+$(document).on('shown.bs.collapse', '#peptide', function(e) {
+// do something…
+$('#toggle-peptide').removeClass('btn-default');
+$('#toggle-peptide').addClass('btn-warning');
+$('#toggle-peptide').html('<i class = "material-icons">remove</i>');
+})
+$(document).on('click', '.main-table a', function(e) {
+e.preventDefault();
+})
+function $_GET(param) {
+var vars = {};
+window.location.href.replace( location.hash, '' ).replace(
+/[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+function( m, key, value ) { // callback
+vars[key] = value !== undefined ? value : '';
+}
+);
+if ( param ) {
+return vars[param] ? vars[param] : null;
+}
+return vars;
+}
+});
+</script>
 {% endblock %}
