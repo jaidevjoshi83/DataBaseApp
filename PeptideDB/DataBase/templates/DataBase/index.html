@@ -357,7 +357,11 @@ peptide_html += '<tr>';
 peptide_html += '<td width = "1%" title = "'+peptide_title+'" class = "vertical-bar" data-color = "'+peptide_bar_color+'"><a data-toggle = "tooltip" href = "" class = "text" title = "'+peptide_title+'">'+peptide_title+'</a></td>';
 peptide_html += '<td width = "99%" colspan = "2">';
 peptide_html += '<table class = "table">';
-for(var i = 0;i < 10;i++){
+var limited_len = pep_len;
+if(pep_len > 10) {
+  limited_len = 10;
+}
+for(var i = 0;i < limited_len;i++){
 var peptide = peptides['seq'][i];
 //var text = peptide[0];
 //var start = peptide[1];
