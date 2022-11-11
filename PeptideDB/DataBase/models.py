@@ -1,32 +1,21 @@
 from django.db import models
 
-# Create your models here.
-
-
-#class ProteinID(models.Model):
-#   ProtID = models.CharField(max_length=30)
-#
-#   def __str__(self):
-#      return "%s" % (self.ProtID)
 
 class PeptideSeq(models.Model):
+       
+    db_id = models.CharField(max_length=20,  null=True)
+    sequnce = models.CharField(max_length=10,  null=True)
+    master_protein_accession = models.CharField(max_length=200,  null=True)
+    master_protein_description = models.CharField(max_length=50,  null=True)
+    cleavage_site = models.CharField(max_length=10,  null=True)
+    annotated_sequence = models.CharField(max_length=30,  null=True)
+    abundance = models.CharField(max_length=100  )
 
-    Protein_found =models.CharField(max_length=10)
-    Recommended_Protein_Name = models.CharField(max_length=200)
-    Species = models.CharField(max_length=50)
-    Chromosome = models.CharField(max_length=10)
-    Accession = models.CharField(max_length=30)
-    Input_Sequence = models.CharField(max_length=100)
-    P1_Position = models.CharField(max_length=4)
-    Cleaving_proteases = models.CharField(max_length=4)
-
-    def __str__(self):
-        return "%s %s %s %s %s %s %s %s " % (self.Input_Sequence, self.P1_Position, self.Accession, self.Protein_found, self.Recommended_Protein_Name, self.Species, self.Cleaving_proteases, self.Chromosome )
+    # def __str__(self):
+    #     return "%s\t%s\t%s\t%s\t%s\t%s\t%s" % (self.db_id, self.sequnce, self.master_protein_accession, self.master_protein_description, self.cleavage_site, self.annotated_sequence, self.abundance)
 
     class Meta:
-        ordering = ['Input_Sequence']
-
-
+        ordering = ['db_id']
 
 
 #PeptideSeq.objects.filter(protein_id__ProtID='A0A0B4J1X5')
