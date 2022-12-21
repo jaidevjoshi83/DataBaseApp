@@ -4,7 +4,12 @@
 {% block content %}
 
 <head>
+    <script type="text/javascript"> 
+        var temp_acc = "{{acc}}"
+        var temp_des = "{{des}}"
+    </script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+   
 </head>
 
         <!-- Static Table Start -->
@@ -22,16 +27,15 @@
                                 <div class="datatable-dashv1-list custom-datatable-overright">
                                     <div id="toolbar">
                                         <select class="form-control dt-tb">
-                                            <option value="">Export Basic</option>
+                                            <option value="selected">Download Data</option>
                                             <option value="all">Export All</option>
-                                            <option value="selected">Export Selected</option>
                                         </select>
                                     </div>
-                                    <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
-                                        data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                    <table id="table" data-toggle="table" data-pagination="true" 
+                                        data-click-to-select="true" data-toolbar="#toolbar">
                                         <thead>
                                             <tr>
-                                                <th data-field="state" data-checkbox="true"></th>
+                                                <!-- <th data-field="state" data-checkbox="true"></th> -->
                                                 <th data-field="id">ID</th>
                                                 <th data-field="name" data-editable="true">Sequence</th>
                                                 <th data-field="email" data-editable="true">Master Protein Accession</th>
@@ -39,25 +43,13 @@
                                                 <th data-field="complete">Cleavage Side</th>
                                                 <th data-field="task" data-editable="true">Annotated Sequence</th>
                                                 <th data-field="date" data-editable="true">Abundance</th>
-                                                <th data-field="action">Action</th>
+                                     
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for i in peps%}
-                                            <tr>
-                                                <td></td>
-                                                <td>{{i.db_id}}</td>
-                                                <td>{{i.sequnce}}</td>
-                                                <td>{{i.master_protein_accession}}</td>
-                                                <td>{{i.master_protein_description}}</td>
-                                                <td class="datatable-ct"><span class="pie">{{i.cleavage_site}}</span>
-                                                </td>
-                                                <td>{{i.annotated_sequence}}</td>
-                                                <td>{{i.abundance}}</td>
-                                                <td class="datatable-ct"><i class="fa fa-check"></i>
-                                                </td>
-                                            </tr>
-                                           {% endfor %}
+
+                                            <!-- Create rows dynamically-->
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -76,7 +68,8 @@
     
     <!-- bootstrap JS
         ============================================ -->
-    <script src="{% static 'css/table/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'js/table.js' %}"></script>
 
     <script src="{% static 'table/js/data-table/bootstrap-table.js' %}"></script>
     <script src="{% static 'table/js/data-table/tableExport.js' %}"></script>
