@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from .forms import  Rand_Frag_From
 from .models import PeptideSeq
+import os
 # #from .QueryJson import QurJson
-from .QueryJson import nti_by_accession
+
 from django.http import JsonResponse
 import os
 from django.core import serializers
@@ -11,55 +12,20 @@ from django.http import HttpResponse
 from six.moves.urllib.request import urlopen
 
 
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from .forms import UploadFileForm
+from django.core.files import uploadedfile
+from django.contrib.admin.views.decorators import staff_member_required
+
+
 import json
 
 # Create your views here.
 
-def HomePage(request):
-    return render(request, 'DataBase/base.html', {})
-
-def AboutPage(request):
-
-    peps = PeptideSeq.objects.all()[1:30]
-    # print(str(a[3]).split('\t'))
-
-    # peps = []
-    # for o in objs:
-    #     peps.append(str(o).split('\t'))
-
-    return render(request, 'DataBase/data-table.html', {'peps':peps})
 
 def HelpPage(request):
     return render(request, 'DataBase/help.html', {})
-
-# def DB(request):
-
-#     if request.method == 'POST':
-#         form = Rand_Frag_From(request.POST)
-
-#         print(form)
-
-#         if form.is_valid():
-
-#             inputPeptide = form.cleaned_data['Sequence']
-#             # accession = form.cleaned_data['Accession']
-
-#             print("OKKKKKK", inputPeptide)
-
-#             Ps = PeptideSeq.objects.all()[3:4]
-#             print(Ps)
-#             # return render(request, 'DataBase/PepInfo.html', {'Ps': Ps, })
-#             return render(request, 'DataBase/data-table.html', {'peps':Ps})
-#         else:
-
-#         # Fasta = ''
-#         # Acc = ''
-#             form = Rand_Frag_From(initial={'Sequence':Fasta})
-
-#         print(form)
-
-#     return render(request, 'DataBase/home.html', {'form': form})
-
 
 def DB(request):
 
@@ -90,14 +56,6 @@ def DB(request):
 
     return render(request, 'DataBase/Form.html', {'form': form})
 
-def OutData(request):
-    return render(request, 'DataBase/OutResults.html', {})
-
-def ProtView(request):
-    return render(request, 'DataBase/index.html', {})
-
-def Combined(request):
-    return render(request, 'DataBase/index.html', {})
 
 def PepView(request):
 
@@ -107,7 +65,6 @@ def PepView(request):
         record = PeptideSeq.objects.filter(master_protein_description__contains=request.GET['des'], master_protein_accession__contains=request.GET['acc'])
         qs_json = serializers.serialize('json', record)
         return JsonResponse(qs_json, safe=False)
-        # return JsonResponse(nti_by_accession(accession,sequence).to_dict())
 
     elif  'acc' in request.GET :
         record = PeptideSeq.objects.filter( master_protein_accession__contains=request.GET['acc'])
@@ -118,18 +75,22 @@ def PepView(request):
         record = PeptideSeq.objects.filter(master_protein_description__contains=request.GET['des'])
         qs_json = serializers.serialize('json', record)
         return JsonResponse(qs_json, safe=False)
-   
 
-def api_nti_peptide(request, accession=None, version=None, sequence=None):
-    print(accession)
-    print(sequence)
-    record = PeptideSeq.objects.filter(master_protein_description__contains=sequence, master_protein_accession__contains=accession)
-    qs_json = serializers.serialize('json', record)
-    return HttpResponse(qs_json, content_type='json')
-
-
-    # for i in record:
-    #     print(dir(i))
-
-    # print(list(record))
-    # return JsonResponse(record, safe = False)
+@staff_member_required
+def DataUpload(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+       
+        if form.is_valid():
+            print(request.FILES['file'])
+            print(uploadedfile)
+            handle_uploaded_file(request.FILES['file'])
+            return HttpResponseRedirect('/DataUpload/')
+    else:
+        form = UploadFileForm()
+    return render(request, 'DataBase/upload.html', {'form': form})
+  
+def handle_uploaded_file(f):
+    with open(os.getcwd()+f.name, 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
