@@ -46,7 +46,7 @@ function table_content(data){
     console.log(data[i])
 
     row.innerHTML  =   `<td>${data[i].fields.db_id}</td>
-                        <td>${data[i].fields.sequnce}</td>
+                        <td>${data[i].fields.sequence}</td>
                         <td>${data[i].fields.master_protein_accession}</td>
                         <td>${data[i].fields.master_protein_description}</td>
                         <td>${data[i].fields.cleavage_site}</td>
@@ -65,53 +65,20 @@ function removeAllChildNodes(parent) {
 
 
 function ExportData(data){
-
-    console.log('OK')
-
-    
-
     document.querySelector('.form-control.dt-tb').addEventListener('change', (e)=>{
 
         if (e.target.value == 'all'){
-
             JSONToCSVConvertor(data, 'test', true)
-            
         } else{
-
-        }
-
-        console.log(e.target.value)
-    
+        }    
     })
-
 }
 
-
 function JSONToCSVConvertor(JSONData, ReportTitle) {
-
-    //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
     var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     var arrData = JSONData
     var CSV = '';
-    //This condition will generate the Label/Header
-    // if (ShowLabel) {
-    //     var row = "";
-
-    //     //This loop will extract the label from 1st index of on array
-    //     for (var index in arrData[0]) {
-    //         //Now convert each value to string and comma-seprated
-    //         row += index + ',';
-    //     }
-    //     row = row.slice(0, -1);
-    //     //append Label row with line break
-    //     CSV += row + '\r\n';
-    // }
-
-
     CSV += `"ID","Sequence","Master Protein Accession","Master Protein Description","Cleavage Side","Annotated Sequence","Abundance"\r\n`
-
-    //1st loop is to extract each row
-
 
     for (var i = 0; i < arrData.length; i++) {
         var row = "";

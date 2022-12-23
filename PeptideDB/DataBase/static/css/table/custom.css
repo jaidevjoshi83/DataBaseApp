@@ -190,21 +190,21 @@ nav a:hover{
 }
 
 .site-content button { 
-        border: none;
-        color: rgb(8, 8, 8);
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
+    border: none;
+    color: rgb(8, 8, 8);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
 }
 
 .main .contact{
     color: white;
-    margin-left: 40%;
-    padding-top: 10%;
+    /* margin-left: 40%;
+    padding-top: 10%; */
 }
 
 .main .contact a:link{
@@ -214,18 +214,66 @@ nav a:hover{
 
 .main .upload-data input {
     
- 
-        /* position: relative; */
-        top: 150px;
-        font-family: calibri;
-        width: 300px;
-        padding: 10px;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        /* border: 1px dashed #BBB; */
-        text-align: center;
-        background-color: #DDD;
-        cursor: pointer;
-    
-    
+    top: 150px;
+    font-family: calibri;
+    width: 300px;
+    padding: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    /* border: 1px dashed #BBB; */
+    text-align: center;
+    background-color: #DDD;
+    cursor: pointer;
 }
+
+.form-control{
+    margin-bottom: 10px;
+}
+
+
+#bug-description input{
+    /* width: 200px; */
+    height: 100px;
+}
+
+
+
+.main .form-div{
+ 
+    width: 40%;
+    padding-top: 10%;
+    padding-left: 10%;
+    margin-left: 20%;
+
+}
+
+.main .form-div .form-button{
+    color: rgb(15, 3, 3);
+    border: 0px;
+    
+    width: 80px;
+    height: 30px;
+}
+
+.main .form-div .form-button:hover{
+    color: rgb(255, 255, 255);
+    border: 0px;
+    width: 80px;
+    height: 30px;
+    background-color: #283624;
+}
+
+.main .form-div .form-file{
+    top: 150px;
+    font-family: calibri;
+    width: 100%;
+    padding: 5px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 5px;
+    /* border: 1px dashed #BBB; */
+    text-align: center;
+    background-color: #DDD;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+

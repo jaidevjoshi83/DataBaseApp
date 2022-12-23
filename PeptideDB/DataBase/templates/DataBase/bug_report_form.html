@@ -6,8 +6,8 @@
 
 <div class="main">
   <div class="form-div">
-    <h2 class="mdl-card__title-text">Upload data </h2>
-    <form action="{%url 'data_upload' %}" method="POST" enctype="multipart/form-data" class="form-contact">
+    <h2 class="mdl-card__title-text">Report bugs </h2>
+    <form action="{%url 'bugs' %}" method="POST" enctype="multipart/form-data" class="form-contact">
       {%csrf_token%}
       {% for error in form.non_field_errors %}
       <div class="form-group has-errors text-danger small">
@@ -23,20 +23,20 @@
       {% endfor %}
 
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          {{form.experiment_name}}
-      </div>
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          {{form.user}}
-      </div>
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      {{form.description}}
+          {{form.title}}
       </div>
 
-      <div class="form-file">
-          {{form.file}}
+      <div id="bug-description", class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          {{form.bug_description}}
       </div>
 
-      <button class="form-button" type="submit">Submit</button>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          {{form.user_name}}
+      </div>
+
+      <button class="form-button" type="submit">
+            Submit
+      </button>
     </form>
   </div>
 </div>
