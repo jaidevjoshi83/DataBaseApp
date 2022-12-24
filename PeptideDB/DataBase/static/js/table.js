@@ -39,19 +39,24 @@ function table_content(data){
 
    removeAllChildNodes(table_body)
 
-   for (var i =0; i < data.length; i++){
+   for (var i =0; i < 10; i++){
+
+    console.log(i)
 
     var row = document.createElement('tr')
 
-    console.log(data[i])
-
     row.innerHTML  =   `<td>${data[i].fields.db_id}</td>
-                        <td>${data[i].fields.sequence}</td>
-                        <td>${data[i].fields.master_protein_accession}</td>
-                        <td>${data[i].fields.master_protein_description}</td>
+                        <td>${data[i].fields.peptide_sequence}</td>
+                        <td>${data[i].fields.accession}</td>
+                        <td>${data[i].fields.gene_symbol}</td>
+                        <td>${data[i].fields.protein_name}</td>
                         <td>${data[i].fields.cleavage_site}</td>
                         <td>${data[i].fields.annotated_sequence}</td>
-                        <td>${data[i].fields.abundance}</td>`
+                        <td>${data[i].fields.cellular_compartment}</td>
+                        <td>${data[i].fields.species}</td>
+                        <td>${data[i].fields.database_identified}</td>
+                        <td>${data[i].fields.description}</td>
+                        <td><a href=${data[i].fields.reference_link} target="_blank" >${data[i].fields.reference_number}</a></td>`
 
     table_body.append(row)
     }             

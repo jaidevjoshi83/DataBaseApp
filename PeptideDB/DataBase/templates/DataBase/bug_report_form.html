@@ -23,14 +23,23 @@
       {% endfor %}
 
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div class="input-title">
+          <span> Title</span>
+        </div>
           {{form.title}}
       </div>
 
       <div id="bug-description", class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div class="input-title">
+          <span> Brief description</span>
+        </div>
           {{form.bug_description}}
       </div>
 
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div class="input-title">
+          <span> Who is submitting</span>
+        </div>
           {{form.user_name}}
       </div>
 

@@ -23,15 +23,43 @@
       {% endfor %}
 
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          {{form.experiment_name}}
-      </div>
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          {{form.user}}
-      </div>
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      {{form.description}}
+        <div class="input-title">
+          <span> Experiment title </title></span>
+        </div>
+        {{form.experiment_name}}
       </div>
 
+      <div class="form_select_data">
+        <div class="input-title">
+          <span> Experiment Type</span>
+        </div>
+        {{form.experiment_type}}
+      </div>
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div class="input-title">
+          <span>Reference number </span>
+        </div>
+        {{form.reference_number}}
+      </div>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div class="input-title">
+          <span> Reference link </span>
+        </div>
+        {{form.reference_link}}
+      </div>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div class="input-title">
+          <span> Who is uploading the file</span>
+        </div>
+        {{form.user}}
+      </div>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div class="input-title">
+          <span>Description of the data</span>
+        </div>
+        {{form.description}}
+      </div>
       <div class="form-file">
           {{form.file}}
       </div>

@@ -2,10 +2,12 @@ from django.shortcuts import render
 from .forms import  dabase_form, UploadFileForm, BugReportingForm
 from django.contrib.auth import logout
 import os
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.admin.views.decorators import staff_member_required
 from datetime import datetime
-from .models import UploadedData, BugReporting
+from .models import UploadedData, BugReporting, PeptideSeq
+from django.core import serializers
+
 
 
 def contact(request):
@@ -55,29 +57,34 @@ def data_upload(request):
 
             a = UploadedData.objects.create(
                 datafile_index='DBF'+str(len(UploadedData.objects.all())),
-                experiment=form.cleaned_data['experiment_name'],
-                data_upload_date=datetime.today(),
+                experiment_name=form.cleaned_data['experiment_name'],
+                data_upload_date=now.strftime("%Y-%m-%d"),
+                data_upload_time=now.strftime("%H:%M:%S"),
                 user_name=form.cleaned_data['user'],
                 data_description=form.cleaned_data['description'],
-                data_file_name=file_name
+                data_file_name=file_name,
+                experiment_type=form.cleaned_data['experiment_name'],
+                reference_number=form.cleaned_data['reference_number'],
+                reference_link=form.cleaned_data['reference_link'],
                 )
 
             print("@@@@@@@@@@@@@", len(objs))
 
-            handle_uploaded_file(request.FILES['file'], file_name)
+            handle_uploaded_file(request.FILES['file'], file_name, form.cleaned_data['reference_number'], form.cleaned_data['reference_link'])
             a.save()
-            return HttpResponseRedirect('/DataUpload/')
+            return HttpResponseRedirect('/data_upload/')
     else:
         form = UploadFileForm()
     return render(request, 'DataBase/upload.html', {'form': form})
   
-def handle_uploaded_file(f, file_name):
+def handle_uploaded_file(f, file_name, ref_number, ref_link):
 
     with open(os.path.join(os.getcwd(), file_name), 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
-
-
+    
+    import_data_to_model(file_name, ref_number, ref_link)
+    
 def bugs(request):
 
     if request.method == 'POST':
@@ -104,5 +111,69 @@ def bugs(request):
 def success(request):
     return render(request,  'Database/bug_submission_success.html', {})
 
+@staff_member_required
 def download_data_report(request):
-    return render(request,  'Database/bug_submission_success.html', {})
+    return render(request,  'Database/uploaded_data_report.html', {})
+
+
+def import_data_to_model(file_name, ref_num, ref_link):
+    f = open(os.path.join(os.getcwd(), file_name))
+    lines = f.readlines()
+
+    count = PeptideSeq.objects.all().count()
+    for line in lines[1:]:
+        chunks = line.split('\t')
+        # num_of_obj = PeptideSeq.objects.filter(
+        #     sequence=chunks[0],
+        #     master_protein_accession=chunks[1],
+        #      master_protein_description=chunks[2],
+        #     cleavage_site=chunks[3],
+        #     annotated_sequence=chunks[4],
+        #     abundance=chunks[5],
+        # ).count()
+
+        # if num_of_obj > 0:
+        #     pass
+        # else:
+
+        count = count + 1
+        new_obj = PeptideSeq.objects.create(
+
+            db_id='DBS0'+str(count),
+            accession=chunks[0],
+            gene_symbol=chunks[1],
+            protein_name=chunks[2],
+            cleavage_site=chunks[3],
+            peptide_sequence=chunks[4],
+            annotated_sequence=chunks[5],
+            cellular_compartment=chunks[6],
+            species=chunks[7],
+            database_identified=chunks[8],
+            description=chunks[9],
+            reference_number=ref_num,
+            reference_link=ref_link,
+            data_file_name= file_name
+        )
+        new_obj.save()
+
+def PepView(request):
+
+    data = {}
+
+    if 'des' in request.GET and 'acc' in request.GET :
+        record = PeptideSeq.objects.filter(protein_name__contains=request.GET['des'], accession__contains=request.GET['acc'])
+        qs_json = serializers.serialize('json', record)
+        return JsonResponse(qs_json, safe=False)
+
+    elif  'acc' in request.GET and 'des' not in request.GET:
+        record = PeptideSeq.objects.filter( accession__contains=request.GET['acc'])
+        qs_json = serializers.serialize('json', record)
+        return JsonResponse(qs_json, safe=False)
+
+    elif 'des' in request.GET  and 'acc' not in request.GET:
+        record = PeptideSeq.objects.filter(protein_name__contains=request.GET['des'])
+        qs_json = serializers.serialize('json', record)
+        return JsonResponse(qs_json, safe=False)
+
+def references(request):
+    return render(request, 'DataBase/references.html', {})

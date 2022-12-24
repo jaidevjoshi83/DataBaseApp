@@ -272,8 +272,24 @@ nav a:hover{
     -moz-border-radius: 5px;
     /* border: 1px dashed #BBB; */
     text-align: center;
-    background-color: #DDD;
+    background-color: rgb(150, 183, 133);
     cursor: pointer;
     margin-bottom: 10px;
 }
 
+ 
+.main .form-div .form_select_data select{
+    width: 100%;
+    height: 40px;
+    margin-bottom: 5px;
+}
+
+.main .form-div .input-title{
+    font-size: 20px;
+}
+
+.data-table{
+
+    background: red;
+
+}
