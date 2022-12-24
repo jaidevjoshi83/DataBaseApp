@@ -6,7 +6,7 @@
 
 <div class="main">
      <div  class="form-div">
-      <h2 class="mdl-card__title-text">Enter UNIPROT ID and/or description </h2>
+      <h2 class="mdl-card__title-text">Enter UNIPROT ID and/or protein name </h2>
       <form action="{%url 'DB' %}" method="POST" class="form-contact">
         {%csrf_token%}
         {% for error in form.non_field_errors %}

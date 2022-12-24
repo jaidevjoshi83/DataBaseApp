@@ -35,14 +35,13 @@ def DB(request):
 
             elif description == '' and accession == '':
                 render(request, 'DataBase/base.html', {'form': form})
-
     else:
         Fasta = ''
         Acc = ''
         form = dabase_form(initial={'Sequence':Fasta,'Accession':Acc})
         
     logout(request)
-    return render(request, 'DataBase/Form.html', {'form': form})
+    return render(request, 'DataBase/db_query_form.html', {'form': form})
 
 @staff_member_required
 def data_upload(request):
