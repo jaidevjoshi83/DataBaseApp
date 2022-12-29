@@ -122,7 +122,7 @@ def success(request):
 
 @staff_member_required
 def download_data_report(request):
-    return render(request,  'Database/uploaded_data_report.html', {})
+    return render(request,  'DataBase/uploaded_data_report.html', {})
 
 
 def import_data_to_model(file_name, ref_num, ref_link):
