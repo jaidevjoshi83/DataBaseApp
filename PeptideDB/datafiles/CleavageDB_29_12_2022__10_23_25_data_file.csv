@@ -1,0 +1,100 @@
+Protein Accession	Gene symbol	Protein name	Cleavage site	Peptide sequence	Annotated sequence	Cellular Compartment	Species	Database identified 	Discription	Reference
+Q7RTP6	MICAL3	[F-actin]-monooxygenase MICAL3 	1955	QILNEMLEVVEQ	[K].QILNEMLEVVEQ.[R]	Cytoplasm	Human	OA-cartilage	NA	1
+Q04446	GBE1	"1,4-alpha-glucan-branching enzyme "	566	QFHLTDDDLLR	[R].QFHLTDDDLLR.[Y]	Cytoplasm	Human	OA-cartilage	NA	1
+Q9NRX4	PHPT1	14 kDa phosphohistidine phosphatase 	33	SGAPAAESKEIVR	[R].SGAPAAESKEIVR.[G]	Cytoplasm	Human	OA-cartilage	NA	1
+P31946	YWHAB	14-3-3 protein beta/alpha 	21	YDDMAAAMKAVTEQGHELSNEER	[R].YDDMAAAMKAVTEQGHELSNEER.[N]	Cytoplasm	Human	OA-cartilage	NA	1
+P31946	YWHAB	14-3-3 protein beta/alpha 	63	VISSIEQKTER	[R].VISSIEQKTER.[N]	Cytoplasm	Human	OA-cartilage	NA	1
+P62258	YWHAE	14-3-3 protein epsilon 	43	NLLSVAYKNVIGAR	[R].NLLSVAYKNVIGAR.[R]	Cytoplasm	Human	OA-cartilage	NA	1
+P62258	YWHAE	14-3-3 protein epsilon 	174	ALNFSVFYYEILNSPDR	[L].ALNFSVFYYEILNSPDR.[A]	Cytoplasm	Human	OA-cartilage	NA	1
+P61981	YWHAG	14-3-3 protein gamma 	133	YLAEVATGEKR	[R].YLAEVATGEKR.[A]	Cytoplasm	Human	OA-cartilage	NA	1
+P27348	YWHAQ	14-3-3 protein theta 	19	YDDMATCMKAVTEQGAELSNEER	[R].YDDMATCMKAVTEQGAELSNEER.[N]	Cytoplasm	Human	OA-cartilage	NA	1
+P27348	YWHAQ	14-3-3 protein theta 	42	NLLSVAYKNVVGGR	[R].NLLSVAYKNVVGGR.[R]	Cytoplasm	Human	OA-cartilage	NA	1
+P63104	YWHAZ	14-3-3 protein zeta/delta 	19	YDDMAACMKSVTEQGAELSNEER	[R].YDDMAACMKSVTEQGAELSNEER.[N]	Cytoplasm	Human	OA-cartilage	NA	1
+P63104	YWHAZ	14-3-3 protein zeta/delta 	43	NLLSVAYK	[R].NLLSVAYK.[N]	Cytoplasm	Human	OA-cartilage	NA	1
+P63104	YWHAZ	14-3-3 protein zeta/delta 	43	NLLSVAYKNVVGAR	[R].NLLSVAYKNVVGAR.[R]	Cytoplasm	Human	OA-cartilage	NA	1
+O14756	HSD17B6	17-beta-hydroxysteroid dehydrogenase type 6 	292	IPLSYLPTSLADYILTR	[F].IPLSYLPTSLADYILTR.[S]	Other	Human	OA-cartilage	NA	1
+Q9C0C2	TNKS1BP1	182 kDa tankyrase-1-binding protein 	1582	GHRAPVIRPGGTLGLSEAADS	[R].GHRAPVIRPGGTLGLSEAADS.[D]	Nucleus	Human	OA-cartilage	NA	1
+Q8WTS1	ABHD5	1-acylglycerol-3-phosphate O-acyltransferase ABHD5 	170	VNHLILVEPWGFPER	[R].VNHLILVEPWGFPER.[P]	Cytoplasm	Human	OA-cartilage	NA	1
+Q8N3E9	PLCD3	"1-phosphatidylinositol 4,5-bisphosphate phosphodiesterase delta-3 "	430	LENHCGLEQQAAMAR	[S].LENHCGLEQQAAMAR.[H]	Cytoplasm	Human	OA-cartilage	NA	1
+P19174	PLCG1	"1-phosphatidylinositol 4,5-bisphosphate phosphodiesterase gamma-1 "	851	NPVALEPER	[V].NPVALEPER.[E]	Cytoplasm	Human	OA-cartilage	NA	1
+P16885	PLCG2	"1-phosphatidylinositol 4,5-bisphosphate phosphodiesterase gamma-2 "	1125	YDPNLAFLR	[I].YDPNLAFLR.[F]	Cytoplasm	Human	OA-cartilage	NA	1
+Q9BQC3	DPH2	2-(3-amino-3-carboxypropyl)histidine synthase subunit 2 	314	SYVLALGRPTPAKLANFPEVDVFVLLACPLGALAPQLSG	[R].SYVLALGRPTPAKLANFPEVDVFVLLACPLGALAPQLSG.[S]	Cytoplasm	Human	OA-cartilage	NA	1
+P00973	OAS1	2'-5'-oligoadenylate synthase 1 	131	ALSFVLSSLQLGEGVEFDVLPAFDALGQLTGGYKPNP	[R].ALSFVLSSLQLGEGVEFDVLPAFDALGQLTGGYKPNP.[Q]	Cytoplasm	Human	OA-cartilage	NA	1
+Q9UNM6	PSMD13	26S proteasome non-ATPase regulatory subunit 13 	129	QVTKETIEDVEEMLNNLPGVTSVHSR	[L].QVTKETIEDVEEMLNNLPGVTSVHSR.[F]	Cytoplasm	Human	OA-cartilage	NA	1
+P51665	PSMD7	26S proteasome non-ATPase regulatory subunit 7 	273	HNLINNKIANR	[L].HNLINNKIANR.[D]	Cytoplasm	Human	OA-cartilage	NA	1
+P48556	PSMD8	26S proteasome non-ATPase regulatory subunit 8 	65	AAAAVNGAAGFSSSGPAATSGAVLQAATGMYEQLKGEWNR	[M].AAAAVNGAAGFSSSGPAATSGAVLQAATGMYEQLKGEWNR.[K]	Cytoplasm	Human	OA-cartilage	NA	1
+P17980	PSMC3	26S proteasome regulatory subunit 6A 	18	ATVWDEAEQDGIGEEVLKMSTEEIIQR	[M].ATVWDEAEQDGIGEEVLKMSTEEIIQR.[T]	Nucleus	Human	OA-cartilage	NA	1
+P35998	PSMC2	26S proteasome regulatory subunit 7 	298	TMLELINQLDGFDPR	[R].TMLELINQLDGFDPR.[G]	Nucleus	Human	OA-cartilage	NA	1
+P82675	MRPS5	"28S ribosomal protein S5, mitochondrial "	381	PIVVASPR	[L].PIVVASPR.[G]	Cytoplasm	Human	OA-cartilage	NA	1
+Q9BZE1	MRPL37	"39S ribosomal protein L37, mitochondrial "	236	LPTIASR	[P].LPTIASR.[E]	Cytoplasm	Human	OA-cartilage	NA	1
+P46783	RPS10	40S ribosomal protein S10 	71	LTNEGIQYLR	[Y].LTNEGIQYLR.[D]	Cytoplasm	Human	OA-cartilage	NA	1
+P46783	RPS10	40S ribosomal protein S10 	72	TNEGIQYLR	[L].TNEGIQYLR.[D]	Cytoplasm	Human	OA-cartilage	NA	1
+P62280	RPS11	40S ribosomal protein S11 	106	HKNMSVHLSPCFR	[R].HKNMSVHLSPCFR.[D]	Cytoplasm	Human	OA-cartilage	NA	1
+P62280	RPS11	40S ribosomal protein S11 	119	DVQIGDIVTVGECRPLSKTVR	[R].DVQIGDIVTVGECRPLSKTVR.[F]	Cytoplasm	Human	OA-cartilage	NA	1
+P62263	RPS14	40S ribosomal protein S14 	85	CKELGITALHIKLR	[R].CKELGITALHIKLR.[A]	Cytoplasm	Human	OA-cartilage	NA	1
+P62263	RPS14	40S ribosomal protein S14 	105	TKTPGPGAQSALR	[R].TKTPGPGAQSALR.[A]	Cytoplasm	Human	OA-cartilage	NA	1
+P62841	RPS15	40S ribosomal protein S15 	19	GVDLDQLLDMSYEQLMQLYSAR	[R].GVDLDQLLDMSYEQLMQLYSAR.[Q]	Cytoplasm	Human	OA-cartilage	NA	1
+P62249	RPS16	40S ribosomal protein S16 	46	TLQYKLLEPVLLLGKER	[R].TLQYKLLEPVLLLGKER.[F]	Cytoplasm	Human	OA-cartilage	NA	1
+P08708	RPS17	40S ribosomal protein S17 	48	NKIAGYVTHLMKR	[R].NKIAGYVTHLMKR.[I]	Cytoplasm	Human	OA-cartilage	NA	1
+P08708	RPS17	40S ribosomal protein S17 	68	GISIKLQEEER	[R].GISIKLQEEER.[E]	Cytoplasm	Human	OA-cartilage	NA	1
+P08708	RPS17	40S ribosomal protein S17 	68	GISIKLQEEERER	[R].GISIKLQEEERER.[R]	Cytoplasm	Human	OA-cartilage	NA	1
+P08708	RPS17	40S ribosomal protein S17 	34	VCEEIAIIPSKKLR	[R].VCEEIAIIPSKKLR.[N]	Cytoplasm	Human	OA-cartilage	NA	1
+P62269	RPS18	40S ribosomal protein S18 	47	KADIDLTKR	[R].KADIDLTKR.[A]	Cytoplasm	Human	OA-cartilage	NA	1
+P62269	RPS18	40S ribosomal protein S18 	56	AGELTEDEVER	[R].AGELTEDEVER.[V]	Cytoplasm	Human	OA-cartilage	NA	1
+P62269	RPS18	40S ribosomal protein S18 	76	QYKIPDWFLNR	[R].QYKIPDWFLNR.[Q]	Cytoplasm	Human	OA-cartilage	NA	1
+P39019	RPS19	40S ribosomal protein S19 	68	GGAGVGSMTKIYGGR	[R].GGAGVGSMTKIYGGR.[Q]	Cytoplasm	Human	OA-cartilage	NA	1
+P62266	RPS23	40S ribosomal protein S23 	108	KGHAVGDIPGVR	[R].KGHAVGDIPGVR.[F]	Cytoplasm	Human	OA-cartilage	NA	1
+P62854	RPS26	40S ribosomal protein S26 	101	FRPAGAAPRPPPKPM	[R].FRPAGAAPRPPPKPM.[-]	Cytoplasm	Human	OA-cartilage	NA	1
+P62857	RPS28	40S ribosomal protein S28 	45	NVKGPVREGDVLTLLESER	[R].NVKGPVREGDVLTLLESER.[E]	Cytoplasm	Human	OA-cartilage	NA	1
+P62857	RPS28	40S ribosomal protein S28 	52	EGDVLTLLESER	[R].EGDVLTLLESER.[E]	Cytoplasm	Human	OA-cartilage	NA	1
+P23396	RPS3	40S ribosomal protein S3 	95	GLCAIAQAESLR	[R].GLCAIAQAESLR.[Y]	Cytoplasm	Human	OA-cartilage	NA	1
+P23396	RPS3	40S ribosomal protein S3 	68	ELTAVVQKR	[R].ELTAVVQKR.[F]	Cytoplasm	Human	OA-cartilage	NA	1
+P23396	RPS3	40S ribosomal protein S3 	28	ELAEDGYSGVEVR	[R].ELAEDGYSGVEVR.[V]	Cytoplasm	Human	OA-cartilage	NA	1
+P23396	RPS3	40S ribosomal protein S3 	107	YKLLGGLAVR	[R].YKLLGGLAVR.[R]	Cytoplasm	Human	OA-cartilage	NA	1
+P23396	RPS3	40S ribosomal protein S3 	46	TEIIILATR	[R].TEIIILATR.[T]	Cytoplasm	Human	OA-cartilage	NA	1
+P61247	RPS3A	40S ribosomal protein S3a 	70	SLADLQNDEVAFR	[V].SLADLQNDEVAFR.[K]	Nucleus	Human	OA-cartilage	NA	1
+P62701	RPS4X	"40S ribosomal protein S4, X isoform "	128	KIFVGTKGIPHLVTHDAR	[R].KIFVGTKGIPHLVTHDAR.[T]	Cytoplasm	Human	OA-cartilage	NA	1
+P62701	RPS4X	"40S ribosomal protein S4, X isoform "	78	TDITYPAGFMDVISIDKTGENFR	[R].TDITYPAGFMDVISIDKTGENFR.[L]	Cytoplasm	Human	OA-cartilage	NA	1
+P62753	RPS6	40S ribosomal protein S6 	32	MATEVAADALGEEWKGYVVR	[R].MATEVAADALGEEWKGYVVR.[I]	Cytoplasm	Human	OA-cartilage	NA	1
+P62081	RPS7	40S ribosomal protein S7 	121	TLTAVHDAILEDLVFPSEIVGKR	[R].TLTAVHDAILEDLVFPSEIVGKR.[I]	Cytoplasm	Human	OA-cartilage	NA	1
+P62241	RPS8	40S ribosomal protein S8 	26	KYELGRPAANTKIGPR	[R].KYELGRPAANTKIGPR.[R]	Cytoplasm	Human	OA-cartilage	NA	1
+P62241	RPS8	40S ribosomal protein S8 	78	IIDVVYNASNNELVR	[R].IIDVVYNASNNELVR.[T]	Cytoplasm	Human	OA-cartilage	NA	1
+P62241	RPS8	40S ribosomal protein S8 	111	QWYESHYALPLGR	[R].QWYESHYALPLGR.[K]	Cytoplasm	Human	OA-cartilage	NA	1
+P62241	RPS8	40S ribosomal protein S8 	60	LDVGNFSWGSECCTR	[R].LDVGNFSWGSECCTR.[K]	Cytoplasm	Human	OA-cartilage	NA	1
+P46781	RPS9	40S ribosomal protein S9 	70	RLFEGNALLR	[R].RLFEGNALLR.[R]	Cytoplasm	Human	OA-cartilage	NA	1
+P46781	RPS9	40S ribosomal protein S9 	46	VKFTLAKIR	[R].VKFTLAKIR.[K]	Cytoplasm	Human	OA-cartilage	NA	1
+P08865	RPSA	40S ribosomal protein SA 	64	AIVAIENPADVSVISSR	[R].AIVAIENPADVSVISSR.[N]	Cytoplasm	Human	OA-cartilage	NA	1
+P08865	RPSA	40S ribosomal protein SA 	129	ADHQPLTEASYVNLPTIALCNTDSPLR	[R].ADHQPLTEASYVNLPTIALCNTDSPLR.[Y]	Cytoplasm	Human	OA-cartilage	NA	1
+Q96IR7	HPDL	4-hydroxyphenylpyruvate dioxygenase-like protein 	274	ATAGGQFLAPPGAYYQQPGKER	[V].ATAGGQFLAPPGAYYQQPGKER.[Q]	Other	Human	OA-cartilage	NA	1
+P13196	ALAS1	"5-aminolevulinate synthase, nonspecific, mitochondrial "	55	YQQIKETPPASEKDK	[H].YQQIKETPPASEKDK.[T]	Cytoplasm	Human	OA-cartilage	NA	1
+P05388	RPLP0	60S acidic ribosomal protein P0 	67	GHLENNPALEKLLPHIR	[R].GHLENNPALEKLLPHIR.[G]	Cytoplasm	Human	OA-cartilage	NA	1
+P05388	RPLP0	60S acidic ribosomal protein P0 	100	DMLLANKVPAAAR	[R].DMLLANKVPAAAR.[A]	Cytoplasm	Human	OA-cartilage	NA	1
+P27635	RPL10	60S ribosomal protein L10 	99	INKMLSCAGADR	[R].INKMLSCAGADR.[L]	Cytoplasm	Human	OA-cartilage	NA	1
+P27635	RPL10	60S ribosomal protein L10 	140	TKLQNKEHVIEALR	[R].TKLQNKEHVIEALR.[R]	Cytoplasm	Human	OA-cartilage	NA	1
+P62913	RPL11	60S ribosomal protein L11 	65	NEKIAVHCTVR	[R].NEKIAVHCTVR.[G]	Cytoplasm	Human	OA-cartilage	NA	1
+P62913	RPL11	60S ribosomal protein L11 	36	AAKVLEQLTGQTPVFSKAR	[R].AAKVLEQLTGQTPVFSKAR.[Y]	Cytoplasm	Human	OA-cartilage	NA	1
+P30050	RPL12	60S ribosomal protein L12 	147	HPHDIIDDINSGAVECPAS	[R].HPHDIIDDINSGAVECPAS.[-]	Nucleus	Human	OA-cartilage	NA	1
+P30050	RPL12	60S ribosomal protein L12 	124	ELSGTIKEILGTAQSVGCNVDGR	[R].ELSGTIKEILGTAQSVGCNVDGR.[H]	Nucleus	Human	OA-cartilage	NA	1
+P26373	RPL13	60S ribosomal protein L13 	22	VATWFNQPAR	[R].VATWFNQPAR.[K]	Nucleus	Human	OA-cartilage	NA	1
+P26373	RPL13	60S ribosomal protein L13 	122	SKLILFPR	[R].SKLILFPR.[K]	Nucleus	Human	OA-cartilage	NA	1
+P26373	RPL13	60S ribosomal protein L13 	75	GFSLEELR	[R].GFSLEELR.[V]	Nucleus	Human	OA-cartilage	NA	1
+P40429	RPL13A	60S ribosomal protein L13a 	118	MVVPAALKVVR	[R].MVVPAALKVVR.[L]	Cytoplasm	Human	OA-cartilage	NA	1
+P50914	RPL14	60S ribosomal protein L14 	36	ALVDGPCTQVR	[R].ALVDGPCTQVR.[R]	Cytoplasm	Human	OA-cartilage	NA	1
+P61313	RPL15	60S ribosomal protein L15 	97	SLQSVAEER	[R].SLQSVAEER.[A]	Cytoplasm	Human	OA-cartilage	NA	1
+P18621	RPL17	60S ribosomal protein L17 	70	CAQAKQWGWTQGR	[R].CAQAKQWGWTQGR.[W]	Cytoplasm	Human	OA-cartilage	NA	1
+P18621	RPL17	60S ribosomal protein L17 	31	ETAQAIKGMHIR	[R].ETAQAIKGMHIR.[K]	Cytoplasm	Human	OA-cartilage	NA	1
+Q07020	RPL18	60S ribosomal protein L18 	116	AGGKILTFDQLALDSPKGCGTVLLSGPR	[R].AGGKILTFDQLALDSPKGCGTVLLSGPR.[K]	Cytoplasm	Human	OA-cartilage	NA	1
+Q07020	RPL18	60S ribosomal protein L18 	76	ENKTAVVVGTITDDVR	[R].ENKTAVVVGTITDDVR.[V]	Cytoplasm	Human	OA-cartilage	NA	1
+Q02543	RPL18A	60S ribosomal protein L18a 	99	DLTTAGAVTQCYR	[R].DLTTAGAVTQCYR.[D]	Cytoplasm	Human	OA-cartilage	NA	1
+P84098	RPL19	60S ribosomal protein L19 	43	KLIKDGLIIR	[R].KLIKDGLIIR.[K]	Cytoplasm	Human	OA-cartilage	NA	1
+P46778	RPL21	60S ribosomal protein L21 	21	KHGVVPLATYMR	[R].KHGVVPLATYMR.[I]	Cytoplasm	Human	OA-cartilage	NA	1
+P62750	RPL23A	60S ribosomal protein L23a 	140	LAPDYDALDVANKIGII	[R].LAPDYDALDVANKIGII.[-]	Cytoplasm	Human	OA-cartilage	NA	1
+P83731	RPL24	60S ribosomal protein L24 	48	QINWTVLYR	[R].QINWTVLYR.[R]	Cytoplasm	Human	OA-cartilage	NA	1
+P83731	RPL24	60S ribosomal protein L24 	81	AITGASLADIMAKR	[R].AITGASLADIMAKR.[N]	Cytoplasm	Human	OA-cartilage	NA	1
+P61254	RPL26	60S ribosomal protein L26 	51	KDDEVQVVR	[R].KDDEVQVVR.[G]	Cytoplasm	Human	OA-cartilage	NA	1
+P61254	RPL26	60S ribosomal protein L26 	46	SMPIRKDDEVQVVR	[R].SMPIRKDDEVQVVR.[G]	Cytoplasm	Human	OA-cartilage	NA	1
+P61254	RPL26	60S ribosomal protein L26 	18	HFNAPSHIR	[R].HFNAPSHIR.[R]	Cytoplasm	Human	OA-cartilage	NA	1
+P46776	RPL27A	60S ribosomal protein L27a 	88	VNAAKNKTGAAPIIDVVR	[R].VNAAKNKTGAAPIIDVVR.[S]	Cytoplasm	Human	OA-cartilage	NA	1
+P47914	RPL29	60S ribosomal protein L29 	96	LAYIAHPKLGKR	[R].LAYIAHPKLGKR.[A]	Cytoplasm	Human	OA-cartilage	NA	1
+P39023	RPL3	60S ribosomal protein L3 	11	HGSLGFLPR	[R].HGSLGFLPR.[K]	Nucleus	Human	OA-cartilage	NA	1
+P62899	RPL31	60S ribosomal protein L31 	24	EYTINIHKR	[R].EYTINIHKR.[I]	Cytoplasm	Human	OA-cartilage	NA	1
