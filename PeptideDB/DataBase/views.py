@@ -191,7 +191,7 @@ def references(request):
 def data_validation_error(request):
     return render(request, 'DataBase/validation_error.html')
 
-
+@staff_member_required
 def top_bugs(request):
     bugs = BugReporting.objects.all().order_by('-report_date').order_by('-report_time')
     return render(request, 'DataBase/bug_list.html', {'bugs': bugs})
