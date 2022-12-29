@@ -1,0 +1,5 @@
+PeptideDB/DataBase/migrations
+*.pyc
+DataBase/__pycache__
+PeptideDB/PeptideDB/__pycache__/
+.DS_Store

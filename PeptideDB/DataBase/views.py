@@ -22,13 +22,14 @@ def DB(request):
             description = form.cleaned_data['Sequence']
             accession = form.cleaned_data['Accession']
             if description != '' and accession != '':
-                param = {'acc':accession,'des':description}
+
+                param = {'acc':accession,'des':description, 'host_name':  request.get_host()}
                 return render(request, 'DataBase/data-table.html', param)
             elif description == '' and accession != '':                
-                param = {'acc':accession,'des':'undefined'}
+                param = {'acc':accession,'des':'undefined', 'host_name':  request.get_host()}
                 return render(request, 'DataBase/data-table.html', param)
             elif accession == '' and description != '':
-                param = {'acc':'undefined','des':description}
+                param = {'acc':'undefined','des':description, 'host_name':  request.get_host()}
                 return render(request, 'DataBase/data-table.html', param)
 
             elif description == '' and accession == '':
