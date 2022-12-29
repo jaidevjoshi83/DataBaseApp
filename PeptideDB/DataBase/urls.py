@@ -11,4 +11,5 @@ urlpatterns = [
     path(r'PepView/', views.PepView, name='PepView'),
     path(r'references', views.references, name='references'),
     path(r'data_validation_error', views.data_validation_error, name='data_validation_error'),
+    path(r'top_bugs', views.top_bugs, name='top_bugs'),
 ]
