@@ -13,12 +13,13 @@ var getJSON = function(url, callback) {
     xhr.send();
 };
 
+
 if (temp_acc != 'undefined' && temp_des == 'undefined'){
-    var link = `http://127.0.0.1:8000/PepView/?acc=${temp_acc}`
+    var link = `http://${host_name}/PepView/?acc=${temp_acc}`
 } else if (temp_acc == 'undefined' && temp_des != 'undefined'){
-   var link = `http://127.0.0.1:8000/PepView/?des=${temp_des}`
+   var link = `http://${host_name}/PepView/?des=${temp_des}`
 } else if (temp_acc != 'undefined' && temp_des != 'undefined'){
-   var link = `http://127.0.0.1:8000/PepView/?acc=${temp_acc}&des=${temp_des}`
+   var link = `http://${host_name}/PepView/?acc=${temp_acc}&des=${temp_des}`
 }
 
 getJSON(link,
@@ -114,7 +115,7 @@ function JSONToCSVConvertor(JSONData, ReportTitle) {
     //this part will append the anchor tag and remove it after automatic click
     document.body.appendChild(link);
 
-    var csv = CSV;
+    var tsv = CSV;
     blob = new Blob([tsv], { type: 'text/tsv' });
     var csvUrl = window.webkitURL.createObjectURL(blob);
     var filename =  (ReportTitle || 'UserExport') + '.tsv';
