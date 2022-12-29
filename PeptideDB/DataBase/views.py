@@ -118,7 +118,7 @@ def bugs(request):
     return render(request, 'DataBase/bug_report_form.html', {'form': form})
 
 def success(request):
-    return render(request,  'Database/bug_submission_success.html', {})
+    return render(request,  'DataBase/bug_submission_success.html', {})
 
 @staff_member_required
 def download_data_report(request):
