@@ -2,37 +2,33 @@
 {% load static %}
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'css/table/custom.css' %}">
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
 
-<div class="main">
-     <div  class="form-div">
-      <h2 class="mdl-card__title-text">Enter UNIPROT ID and/or protein name </h2>
-      <form action="{%url 'DB' %}" method="POST" class="form-contact">
-        {%csrf_token%}
-        {% for error in form.non_field_errors %}
-        <div class="form-group has-errors text-danger small">
-            {{error}}
-        </div>
-        {% endfor %}
-        {% for field in form %}
-        <div class="form-group has-errors text-danger small">
-            {{field.errors}}
-        </div>
-        <div class="form-group has-errors text-danger small">
-        </div>
-        {% endfor %}
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          {{form.Accession}}
-        </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          {{form.Sequence}}
-        </div>
-
-          <button class="form-button" style="margin-left: 5px;" type="submit">
-          Submit
-          </button>
-      </form>
+<div  class="form-div"> 
+  <h2 class="mdl-card__title-text">Enter UNIPROT ID and/or protein name </h2>
+  <form action="{% url 'DB' %}" method="POST" class="form-contact" style="width: 30%;">
+    {%csrf_token%}
+    {% for error in form.non_field_errors %}
+    <div class="form-group has-errors text-danger small">
+        {{error}}
     </div>
+    {% endfor %}
+
+    {% for field in form %}
+    <div class="form-group has-errors text-danger small">
+        {{field.errors}}
+    </div>
+    {% endfor %}
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      {{form.Accession}}
+    </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      {{form.Sequence}}
+    </div>
+    
+      <button class="form-button" style="margin-left: 5px;" type="submit"> Submit</button>
+  </form>
 </div>
 
 {% endblock %}

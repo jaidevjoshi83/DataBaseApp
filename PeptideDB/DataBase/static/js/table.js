@@ -26,22 +26,29 @@ function(err, data) {
     if (err !== null) {
         alert('Something went wrong: ' + err);
     } else {   
+        console.log("OKKK1")
         table_content(JSON.parse(data))
         ExportData(JSON.parse(data))
+
+        $(document).ready(function () {
+            $('#example').DataTable({
+                // data:data,
+            });
+        });
     }
 });
 
-
 function table_content(data){
+    var table_body = document.querySelector('tbody')
+    removeAllChildNodes(table_body)
 
-   var table_body = document.querySelector('tbody')
-   var table_head = document.querySelector('thead')
-
-   removeAllChildNodes(table_body)
-
-   for (var i =0; i < data.length; i++){
-
-    var row = document.createElement('tr')
+    for (var i =0; i < data.length; i++){
+        var row = document.createElement('tr')
+    if (i % 2 == 0) {
+        row.className = 'even'
+    } else{
+        row.className = 'odd'
+    }
 
     row.innerHTML  =   `<td>${data[i].fields.db_id}</td>
                         <td>${data[i].fields.peptide_sequence}</td>
@@ -81,16 +88,15 @@ function JSONToCSVConvertor(JSONData, ReportTitle) {
     var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     var arrData = JSONData
     var CSV = '';
-    CSV += `"ID","Sequence","Master Protein Accession","Master Protein Description","Cleavage Side","Annotated Sequence","Abundance"\r\n`
+    CSV += `ID\tPeptide Sequence\tAccession\tGene symbol\tProtein name\tCleavage side\tAbundance sequence\tCellular compartment\tSpecies\tDatabase identified\tDescription\tReference\tLink\r\n`
 
     for (var i = 0; i < arrData.length; i++) {
         var row = "";
-        //2nd loop will extract each column and convert it in string comma-seprated
-        //FixMe: sequence spelling 
-        for (var index in Object.keys(arrData[i].fields)) {
-            console.log(index)
-            row += '"' + arrData[i].fields[Object.keys(arrData[i].fields)[index]] + '",';
+        var headers = ['db_id','accession','gene_symbol','protein_name','cleavage_site','peptide_sequence','annotated_sequence','cellular_compartment','species','database_identified','description','reference_number','reference_link']
+        for (var index in headers) {
+            row += `${arrData[i].fields[headers[index]]}\t`;
         }
+
         row.slice(0, row.length - 1);
         //add a line break after each row
         CSV += row + '\r\n';
@@ -109,9 +115,9 @@ function JSONToCSVConvertor(JSONData, ReportTitle) {
     document.body.appendChild(link);
 
     var csv = CSV;
-    blob = new Blob([csv], { type: 'text/csv' });
+    blob = new Blob([tsv], { type: 'text/tsv' });
     var csvUrl = window.webkitURL.createObjectURL(blob);
-    var filename =  (ReportTitle || 'UserExport') + '.csv';
+    var filename =  (ReportTitle || 'UserExport') + '.tsv';
     $("#lnkDwnldLnk")
         .attr({
             'download': filename,

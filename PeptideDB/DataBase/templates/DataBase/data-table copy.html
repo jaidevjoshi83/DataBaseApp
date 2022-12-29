@@ -1,0 +1,58 @@
+
+<head>
+    <script type="text/javascript"> 
+        var temp_acc = "{{acc}}"
+        var temp_des = "{{des}}"
+    </script>
+    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'css/table.css' %}">
+    <script src="{% static 'js/table.js' %}"></script>
+</head>
+    <div id="toolbar" style="width:180px; margin: 10px;">
+        <select class="form-control dt-tb">
+            <option value="selected">Download Data</option>
+            <option value="all">Export All</option>
+        </select>
+    </div>
+
+<div class="table-div">
+
+    <table id="paginationFirstLast" class="table" width="100%">
+        <thead >
+            <tr>
+                <th scope="col" data-field="id">ID</th>
+                <th scope="col" data-field="peptide_sequence" >Peptide Sequence</th>
+                <th scope="col" data-field="accession" >Accession</th>
+                <th scope="col" data-field="gene_symbol" >Gene Symbol</th>
+                <th data-field="protein_name" >Protein Name</th>
+                <th data-field="cleavage_site">Cleavage Side</th>
+                <th data-field="annotated_sequence" >Annotated Sequence</th>
+                <th data-field="cellular_compartment" >Cellular Compartment</th>
+                <th data-field="species" >Species</th>
+                <th data-field="database_identified" >Database Identified</th>
+                <th data-field="description" >Description</th>
+                <th data-field="reference" >Reference</th>
+            </tr>
+        </thead>
+        <tbody class='thead-light'>
+            <!-- Create rows dynamically by table.js-->
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="col" data-field="id">ID</th>
+                <th scope="col" data-field="peptide_sequence" >Peptide Sequence</th>
+                <th scope="col" data-field="accession" >Accession</th>
+                <th scope="col" data-field="gene_symbol" >Gene Symbol</th>
+                <th data-field="protein_name" >Protein Name</th>
+                <th data-field="cleavage_site">Cleavage Side</th>
+                <th data-field="annotated_sequence" >Annotated Sequence</th>
+                <th data-field="cellular_compartment" >Cellular Compartment</th>
+                <th data-field="species" >Species</th>
+                <th data-field="database_identified" >Database Identified</th>
+                <th data-field="description" >Description</th>
+                <th data-field="reference" >Reference</th>
+            </tr>
+        </tfoot>
+    </table>
+<div>
+{% endblock %}

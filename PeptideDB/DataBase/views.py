@@ -8,8 +8,6 @@ from datetime import datetime
 from .models import UploadedData, BugReporting, PeptideSeq
 from django.core import serializers
 
-
-
 def contact(request):
     logout(request)
     return render(request, 'DataBase/contact.html', {})
@@ -52,37 +50,49 @@ def data_upload(request):
             dt_string = now.strftime("%d_%m_%Y__%H_%M_%S")
             file_name = "CleavageDB_"+dt_string+'_data_file.csv'
 
-            objs = UploadedData.objects.all()
-
-            a = UploadedData.objects.create(
-                datafile_index='DBF'+str(len(UploadedData.objects.all())),
-                experiment_name=form.cleaned_data['experiment_name'],
-                data_upload_date=now.strftime("%Y-%m-%d"),
-                data_upload_time=now.strftime("%H:%M:%S"),
-                user_name=form.cleaned_data['user'],
-                data_description=form.cleaned_data['description'],
-                data_file_name=file_name,
-                experiment_type=form.cleaned_data['experiment_name'],
-                reference_number=form.cleaned_data['reference_number'],
-                reference_link=form.cleaned_data['reference_link'],
-                )
-
-            print("@@@@@@@@@@@@@", len(objs))
-
-            handle_uploaded_file(request.FILES['file'], file_name, form.cleaned_data['reference_number'], form.cleaned_data['reference_link'])
-            a.save()
-            return HttpResponseRedirect('/data_upload/')
+            # objs = UploadedData.objects.all()
+            validation_pass = handle_uploaded_file(request, request.FILES['file'], file_name, form.cleaned_data['reference_number'], form.cleaned_data['reference_link'])
+            if validation_pass['validation']:
+                a = UploadedData.objects.create(
+                    datafile_index='DBF'+str(len(UploadedData.objects.all())),
+                    experiment_name=form.cleaned_data['experiment_name'],
+                    data_upload_date=now.strftime("%Y-%m-%d"),
+                    data_upload_time=now.strftime("%H:%M:%S"),
+                    user_name=form.cleaned_data['user'],
+                    data_description=form.cleaned_data['description'],
+                    data_file_name=file_name,
+                    experiment_type=form.cleaned_data['experiment_type'],
+                    reference_number=form.cleaned_data['reference_number'],
+                    reference_link=form.cleaned_data['reference_link'],
+                    )
+                a.save()
+                return HttpResponseRedirect('/data_upload')
+            else:
+                return render(request, 'DataBase/validation_error.html', {'data': validation_pass['error_column'] })
+                 
     else:
         form = UploadFileForm()
     return render(request, 'DataBase/upload.html', {'form': form})
   
-def handle_uploaded_file(f, file_name, ref_number, ref_link):
+def handle_uploaded_file(request, f, file_name, ref_number, ref_link):
 
-    with open(os.path.join(os.getcwd(), file_name), 'wb+') as destination:
+    headers = ['Protein Accession', 'Gene symbol', 'Protein name', 'Cleavage site', 'Peptide sequence',	'Annotated sequence', 'Cellular Compartment',	'Species', 'Database identified ', 'Discription', 'Reference']
+    line = f.readline().decode('UTF-8')
+
+    for i, h in enumerate(line.replace('\r\n', '').split('\t')):
+        
+        if h == headers[i]:
+            pass
+        else:
+            print("error")
+            return {"validation": False, "error_column": h}
+
+    with open(os.path.join(os.getcwd(), 'datafiles', file_name), 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
-    
+
     import_data_to_model(file_name, ref_number, ref_link)
+    return {'validation': True}
     
 def bugs(request):
 
@@ -102,7 +112,6 @@ def bugs(request):
             return HttpResponseRedirect('/success')
     else:
 
-        print()
         form = BugReportingForm(initial={'title':'','bug_description':'', 'user_name':''})
         
     return render(request, 'DataBase/bug_report_form.html', {'form': form})
@@ -116,7 +125,7 @@ def download_data_report(request):
 
 
 def import_data_to_model(file_name, ref_num, ref_link):
-    f = open(os.path.join(os.getcwd(), file_name))
+    f = open(os.path.join(os.getcwd(), 'datafiles', file_name))
     lines = f.readlines()
 
     count = PeptideSeq.objects.all().count()
@@ -175,4 +184,9 @@ def PepView(request):
         return JsonResponse(qs_json, safe=False)
 
 def references(request):
+    print("host", request.get_host().split(":") )
     return render(request, 'DataBase/references.html', {})
+
+def data_validation_error(request):
+
+    return render(request, 'DataBase/validation_error.html')
