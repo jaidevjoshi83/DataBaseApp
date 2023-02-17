@@ -80,7 +80,6 @@ function removeAllChildNodes(parent) {
     }
 }
 
-
 function ExportData(data){
     document.querySelector('.form-control.dt-tb').addEventListener('change', (e)=>{
 
