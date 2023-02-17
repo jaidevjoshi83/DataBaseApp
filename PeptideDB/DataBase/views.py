@@ -208,7 +208,6 @@ def return_merge_peptidedata(retrived_peps):
     merges dublicate protein entries. 
     
     """
-
     pep_set = []
 
     for p in retrived_peps:
