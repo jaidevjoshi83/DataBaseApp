@@ -27,9 +27,9 @@ function(err, data) {
     if (err !== null) {
         alert('Something went wrong: ' + err);
     } else {   
-        console.log("OKKK1")
-        table_content(JSON.parse(data))
-        ExportData(JSON.parse(data))
+        console.log(data)
+        table_content(data)
+        ExportData(data)
 
         $(document).ready(function () {
             $('#example').DataTable({
@@ -51,18 +51,24 @@ function table_content(data){
         row.className = 'odd'
     }
 
-    row.innerHTML  =   `<td>${data[i].fields.db_id}</td>
-                        <td>${data[i].fields.peptide_sequence}</td>
-                        <td>${data[i].fields.accession}</td>
-                        <td>${data[i].fields.gene_symbol}</td>
-                        <td>${data[i].fields.protein_name}</td>
-                        <td>${data[i].fields.cleavage_site}</td>
-                        <td>${data[i].fields.annotated_sequence}</td>
-                        <td>${data[i].fields.cellular_compartment}</td>
-                        <td>${data[i].fields.species}</td>
-                        <td>${data[i].fields.database_identified}</td>
-                        <td>${data[i].fields.description}</td>
-                        <td><a href=${data[i].fields.reference_link} target="_blank" >${data[i].fields.reference_number}</a></td>`
+    var ref_list = []
+
+    for (var j = 0; j < data[i].reference_link.length;  j++) {
+        ref_list.push(`<a href=${data[i].reference_link[j]} target="_blank" >${data[i].reference_number[j]}</a>`)
+    }
+       
+    row.innerHTML  =   `<td>${i+1}</td>
+                        <td>${data[i].peptide_sequence}</td>
+                        <td>${data[i].accession}</td>
+                        <td>${data[i].gene_symbol}</td>
+                        <td>${data[i].protein_name}</td>
+                        <td>${data[i].cleavage_site}</td>
+                        <td>${data[i].annotated_sequence}</td>
+                        <td>${data[i].cellular_compartment}</td>
+                        <td>${data[i].species}</td>
+                        <td>${data[i].database_identified}</td>
+                        <td>${data[i].description}</td>
+                        <td>${ref_list.join(', ')}</td>`
 
     table_body.append(row)
     }             

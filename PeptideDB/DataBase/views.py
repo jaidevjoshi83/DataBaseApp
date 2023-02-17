@@ -7,6 +7,10 @@ from django.contrib.admin.views.decorators import staff_member_required
 from datetime import datetime
 from .models import UploadedData, BugReporting, PeptideSeq
 from django.core import serializers
+import pandas as  pd
+import json
+
+# from .utils import return_merge_peptidedata
 
 def contact(request):
     logout(request)
@@ -22,7 +26,6 @@ def DB(request):
             description = form.cleaned_data['Sequence']
             accession = form.cleaned_data['Accession']
             if description != '' and accession != '':
-
                 param = {'acc':accession,'des':description, 'host_name':  request.get_host()}
                 return render(request, 'DataBase/data-table.html', param)
             elif description == '' and accession != '':                
@@ -77,7 +80,7 @@ def data_upload(request):
   
 def handle_uploaded_file(request, f, file_name, ref_number, ref_link):
 
-    headers = ['Protein Accession', 'Gene symbol', 'Protein name', 'Cleavage site', 'Peptide sequence',	'Annotated sequence', 'Cellular Compartment',	'Species', 'Database identified ', 'Discription', 'Reference']
+    headers = ['Protein Accession', 'Gene symbol', 'Protein name', 'Cleavage site', 'Peptide sequence',	'Annotated sequence', 'Cellular Compartment',	'Species', 'Database identified', 'Discription', 'Reference']
     line = f.readline().decode('UTF-8')
 
     for i, h in enumerate(line.replace('\r\n', '').split('\t')):
@@ -171,21 +174,23 @@ def PepView(request):
 
     if 'des' in request.GET and 'acc' in request.GET :
         record = PeptideSeq.objects.filter(protein_name__contains=request.GET['des'], accession__contains=request.GET['acc'])
-        qs_json = serializers.serialize('json', record)
+        qs = serializers.serialize('json', record)
+        qs_json = return_merge_peptidedata(json.loads(qs))
         return JsonResponse(qs_json, safe=False)
 
     elif  'acc' in request.GET and 'des' not in request.GET:
         record = PeptideSeq.objects.filter( accession__contains=request.GET['acc'])
-        qs_json = serializers.serialize('json', record)
+        qs = serializers.serialize('json', record)
+        qs_json = return_merge_peptidedata(json.loads(qs))
         return JsonResponse(qs_json, safe=False)
 
     elif 'des' in request.GET  and 'acc' not in request.GET:
         record = PeptideSeq.objects.filter(protein_name__contains=request.GET['des'])
-        qs_json = serializers.serialize('json', record)
+        qs = serializers.serialize('json', record)
+        qs_json = return_merge_peptidedata(json.loads(qs))
         return JsonResponse(qs_json, safe=False)
 
 def references(request):
-    print("host", request.get_host().split(":") )
     return render(request, 'DataBase/references.html', {})
 
 def data_validation_error(request):
@@ -195,3 +200,74 @@ def data_validation_error(request):
 def top_bugs(request):
     bugs = BugReporting.objects.all().order_by('-report_date').order_by('-report_time')
     return render(request, 'DataBase/bug_list.html', {'bugs': bugs})
+
+def return_merge_peptidedata(retrived_peps):
+    
+    """
+    this function takes input from django query and 
+    merges dublicate protein entries. 
+    
+    """
+
+    pep_set = []
+
+    for p in retrived_peps:
+        pep_set.append(p['fields']['peptide_sequence'])
+
+    updated_pep_records = []
+
+    for pep in set(pep_set):
+        db_id = []
+        accession= []
+        gene_symbol=[] 
+        protein_name=[]
+        cleavage_site=[]
+        peptide_sequence=[]
+        annotated_sequence=[] 
+        cellular_compartment=[] 
+        species=[] 
+        database_identified=[] 
+        description=[]
+        reference_number=[]
+        reference_link=[]
+        data_file_name=[]
+
+        for record in retrived_peps:
+            if pep == record['fields']['peptide_sequence']:
+
+                db_id.append(record['fields']['db_id'])
+                accession.append(record['fields']['accession'])
+                gene_symbol.append(record['fields']['gene_symbol'])
+                protein_name.append(record['fields']['protein_name'])
+                cleavage_site.append(record['fields']['cleavage_site'])
+                peptide_sequence.append(record['fields']['peptide_sequence'])
+                annotated_sequence.append(record['fields']['annotated_sequence'])
+                cellular_compartment.append(record['fields']['cellular_compartment'])
+                species.append(record['fields']['species'])
+                database_identified.append(record['fields']['database_identified'])
+                description.append(record['fields']['description'])
+                reference_number.append(record['fields']['reference_number'])
+                reference_link.append(record['fields']['reference_link'])
+                data_file_name.append(record['fields']['data_file_name'])
+
+        updated_pep_record = {
+                            
+                            'db_id':", ".join(list(set(db_id))), 
+                            'accession':", ".join(list(set(accession))),
+                            'gene_symbol':", ".join(list(set(gene_symbol))), 
+                            'protein_name':", ".join(list(set(protein_name))), 
+                            'cleavage_site':", ".join(list(set(cleavage_site))), 
+                            'peptide_sequence':", ".join(list(set(peptide_sequence))), 
+                            'annotated_sequence':", ".join(list(set(annotated_sequence))), 
+                            'cellular_compartment':", ".join(list(set(cellular_compartment))), 
+                            'species':", ".join(list(set(species))), 
+                            'database_identified':", ".join(list(set(database_identified))), 
+                            'description':", ".join(list(set(description))), 
+                            'reference_number':list(set(reference_number)), 
+                            'reference_link':list(set(reference_link)), 
+                            'data_file_name':", ".join(list(set(data_file_name))),
+                        }
+
+        updated_pep_records.append(updated_pep_record)
+
+    return updated_pep_records
