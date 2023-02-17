@@ -27,7 +27,7 @@ function(err, data) {
     if (err !== null) {
         alert('Something went wrong: ' + err);
     } else {   
-        console.log(data)
+        
         table_content(data)
         ExportData(data)
 
@@ -93,6 +93,7 @@ function ExportData(data){
 function JSONToCSVConvertor(JSONData, ReportTitle) {
     var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     var arrData = JSONData
+
     var CSV = '';
     CSV += `ID\tPeptide Sequence\tAccession\tGene symbol\tProtein name\tCleavage side\tAbundance sequence\tCellular compartment\tSpecies\tDatabase identified\tDescription\tReference\tLink\r\n`
 
@@ -100,7 +101,7 @@ function JSONToCSVConvertor(JSONData, ReportTitle) {
         var row = "";
         var headers = ['db_id','accession','gene_symbol','protein_name','cleavage_site','peptide_sequence','annotated_sequence','cellular_compartment','species','database_identified','description','reference_number','reference_link']
         for (var index in headers) {
-            row += `${arrData[i].fields[headers[index]]}\t`;
+            row += `${arrData[i][headers[index]]}\t`;
         }
 
         row.slice(0, row.length - 1);

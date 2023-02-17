@@ -80,15 +80,15 @@ def data_upload(request):
   
 def handle_uploaded_file(request, f, file_name, ref_number, ref_link):
 
-    headers = ['Protein Accession', 'Gene symbol', 'Protein name', 'Cleavage site', 'Peptide sequence',	'Annotated sequence', 'Cellular Compartment',	'Species', 'Database identified', 'Discription', 'Reference']
+    headers = ['Protein Accession', 'Gene symbol', 'Protein name', 'Cleavage site', 'Peptide sequence',	'Annotated sequence', 'Cellular Compartment',	'Species','Database identified', 'Discription', 'Reference']
     line = f.readline().decode('UTF-8')
 
     for i, h in enumerate(line.replace('\r\n', '').split('\t')):
         
         if h == headers[i]:
+
             pass
         else:
-            print("error")
             return {"validation": False, "error_column": h}
 
     with open(os.path.join(os.getcwd(), 'datafiles', file_name), 'wb+') as destination:
@@ -135,6 +135,7 @@ def import_data_to_model(file_name, ref_num, ref_link):
     count = PeptideSeq.objects.all().count()
     for line in lines[1:]:
         chunks = line.split('\t')
+        # print(chunks)
         # num_of_obj = PeptideSeq.objects.filter(
         #     sequence=chunks[0],
         #     master_protein_accession=chunks[1],
@@ -166,6 +167,7 @@ def import_data_to_model(file_name, ref_num, ref_link):
             reference_link=ref_link,
             data_file_name= file_name
         )
+
         new_obj.save()
 
 def PepView(request):
@@ -182,6 +184,7 @@ def PepView(request):
         record = PeptideSeq.objects.filter( accession__contains=request.GET['acc'])
         qs = serializers.serialize('json', record)
         qs_json = return_merge_peptidedata(json.loads(qs))
+
         return JsonResponse(qs_json, safe=False)
 
     elif 'des' in request.GET  and 'acc' not in request.GET:
