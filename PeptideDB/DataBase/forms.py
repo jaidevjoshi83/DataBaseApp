@@ -2,7 +2,7 @@ from django import forms
 
 class dabase_form(forms.Form):
 
-    Sequence = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Protein name; Ex. Tropomyosin beta chain', 'type':'text'}),required=False)
+    Sequence = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Protein name; Ex. versican or fibronectin', 'type':'text'}),required=False)
     Accession = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Uniprot ID; Ex. P02671', 'type':'text'}), required=False)
 
 class UploadFileForm(forms.Form):

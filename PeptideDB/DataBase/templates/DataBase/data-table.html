@@ -1,6 +1,6 @@
-{% extends 'DataBase/base.html' %}
+
 {% load static %}
-{% block content %}
+
 <head>
     <!--Import jQuery before export.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -16,7 +16,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
 
-        <!--Export table button CSS-->
+    <!--Export table button CSS-->
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
@@ -42,7 +42,7 @@
         }
     </style>
 </head>
-<body style="font-size: 12pt;">
+
     <div class='table-div'  style="background-color: rgb(219,220,214);padding: 5px; margin-top:5px; width: 100%; overflow:scroll;">
         <table class="table table-sm" data-replace="jtable" id="example" aria-label="JS Datatable" data-locale="en" data-search="true">
             <thead class="thead-dark">
@@ -73,5 +73,4 @@
             </select>
         </div>  
     </div >
-</body>
-{% endblock %}
+

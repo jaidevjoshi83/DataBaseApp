@@ -2,7 +2,9 @@
 {% load static %}
 {% block content %}
 
-<div class="form-div">
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+
+<div  class="form-div">
   <h2 class="mdl-card__title-text">Report bugs </h2>
   <form action="{%url 'bugs' %}" method="POST" enctype="multipart/form-data" class="form-contact" style="width: 30%;">
     {%csrf_token%}

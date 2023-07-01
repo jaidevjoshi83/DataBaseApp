@@ -9,6 +9,8 @@ from .models import UploadedData, BugReporting, PeptideSeq
 from django.core import serializers
 import pandas as  pd
 import json
+from .utils import write_metadata_json, return_metadata
+
 
 # from .utils import return_merge_peptidedata
 
@@ -18,32 +20,39 @@ def contact(request):
 
 def DB(request):
 
+    acv = len(set(list(PeptideSeq.objects.filter(accession__isnull=False).values_list('accession', flat=True))))
+    clv = len((list(PeptideSeq.objects.filter(cleavage_site__isnull=False).values_list('cleavage_site', flat=True))))
+
     if request.method == 'POST':
         form = dabase_form(request.POST)
 
         if form.is_valid():
-
             description = form.cleaned_data['Sequence']
             accession = form.cleaned_data['Accession']
+
             if description != '' and accession != '':
                 param = {'acc':accession,'des':description, 'host_name':  request.get_host()}
-                return render(request, 'DataBase/data-table.html', param)
+                return render(request, 'DataBase/table.html', param)
             elif description == '' and accession != '':                
                 param = {'acc':accession,'des':'undefined', 'host_name':  request.get_host()}
-                return render(request, 'DataBase/data-table.html', param)
+                return render(request, 'DataBase/table.html', param)
             elif accession == '' and description != '':
+                print(description)
                 param = {'acc':'undefined','des':description, 'host_name':  request.get_host()}
-                return render(request, 'DataBase/data-table.html', param)
+                return render(request, 'DataBase/table.html', param)
 
             elif description == '' and accession == '':
-                render(request, 'DataBase/base.html', {'form': form})
+
+                render(request, 'DataBase/index.html', {'form': form, 'acv':acv, 'clv':clv})
     else:
         Fasta = ''
         Acc = ''
         form = dabase_form(initial={'Sequence':Fasta,'Accession':Acc})
         
     logout(request)
-    return render(request, 'DataBase/db_query_form.html', {'form': form})
+    meta_data = return_metadata()
+
+    return render(request, 'DataBase/index.html', {'form': form, 'acv':acv, 'clv':clv, 'meta_data':meta_data})
 
 @staff_member_required
 def data_upload(request):
@@ -56,6 +65,7 @@ def data_upload(request):
 
             # objs = UploadedData.objects.all()
             validation_pass = handle_uploaded_file(request, request.FILES['file'], file_name, form.cleaned_data['reference_number'], form.cleaned_data['reference_link'])
+
             if validation_pass['validation']:
                 a = UploadedData.objects.create(
                     datafile_index='DBF'+str(len(UploadedData.objects.all())),
@@ -70,6 +80,7 @@ def data_upload(request):
                     reference_link=form.cleaned_data['reference_link'],
                     )
                 a.save()
+
                 return HttpResponseRedirect('/data_upload')
             else:
                 return render(request, 'DataBase/validation_error.html', {'data': validation_pass['error_column'] })
@@ -84,9 +95,7 @@ def handle_uploaded_file(request, f, file_name, ref_number, ref_link):
     line = f.readline().decode('UTF-8')
 
     for i, h in enumerate(line.replace('\r\n', '').split('\t')):
-        
         if h == headers[i]:
-
             pass
         else:
             return {"validation": False, "error_column": h}
@@ -127,12 +136,12 @@ def success(request):
 def download_data_report(request):
     return render(request,  'DataBase/uploaded_data_report.html', {})
 
-
 def import_data_to_model(file_name, ref_num, ref_link):
     f = open(os.path.join(os.getcwd(), 'datafiles', file_name))
     lines = f.readlines()
 
     count = PeptideSeq.objects.all().count()
+    start = count
     for line in lines[1:]:
         chunks = line.split('\t')
         # print(chunks)
@@ -150,25 +159,54 @@ def import_data_to_model(file_name, ref_num, ref_link):
         # else:
 
         count = count + 1
-        new_obj = PeptideSeq.objects.create(
 
-            db_id='DBS0'+str(count),
-            accession=chunks[0],
-            gene_symbol=chunks[1],
-            protein_name=chunks[2],
-            cleavage_site=chunks[3],
-            peptide_sequence=chunks[4],
-            annotated_sequence=chunks[5],
-            cellular_compartment=chunks[6],
-            species=chunks[7],
-            database_identified=chunks[8],
-            description=chunks[9],
-            reference_number=ref_num,
-            reference_link=ref_link,
-            data_file_name= file_name
-        )
+        if not PeptideSeq.objects.filter( 
+                    accession=chunks[0],
+                    gene_symbol=chunks[1],
+                    protein_name=chunks[2],
+                    cleavage_site=chunks[3],
+                    peptide_sequence=chunks[4],
+                    annotated_sequence=chunks[5],
+                    cellular_compartment=chunks[6],
+                    species=chunks[7],
+                    database_identified=chunks[8],
+                    description=chunks[9],
+                    reference_number=ref_num,
+                    reference_link=ref_link,
 
-        new_obj.save()
+            ).exists():
+
+            new_obj = PeptideSeq.objects.create(
+
+                db_id='DBS0'+str(count),
+                accession=chunks[0],
+                gene_symbol=chunks[1],
+                protein_name=chunks[2],
+                cleavage_site=chunks[3],
+                peptide_sequence=chunks[4],
+                annotated_sequence=chunks[5],
+                cellular_compartment=chunks[6],
+                species=chunks[7],
+                database_identified=chunks[8],
+                description=chunks[9],
+                reference_number=ref_num,
+                reference_link=ref_link,
+                data_file_name= file_name
+            )
+
+            new_obj.save()
+        else:
+            pass
+
+    count_end = PeptideSeq.objects.all().count()
+
+    print("count_end", count_end)
+    print("start", start)
+
+    if count_end > start:
+        print("######################")
+        write_metadata_json()
+
 
 def PepView(request):
 
@@ -198,6 +236,9 @@ def references(request):
 
 def data_validation_error(request):
     return render(request, 'DataBase/validation_error.html')
+
+def test_view(request):
+    return render(request, 'DataBase/table_1.html')
 
 @staff_member_required
 def top_bugs(request):
@@ -273,3 +314,5 @@ def return_merge_peptidedata(retrived_peps):
         updated_pep_records.append(updated_pep_record)
 
     return updated_pep_records
+
+
