@@ -59,19 +59,14 @@
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="{% url 'DB' %}" class="nav-item nav-link active">Home</a>
                 <a href="{% url 'DB' %}" class="nav-item nav-link">About</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu fade-up m-0">
-                        <a href="{% url 'DB' %}" class="dropdown-item">Contacts</a>
-                        <a href="{% url 'admin_activity' %}" class="dropdown-item">Admin</a>
-                        <a href="{% url 'DB' %}" class="dropdown-item">Our Team</a>
-                    </div>
-                </div>
                 <a href="{% url 'DB' %}" class="nav-item nav-link">Contact</a>
+                <a href="{% url 'DB' %}" class="nav-item nav-link">Our Team</a>
+                <a href="{% url 'admin_activity' %}" class="nav-item nav-link">Admin</a>
                 {% if is_authenticated %}
                 <a href="{% url 'logout_view' %}" class="nav-item nav-link">Log Out</a>
                 {% endif %}
             </div>
+        </div>
     </nav>
     <!-- Navbar End -->
 
