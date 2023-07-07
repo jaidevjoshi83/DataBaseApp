@@ -6,6 +6,9 @@ from .models import  PeptideSeq, UploadedData, BugReporting
 # Register your models here.
 
 
+admin.site.login_template = 'admin/login.html'
+
+
 class PeptideInfoResource(resources.ModelResource):
 
     class Meta:
