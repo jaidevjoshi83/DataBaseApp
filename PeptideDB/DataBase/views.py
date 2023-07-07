@@ -10,6 +10,7 @@ from django.core import serializers
 import pandas as  pd
 import json
 from .utils import write_metadata_json, return_metadata
+from django.shortcuts import redirect
 
 
 # from .utils import return_merge_peptidedata
@@ -25,6 +26,7 @@ def DB(request):
 
     if request.method == 'POST':
         form = dabase_form(request.POST)
+        formb = BugReportingForm(request.POST)
 
         if form.is_valid():
             description = form.cleaned_data['Sequence']
@@ -43,7 +45,22 @@ def DB(request):
 
             elif description == '' and accession == '':
 
-                render(request, 'DataBase/index.html', {'form': form, 'acv':acv, 'clv':clv})
+                render(request, 'DataBase/index.html', {'form': form, 'acv':acv, 'clv':clv, 'formb':formb})
+
+        elif formb.is_valid():
+
+            now = datetime.now()
+            a = BugReporting.objects.create(
+                title = formb.cleaned_data['title'],
+                report_date = now.strftime("%Y-%m-%d"),
+                report_time = now.strftime("%H:%M:%S"),
+                bug_description = formb.cleaned_data['bug_description'],
+                user_name  =  formb.cleaned_data['user_name'],
+            )
+            a.save()
+
+            return HttpResponseRedirect('/success')
+
     else:
         Fasta = ''
         Acc = ''
@@ -109,25 +126,27 @@ def handle_uploaded_file(request, f, file_name, ref_number, ref_link):
     
 def bugs(request):
 
-    if request.method == 'POST':
-        form = BugReportingForm(request.POST)
-        if form.is_valid():
-            now = datetime.now()
-            a = BugReporting.objects.create(
-                title = form.cleaned_data['title'],
-                report_date = now.strftime("%Y-%m-%d"),
-                report_time = now.strftime("%H:%M:%S"),
-                bug_description = form.cleaned_data['bug_description'],
-                user_name  =  form.cleaned_data['user_name'],
-            )
-            a.save()
+    data = request.GET.get('data', {})
+    now = datetime.now()
+    data =  json.loads(data)
 
-            return HttpResponseRedirect('/success')
-    else:
+    a = BugReporting.objects.create(
 
-        form = BugReportingForm(initial={'title':'','bug_description':'', 'user_name':''})
+        title = data['title'],
+        report_date = now.strftime("%Y-%m-%d"),
+        report_time = now.strftime("%H:%M:%S"),
+        bug_description = data['details'],
+        user_name = data['name'],
+        institute = data['institution'],
+        email  = data['email'],
+        types = data['type']
+    )
+
+    a.save()
+
+    return JsonResponse(data, safe=False)
         
-    return render(request, 'DataBase/bug_report_form.html', {'form': form})
+    # return render(request, 'DataBase/bug_report_form.html', {'form': form})
 
 def success(request):
     return render(request,  'DataBase/bug_submission_success.html', {})
@@ -206,7 +225,6 @@ def import_data_to_model(file_name, ref_num, ref_link):
     if count_end > start:
         print("######################")
         write_metadata_json()
-
 
 def PepView(request):
 
@@ -315,4 +333,30 @@ def return_merge_peptidedata(retrived_peps):
 
     return updated_pep_records
 
+@staff_member_required
+def admin_activity(request):
 
+    bugs =  BugReporting.objects.all().filter(types="bug")
+    suggestions = BugReporting.objects.all().filter(types="suggestion")
+    db =  len(PeptideSeq.objects.all())
+
+    n_bugs = len(bugs)
+    n_suggestions = len(suggestions)
+
+    with open(os.path.join(os.getcwd(), 'metadata.json'), 'r') as file:
+        json_data = json.load(file)
+
+    return render(request, 'DataBase/admin_activity.html', {'data':json_data, 'bugs':bugs, 'suggestions':suggestions, 'n_bugs':n_bugs, 'n_suggestions': n_suggestions, 'db':db, 'is_authenticated':True})
+@staff_member_required
+def bug_list(request):
+    bugs =  BugReporting.objects.all().filter(types="bug")
+    return render(request, 'DataBase/bug_list.html', {'bugs':bugs, 'is_authenticated':True})
+
+@staff_member_required
+def suggestion_list(request):
+    suggestions = BugReporting.objects.all().filter(types="suggestion")
+    return render(request, 'DataBase/suggestion_list.html', {'suggestions':suggestions, 'is_authenticated':True})
+
+def logout_view(request):
+    logout(request)
+    return redirect('/home') 

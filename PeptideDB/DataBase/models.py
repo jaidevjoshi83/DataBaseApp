@@ -43,6 +43,9 @@ class BugReporting(models.Model):
     report_time = models.TimeField( null=True)
     bug_description = models.CharField(max_length=200,  null=True)
     user_name = models.CharField(max_length=100,  null=True)
+    institute = models.CharField(max_length=100,  null=True)
+    email  = models.CharField(max_length=100,  null=True)
+    types = models.CharField(max_length=100,  null=True)
 
     class Meta:
         ordering = ['report_date']

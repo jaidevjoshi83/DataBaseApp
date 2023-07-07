@@ -47,17 +47,12 @@
     width: 30%;
 }
 
-
 .px-lg-5 {
-    
     background: rgb(255,255,255) !important;
-    
 }
 
-.px-lg-5 img{
-    
+.px-lg-5 img{  
    width: 150px
-    
 }
 
 #data tr {
@@ -65,11 +60,24 @@
   }
 
   .mx-2 {
-    
     margin-top: 150px;
     background: rgb(255,255,255);
-  
     padding: 40px;
-    
 }
 
+.admin-menu-titles:hover {
+    font-size: black;
+    padding-left: 5px;
+}
+
+
+article{
+    
+    background: rgb(244,242,238) !important;
+    margin: 5px;
+    padding: 20px;
+}
+
+article .img-responsive {
+    width: 150px;
+}

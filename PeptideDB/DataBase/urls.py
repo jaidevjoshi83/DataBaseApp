@@ -12,5 +12,9 @@ urlpatterns = [
     path(r'references', views.references, name='references'),
     path(r'data_validation_error', views.data_validation_error, name='data_validation_error'),
     path(r'top_bugs', views.top_bugs, name='top_bugs'),
-    path(r'test_view', views.test_view, name='test_view')
+    path(r'test_view', views.test_view, name='test_view'),
+    path(r'admin_activity', views.admin_activity, name='admin_activity'),
+    path(r'bug_list', views.bug_list, name='bug_list'),
+    path(r'suggestion_list', views.suggestion_list, name='suggestion_list'),
+    path(r'logout_view', views.logout_view, name='logout_view'),
 ]

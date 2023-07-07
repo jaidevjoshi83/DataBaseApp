@@ -32,6 +32,7 @@
     <!-- Template Stylesheet -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -62,8 +63,7 @@
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu fade-up m-0">
                         <a href="{% url 'DB' %}" class="dropdown-item">Contacts</a>
-                        <a href="{% url 'bugs' %}" class="dropdown-item">Bugs</a>
-                        <a href="{% url 'data_upload' %}" class="dropdown-item">Uploaded Data</a>
+                        <a href="{% url 'admin_activity' %}" class="dropdown-item">Admin</a>
                         <a href="{% url 'DB' %}" class="dropdown-item">Our Team</a>
                     </div>
                 </div>
@@ -239,7 +239,7 @@
                             <img class="img-fluid" src="img/service-1.jpg" alt="">
                         </div>
                         <h4 class="mb-3">Air Freight</h4>
-                        <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam.</p>
+                        <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam.</p>f
                         <a class="btn-slide mt-2" href=""><i class="fa fa-arrow-right"></i><span>Read More</span></a>
                     </div>
                 </div>
@@ -333,33 +333,83 @@
                         <img class="position-absolute img-fluid w-100 h-100" src="img/feature.jpg" style="object-fit: cover;" alt="">
                     </div> -->
                     <!-- <div class="col-lg-7"> -->
+                        {% csrf_token %}
                         <div class="bg-light text-center p-5 wow fadeIn" data-wow-delay="0.5s">
+                            {% csrf_token %}
                             <form>
-                                <div class="row g-3">
-                                    <div class="col-12 col-sm-6">
-                                        <input type="text" class="form-control border-0" placeholder="Your Name" style="height: 55px;">
+                                <div class="row g-3" id="bugs-form">
+                                    <div class="col-12 col-sm-6 w-100">
+                                        <h5 id="post-error"> </h5>
+                                    </div>
+                                    <div class="col-12 col-sm-6 w-100">
+                                        <input type="text" name="title" id="bug-title" class="form-control border-0" placeholder="Title" style="height: 55px;">
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <input type="email" class="form-control border-0" placeholder="Your Email (optinal)" style="height: 55px;">
+                                        <input type="text" name="name" class="form-control border-0" placeholder="Your Name" style="height: 55px;">
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <input type="text" class="form-control border-0" placeholder="Institution" style="height: 55px;">
+                                        <input type="email" class="form-control border-0"  name="email" placeholder="Your Email (optinal)" style="height: 55px;">
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <select class="form-select border-0" style="height: 55px;">
-                                            <option selected>Type</option>
-                                            <option value="1">Bug</option>
-                                            <option value="2">Suggestions</option>
+                                        <input type="text" class="form-control border-0" name="institution" placeholder="Institution" style="height: 55px;">
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <select class="form-select border-0" name="type" style="height: 55px;">
+                                            <option value="bug">Bug</option>
+                                            <option value="suggestion">Suggestions</option>
+
                                         </select>
                                     </div>
                                     <div class="col-12">
-                                        <textarea class="form-control border-0" placeholder="Note"></textarea>
+                                        <textarea class="form-control border-0" name="details" placeholder="Note"></textarea>
                                     </div>
                                     <div class="col-12">
-                                        <button class="btn btn-primary w-100 py-3" type="submit">Submit</button>
+                                        <button class="btn btn-primary w-100 py-3" id="bugs-form-button" type="button">Submit</button>
                                     </div>
                                 </div>
                             </form>
+
+                            <!-- <div  class="form-div">
+                                <h2 class="mdl-card__title-text">Report bugs </h2>
+                                <form action="{% url 'DB' %}" method="POST" enctype="multipart/form-data" class="form-contact" style="width: 30%;">
+                                  {%csrf_token%}
+                                  {% for error in form.non_field_errors %}
+                                  <div class="form-group has-errors text-danger small">
+                                      {{error}}
+                                  </div>
+                                  {% endfor %}
+                                  {% for field in form %}
+                                  <div class="form-group has-errors text-danger small">
+                                      {{field.errors}}
+                                  </div>
+                                  <div class="form-group has-errors text-danger small">
+                                  </div>
+                                  {% endfor %}
+                              
+                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <div class="input-title">
+                                      <span> Title</span>
+                                    </div>
+                                      {{formb.title}}
+                                  </div>
+                              
+                                  <div id="bug-description", class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <div class="input-title">
+                                      <span> Brief description</span>
+                                    </div>
+                                      {{formb.bug_description}}
+                                  </div>
+                              
+                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <div class="input-title">
+                                      <span> Who is submitting</span>
+                                    </div>
+                                      {{formb.user_name}}
+                                  </div>
+                              
+                                  <button class="form-button" type="submit">Submit</button>
+                                </form>
+                              </div> -->
                         </div>
                     <!-- </div> -->
                 </div>
@@ -668,5 +718,6 @@
 
     <!-- Template Javascript -->
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/form.js' %}"></script>
 </body>
 </html>

@@ -92,6 +92,7 @@
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow border-top border-5 border-primary sticky-top p-0">
         
         <a href="{% url 'DB' %}" class="navbar-brand bg-primary d-flex align-items-center px-4 px-lg-5">
+            <!-- <h2 class="mb-2 text-white">DICED</h2>  -->
             <img class="img-fluid" src="{% static 'img/logo.png' %}" alt="">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -105,14 +106,16 @@
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu fade-up m-0">
                         <a href="{% url 'DB' %}" class="dropdown-item">Contacts</a>
-                        <a href="{% url 'DB' %}" class="dropdown-item">Bugs</a>
-                        <a href="{% url 'DB' %}" class="dropdown-item">Uploaded Data</a>
+                        <a href="{% url 'admin_activity' %}" class="dropdown-item">Admin</a>
                         <a href="{% url 'DB' %}" class="dropdown-item">Our Team</a>
+
                     </div>
                 </div>
                 <a href="{% url 'DB' %}" class="nav-item nav-link">Contact</a>
+                {% if is_authenticated %}
+                <a href="{% url 'logout_view' %}" class="nav-item nav-link">Log Out</a>
+                {% endif %}
             </div>
-        </div>
     </nav>
     <!-- Navbar End -->
 
