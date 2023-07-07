@@ -68,6 +68,9 @@
                     </div>
                 </div>
                 <a href="{% url 'DB' %}" class="nav-item nav-link">Contact</a>
+                {% if is_authenticated %}
+                <a href="{% url 'logout_view' %}" class="nav-item nav-link">Log Out</a>
+                {% endif %}
             </div>
     </nav>
     <!-- Navbar End -->

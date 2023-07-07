@@ -19,6 +19,7 @@ def contact(request):
     logout(request)
     return render(request, 'DataBase/contact.html', {})
 
+
 def DB(request):
 
     acv = len(set(list(PeptideSeq.objects.filter(accession__isnull=False).values_list('accession', flat=True))))
@@ -39,13 +40,11 @@ def DB(request):
                 param = {'acc':accession,'des':'undefined', 'host_name':  request.get_host()}
                 return render(request, 'DataBase/table.html', param)
             elif accession == '' and description != '':
-                print(description)
                 param = {'acc':'undefined','des':description, 'host_name':  request.get_host()}
                 return render(request, 'DataBase/table.html', param)
 
             elif description == '' and accession == '':
-
-                render(request, 'DataBase/index.html', {'form': form, 'acv':acv, 'clv':clv, 'formb':formb})
+                render(request, 'DataBase/index.html', {'form': form, 'acv':acv, 'clv':clv, 'formb':formb, 'is_authenticated':request.user.is_authenticated})
 
         elif formb.is_valid():
 
@@ -66,10 +65,9 @@ def DB(request):
         Acc = ''
         form = dabase_form(initial={'Sequence':Fasta,'Accession':Acc})
         
-    logout(request)
     meta_data = return_metadata()
 
-    return render(request, 'DataBase/index.html', {'form': form, 'acv':acv, 'clv':clv, 'meta_data':meta_data})
+    return render(request, 'DataBase/index.html', {'form': form, 'acv':acv, 'clv':clv, 'meta_data':meta_data, 'is_authenticated':request.user.is_authenticated})
 
 @staff_member_required
 def data_upload(request):
@@ -219,11 +217,7 @@ def import_data_to_model(file_name, ref_num, ref_link):
 
     count_end = PeptideSeq.objects.all().count()
 
-    print("count_end", count_end)
-    print("start", start)
-
     if count_end > start:
-        print("######################")
         write_metadata_json()
 
 def PepView(request):
