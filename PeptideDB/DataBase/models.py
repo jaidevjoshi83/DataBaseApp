@@ -1,4 +1,6 @@
 from django.db import models
+from .utils import  time_stamp
+
 
 class PeptideSeq(models.Model):
        
@@ -31,7 +33,7 @@ class UploadedData(models.Model):
     data_file_name = models.CharField(max_length=100,  null=True)
     experiment_type = models.CharField(max_length=20,  null=True)
     reference_number = models.CharField(max_length=20,  null=True)
-    reference_link = models.CharField(max_length=20,  null=True)
+    reference_link = models.CharField(max_length=300,  null=True)
 
     class Meta:
         ordering = ['datafile_index']
@@ -49,3 +51,11 @@ class BugReporting(models.Model):
 
     class Meta:
         ordering = ['report_date']
+
+class DataBaseVersion(models.Model):
+       
+    version = models.CharField(max_length=100,  null=True)
+    time_stamp = models.CharField(max_length=100,  null=True)
+
+    class Meta:
+        ordering = ['time_stamp']

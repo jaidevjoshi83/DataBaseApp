@@ -5,22 +5,26 @@ import os
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.admin.views.decorators import staff_member_required
 from datetime import datetime
-from .models import UploadedData, BugReporting, PeptideSeq
+from .models import UploadedData, BugReporting, PeptideSeq, DataBaseVersion
 from django.core import serializers
 import pandas as  pd
 import json
-from .utils import write_metadata_json, return_metadata
+from .utils import write_metadata_json, return_metadata, time_stamp
 from django.shortcuts import redirect
-
-
 # from .utils import return_merge_peptidedata
 
 def contact(request):
     logout(request)
     return render(request, 'DataBase/contact.html', {})
 
-
 def DB(request):
+    if len(DataBaseVersion.objects.all()) == 0:
+        v = DataBaseVersion.objects.create(
+            version = '0.0.0' ,
+            time_stamp = time_stamp(),
+        )
+
+        v.save()
 
     acv = len(set(list(PeptideSeq.objects.filter(accession__isnull=False).values_list('accession', flat=True))))
     clv = len((list(PeptideSeq.objects.filter(cleavage_site__isnull=False).values_list('cleavage_site', flat=True))))
@@ -65,7 +69,12 @@ def DB(request):
         Acc = ''
         form = dabase_form(initial={'Sequence':Fasta,'Accession':Acc})
         
-    meta_data = return_metadata()
+    meta_data = DataBaseVersion.objects.latest('time_stamp')
+
+    meta_data = {
+                "version": DataBaseVersion.objects.latest('time_stamp').version,
+                "release_date": DataBaseVersion.objects.latest('time_stamp').time_stamp.split('.')[0],
+                }
 
     return render(request, 'DataBase/index.html', {'form': form, 'acv':acv, 'clv':clv, 'meta_data':meta_data, 'is_authenticated':request.user.is_authenticated})
 
@@ -80,6 +89,8 @@ def data_upload(request):
 
             # objs = UploadedData.objects.all()
             validation_pass = handle_uploaded_file(request, request.FILES['file'], file_name, form.cleaned_data['reference_number'], form.cleaned_data['reference_link'])
+            
+            print(validation_pass)
 
             if validation_pass['validation']:
                 a = UploadedData.objects.create(
@@ -142,8 +153,7 @@ def bugs(request):
 
     a.save()
 
-    return JsonResponse(data, safe=False)
-        
+    return JsonResponse(data, safe=False)  
     # return render(request, 'DataBase/bug_report_form.html', {'form': form})
 
 def success(request):
@@ -215,13 +225,22 @@ def import_data_to_model(file_name, ref_num, ref_link):
         else:
             pass
 
+    now = datetime.now()
+    vsn = DataBaseVersion.objects.latest('time_stamp')
     count_end = PeptideSeq.objects.all().count()
 
-    if count_end > start:
-        write_metadata_json()
+    if count_end != start:
+        updated_version = DataBaseVersion.objects.latest('time_stamp')
+        w = write_metadata_json(updated_version.version)
 
+        v = DataBaseVersion.objects.create(
+            version = w['version'] ,
+            time_stamp = w['release_date'],
+        )
+
+        v.save()
+    
 def PepView(request):
-
     data = {}
 
     if 'des' in request.GET and 'acc' in request.GET :
@@ -336,11 +355,15 @@ def admin_activity(request):
 
     n_bugs = len(bugs)
     n_suggestions = len(suggestions)
+    metadata = DataBaseVersion.objects.latest('time_stamp')
 
-    with open(os.path.join(os.getcwd(), 'metadata.json'), 'r') as file:
-        json_data = json.load(file)
+    json_data = {
+                "version": metadata.version,
+                "release_date": metadata.time_stamp.split('.')[0],
+                }
 
     return render(request, 'DataBase/admin_activity.html', {'data':json_data, 'bugs':bugs, 'suggestions':suggestions, 'n_bugs':n_bugs, 'n_suggestions': n_suggestions, 'db':db, 'is_authenticated':True})
+
 @staff_member_required
 def bug_list(request):
     bugs =  BugReporting.objects.all().filter(types="bug")
@@ -353,4 +376,4 @@ def suggestion_list(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('/home') 
+    return redirect('/') 

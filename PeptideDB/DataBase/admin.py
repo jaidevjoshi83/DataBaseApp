@@ -1,7 +1,7 @@
 from django.contrib import admin
 from import_export import resources
 
-from .models import  PeptideSeq, UploadedData, BugReporting
+from .models import  PeptideSeq, UploadedData, BugReporting, DataBaseVersion
 
 # Register your models here.
 
@@ -17,3 +17,4 @@ class PeptideInfoResource(resources.ModelResource):
 admin.site.register(PeptideSeq)
 admin.site.register(UploadedData)
 admin.site.register(BugReporting)
+admin.site.register(DataBaseVersion)

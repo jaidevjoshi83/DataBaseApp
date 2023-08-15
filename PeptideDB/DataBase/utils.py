@@ -2,10 +2,11 @@
 from datetime import datetime
 import os
 import json
+import pytz
 
 def Version(version_string):
     today = datetime.today()
-    formatted_date = today.strftime("%d:%m:%Y")
+    formatted_date = time_stamp()
     
     major, minor, patch = version_string.split('.')
     major, minor, patch = int(major), int(minor), int(patch)
@@ -21,26 +22,15 @@ def Version(version_string):
 
     return {'version':f"{major}.{minor}.{patch}", 'release_date':formatted_date}
 
-def write_metadata_json():
+def write_metadata_json(version):
 
-    with open(os.path.join(os.getcwd(), 'metadata.json'), 'r') as file:
-        json_data = json.load(file)
+    json_data = {'version':None, 'release_date':None}
+    m = Version(version)
 
-    # Manipulate the data
-
-    m = Version(json_data['version'])
-
-    print(m)
     json_data['version'] = m['version']
     json_data['release_date'] = m['release_date']
 
-
-
-    # Write back to JSON file
-    with open(os.path.join(os.getcwd(), 'metadata.json'), 'w') as file:
-        json.dump(json_data, file, indent=4)
-
-
+    return json_data
 
 def return_metadata():
 
@@ -48,3 +38,9 @@ def return_metadata():
         json_data = json.load(file)
 
     return json_data
+
+def time_stamp():
+    utc_time = datetime.now(pytz.utc)
+    local_time_zone = pytz.timezone('America/New_York')
+    local_time = utc_time.astimezone(local_time_zone)
+    return str(local_time)

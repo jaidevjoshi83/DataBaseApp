@@ -58,9 +58,9 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="{% url 'DB' %}" class="nav-item nav-link active">Home</a>
-                <a href="{% url 'DB' %}" class="nav-item nav-link">About</a>
-                <a href="{% url 'DB' %}" class="nav-item nav-link">Contact</a>
-                <a href="{% url 'DB' %}" class="nav-item nav-link">Our Team</a>
+                <a href="#Statistics" class="nav-item nav-link">About</a>
+                <a href="#contact-us" class="nav-item nav-link">Contact</a>
+                <a href="#our-team" class="nav-item nav-link">Our Team</a>
                 <a href="{% url 'admin_activity' %}" class="nav-item nav-link">Admin</a>
                 {% if is_authenticated %}
                 <a href="{% url 'logout_view' %}" class="nav-item nav-link">Log Out</a>
@@ -169,7 +169,7 @@
     <!-- About End -->
 
     <!-- Fact Start -->
-    <div class="container-xxl py-5">
+    <div class="container-xxl py-5" id="Statistics">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -298,7 +298,7 @@
 
 
     <!-- Feature Start -->
-    <div class="container-fluid py-5 px-lg-0" style="background-color: #c7e0f1;">
+    <div class="container-fluid py-5 px-lg-0" style="background-color: #c7e0f1;" id="contact-us">
         <div class="container feature py-5 px-lg-0">
             <div class="row g-5 mx-lg-0">
                 <div class="col-lg-6 feature-text wow fadeInUp" data-wow-delay="0.1s">
@@ -549,7 +549,7 @@
 
 
     <!-- Team Start -->
-    <div class="container-xxl py-5">
+    <div class="container-xxl py-5" id="our-team">
         <div class="container py-5">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h6 class="text-secondary text-uppercase">Our Team</h6>
@@ -563,12 +563,27 @@
                         </div>
                         <h5 class="mb-0">Dr. Suneel Apte</h5>
                         <p>Principal Investigator</p>
+                        <p>Biomedical Engineering</p>
                         <div class="btn-slide mt-1">
                             <i class="fa fa-share"></i>
                             <span>
-                                <a href=""><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.lerner.ccf.org/biomedical-engineering/apte/"><i class="fa fa-globe" aria-hidden="true"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.9s">
+                    <div class="team-item p-4">
+                        <div class="overflow-hidden mb-4">
+                            <img class="img-fluid" src="https://www.lerner.ccf.org/images/people/blanked2.jpg" alt="">
+                        </div>
+                        <h5 class="mb-0">Daniel Blankenberg</h5>
+                        <p>Principal Investigator</p>
+                        <p>Genomic Medicine Institute</p>
+                        <div class="btn-slide mt-1">
+                            <i class="fa fa-share"></i>
+                            <span>
+                                <a href="https://www.lerner.ccf.org/genomic-medicine/blankenberg/"><i class="fa fa-globe" aria-hidden="true"></i></a>
                             </span>
                         </div>
                     </div>
@@ -580,12 +595,11 @@
                         </div>
                         <h5 class="mb-0">Dr. Sumeet Bhutada</h5>
                         <p>Research Associate</p>
+                        <p>Biomedical Engineering</p>
                         <div class="btn-slide mt-1">
                             <i class="fa fa-share"></i>
                             <span>
-                                <a href=""><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.lerner.ccf.org/biomedical-engineering/apte/#lab-people"><i class="fa fa-globe" aria-hidden="true"></i></a>
                             </span>
                         </div>
                     </div>
@@ -597,33 +611,33 @@
                         </div>
                         <h5 class="mb-0">Dr. Daniel Martin</h5>
                         <p>Postdoctoral Fellow</p>
+                        <p>Biomedical Engineering</p>
                         <div class="btn-slide mt-1">
                             <i class="fa fa-share"></i>
                             <span>
-                                <a href=""><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.lerner.ccf.org/biomedical-engineering/apte/#lab-people"><i class="fa fa-globe" aria-hidden="true"></i></a>
                             </span>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.9s">
+
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.9s">
                     <div class="team-item p-4">
                         <div class="overflow-hidden mb-4">
-                            <img class="img-fluid" src="https://www.lerner.ccf.org/images/people/blanked2.jpg" alt="">
+                            <img class="img-fluid" src="{% static 'img/Joshi_Jayadev.JPG' %}" alt="">
                         </div>
-                        <h5 class="mb-0">Full Name</h5>
-                        <p>Designation</p>
+                        <h5 class="mb-0">Jayadev Joshi</h5>
+                        <p>Postdoctoral Fellow</p>
+                        <p>Genomic Medicine Institute</p>
                         <div class="btn-slide mt-1">
                             <i class="fa fa-share"></i>
                             <span>
-                                <a href=""><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.lerner.ccf.org/genomic-medicine/blankenberg/#lab-people"><i class="fa fa-globe" aria-hidden="true"></i></a>
                             </span>
                         </div>
                     </div>
-                </div> -->
+                </div>
+
             </div>
         </div>
     </div>
