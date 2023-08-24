@@ -13,6 +13,7 @@ var getJSON = function(url, callback) {
     xhr.send();
 };
 
+var table_data 
 
 if (temp_acc != 'undefined' && temp_des == 'undefined'){
     var link = `http://${host_name}/PepView/?acc=${temp_acc}`
@@ -27,50 +28,54 @@ function(err, data) {
     if (err !== null) {
         alert('Something went wrong: ' + err);
     } else {   
-        
-        table_content(data)
-        ExportData(data)
 
-        $(document).ready(function () {
-            $('#example').DataTable({
-                // data:data,
-            });
-        });
+        ExportData(data)
+        
+        if (data.length > 10){
+            table_data = return_data_dict(data)
+            table_content(table_data[1])
+            add_page_select_menu(table_data)
+            document.querySelector('#page-menu').style.display = 'block' 
+        } else{
+            document.querySelector('#page-menu').style.display = 'none' 
+            table_content(data)
+        }
     }
 });
 
 function table_content(data){
+
     var table_body = document.querySelector('tbody')
     removeAllChildNodes(table_body)
 
-    for (var i =0; i < data.length; i++){
+    for (var i = 0; i < data.length; i++){
         var row = document.createElement('tr')
-    if (i % 2 == 0) {
-        row.className = 'even'
-    } else{
-        row.className = 'odd'
-    }
+        if (i % 2 == 0) {
+            row.className = 'even'
+        } else{
+            row.className = 'odd'
+        }
 
-    var ref_list = []
+        var ref_list = []
 
-    for (var j = 0; j < data[i].reference_link.length;  j++) {
-        ref_list.push(`<a href=${data[i].reference_link[j]} target="_blank" >${data[i].reference_number[j]}</a>`)
-    }
+        for (var j = 0; j < data[i].reference_link.length;  j++) {
+            ref_list.push(`<a href=${data[i].reference_link[j]} target="_blank" >${data[i].reference_number[j]}</a>`)
+        }
        
-    row.innerHTML  =   `<td>${i+1}</td>
-                        <td>${data[i].peptide_sequence}</td>
-                        <td>${data[i].accession}</td>
-                        <td>${data[i].gene_symbol}</td>
-                        <td>${data[i].protein_name}</td>
-                        <td>${data[i].cleavage_site}</td>
-                        <td>${data[i].annotated_sequence}</td>
-                        <td>${data[i].cellular_compartment}</td>
-                        <td>${data[i].species}</td>
-                        <td>${data[i].database_identified}</td>
-                        <td>${data[i].description}</td>
-                        <td>${ref_list.join(', ')}</td>`
+        row.innerHTML  =   `<td>${i+1}</td>
+                            <td>${data[i].peptide_sequence}</td>
+                            <td>${data[i].accession}</td>
+                            <td>${data[i].gene_symbol}</td>
+                            <td>${data[i].protein_name}</td>
+                            <td>${data[i].cleavage_site}</td>
+                            <td>${data[i].annotated_sequence}</td>
+                            <td>${data[i].cellular_compartment}</td>
+                            <td>${data[i].species}</td>
+                            <td>${data[i].database_identified}</td>
+                            <td>${data[i].description}</td>
+                            <td>${ref_list.join(', ')}</td>`
 
-    table_body.append(row)
+        table_body.append(row)
     }             
 }
 
@@ -82,7 +87,6 @@ function removeAllChildNodes(parent) {
 
 function ExportData(data){
     document.querySelector('.form-control.dt-tb').addEventListener('change', (e)=>{
-
         if (e.target.value == 'all'){
             JSONToCSVConvertor(data, 'test', true)
         } else{
@@ -135,7 +139,6 @@ function JSONToCSVConvertor(JSONData, ReportTitle) {
     document.body.removeChild(link);
 }
 
-
 $(document).ready(function(){
 
     console.log("ok")
@@ -162,3 +165,35 @@ $(document).ready(function(){
     });
 });
 
+
+//#######################################################################
+
+function return_data_dict(table_data){
+
+    var pgs = {}
+    var total_rows = 20
+
+    for (var i = 0; i < Math.floor(table_data.length/total_rows ); i++){
+        pgs[i] = table_data.slice(i*total_rows, (i+1)*total_rows)
+    }
+    pgs[Math.floor(table_data.length/total_rows )] = table_data.slice(Math.floor(table_data.length/total_rows)*total_rows, )
+
+    return pgs
+}
+
+ function add_page_select_menu(table_data){
+
+    var keys = Object.keys(table_data);
+    var pages = document.querySelector('#pages')
+
+    for (var i = 0; i < keys.length; i++){
+        var page = document.createElement('option')
+        page.value = i
+        page.innerText = i+1
+        pages.appendChild(page)
+    }
+
+    pages.addEventListener('change', (e)=>{
+        table_content(table_data[e.target.value])
+    })
+ }

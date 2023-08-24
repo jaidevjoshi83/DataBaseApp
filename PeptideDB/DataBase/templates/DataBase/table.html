@@ -1,6 +1,8 @@
 {% extends 'DataBase/base.html' %}
 {% load static %}
 {% block content %}
+
+
 <div class='table-div'  style="background-color: rgb(219,220,214);padding: 5px; margin-top:5px; width: 100%; overflow:scroll;">
     <table  id="#someTable" class="table table-sm" data-replace="jtable" id="example" aria-label="JS Datatable" data-locale="en" data-search="true">
         <thead class="thead-dark">
@@ -24,6 +26,13 @@
         </tbody>
     </table>
 
+    <div id="page-menu">
+        <label for="pages">Select a Page:</label>
+        <select id="pages" name="page">
+            <!-- Define the options using option elements -->
+        </select>
+    </div>
+
     <div id="toolbar" style="border-top: 1px solid black">
         <select class="form-control dt-tb" style="width:180px;margin-top: 5px;">
             <option value="selected">Download Data</option>
@@ -31,4 +40,6 @@
         </select>
     </div>  
 </div >
+
+<script src="{% static 'js/table.js' %}"></script>
 {% endblock %}
