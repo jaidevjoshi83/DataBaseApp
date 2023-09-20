@@ -4,13 +4,12 @@ function getCookie(name) {
   }
 
 document.querySelectorAll('button')[2].addEventListener('click', ()=>{
-
     var data = { }
     var Inps = document.querySelector('#bugs-form').querySelectorAll('input')
 
     for (var i = 0; Inps.length > i; i++ ){
 
-        if (Inps[i].value == '' && Inps[i].name  != 'email'){
+        if (Inps[i].value == '' && (Inps[i].name != 'email' && Inps[i].name != 'name' && Inps[i].name != 'institution')){
             Inps[i].style.background  = 'pink'
             return 
 
@@ -31,7 +30,7 @@ document.querySelectorAll('button')[2].addEventListener('click', ()=>{
     data[document.querySelector('#bugs-form').querySelectorAll('select')[0].name] = document.querySelector('#bugs-form').querySelectorAll('select')[0].value
     // document.querySelector('#bugs-form').querySelectorAll('select')[0].value = ''
     
-    const url = `http://10.66.95.3:8000/bugs?data=${JSON.stringify(data)}`;
+    const url = `/bugs?data=${JSON.stringify(data)}`;
 
     fetch(url, {
     method: 'POST',

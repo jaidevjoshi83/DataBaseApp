@@ -44,3 +44,132 @@ def time_stamp():
     local_time_zone = pytz.timezone('America/New_York')
     local_time = utc_time.astimezone(local_time_zone)
     return str(local_time)
+
+
+def upload_data_from_backup_file(file_path):
+
+    with open(file_path) as f:
+        data = json.load(f)
+   
+    for i in data:
+        if "DataBase.peptideseq" == i['model']:
+            if not PeptideSeq.objects.filter( 
+                    accession=chunks[0],
+                    gene_symbol=chunks[1],
+                    protein_name=chunks[2],
+                    cleavage_site=chunks[3],
+                    peptide_sequence=chunks[4],
+                    annotated_sequence=chunks[5],
+                    cellular_compartment=chunks[6],
+                    species=chunks[7],
+                    database_identified=chunks[8],
+                    description=chunks[9],
+                    reference_number=ref_num,
+                    reference_link=ref_link,
+
+                ).exists():
+
+                new_obj = PeptideSeq.objects.create(
+
+                    db_id='DBS0'+str(count),
+                    accession=chunks[0],
+                    gene_symbol=chunks[1],
+                    protein_name=chunks[2],
+                    cleavage_site=chunks[3],
+                    peptide_sequence=chunks[4],
+                    annotated_sequence=chunks[5],
+                    cellular_compartment=chunks[6],
+                    species=chunks[7],
+                    database_identified=chunks[8],
+                    description=chunks[9],
+                    reference_number=ref_num,
+                    reference_link=ref_link,
+                    data_file_name= file_name
+                )
+
+                new_obj.save()
+        
+        elif "DataBase.uploadeddata" == i['model']:
+            if not PeptideSeq.objects.filter (
+
+                    datafile_index = i['datafile_index'],
+                    experiment_name = i['experiment_name'],
+                    data_upload_time = i['data_upload_time'],
+                    data_upload_date = i['data_upload_date'],
+                    user_name = i['user_name'],
+                    data_description = i['data_description'],
+                    data_file_name = i['data_file_name'],
+                    experiment_type = i['experiment_type'],
+                    reference_number = i['reference_number'],
+                    reference_link = i['reference_link'],
+                ).exists():
+
+                uploaded_data_object = PeptideSeq.objects.create (
+
+                    datafile_index = i['datafile_index'],
+                    experiment_name = i['experiment_name'],
+                    data_upload_time = i['data_upload_time'],
+                    data_upload_date = i['data_upload_date'],
+                    user_name = i['user_name'],
+                    data_description = i['data_description'],
+                    data_file_name = i['data_file_name'],
+                    experiment_type = i['experiment_type'],
+                    reference_number = i['reference_number'],
+                    reference_link = i['reference_link'],
+                )
+
+                uploaded_data_object.save()
+
+    
+        elif "DataBase.bugreporting" == i['model']:
+            if not BugReporting.objects.filter(
+                title = i['title'],
+                report_date = i['report_date'],
+                report_time = i['report_time'],
+                bug_description = i['bug_description'],
+                user_name = i['user_name'],
+                institute = i['institute'],
+                email  = i['email'],
+                types = i['types'],
+                ).exists():
+
+                br = BugReporting.objects.create(
+                    title = i['title'],
+                    report_date = i['report_date'],
+                    report_time = i['report_time'],
+                    bug_description = i['bug_description'],
+                    user_name = i['user_name'],
+                    institute = i['institute'],
+                    email  = i['email'],
+                    types = i['types'],
+                )
+
+                br.save()
+
+        elif "DataBase.databaseversion" == i['model']:
+            if not DataBaseVersion.objects.filter(
+                version = i['version'],
+                time_stamp = i['time_stamp'],
+                ).exists():
+
+                dbv = DataBaseVersion.objects.create(
+                    version = i['version'],
+                    time_stamp = i['time_stamp'],
+                )
+
+                dbv.save()
+
+        elif "DataBase.file" == i['model']:
+            if not File.objects.filter(
+                existingPath = i['existingPath'],
+                name = i['path'],
+                eof = i['eof'],
+                ).exists():
+
+                fl = File.objects.create(
+                    existingPath = i['existingPath'],
+                    name = i['path'],
+                    eof = i['eof'],
+                )
+
+                fl.save()

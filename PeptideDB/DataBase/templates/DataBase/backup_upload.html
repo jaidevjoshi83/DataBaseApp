@@ -1,0 +1,84 @@
+{% extends 'DataBase/base.html' %}
+{% load static %}
+{% block content %}
+
+
+   
+    <script src="{% static 'js/test.js' %}"></script>
+
+    <div style="margin: 20px;">
+        <h2>Resumable File Upload</h2>
+
+        <div id="dropTarget" style="width: 500px; height: 200px; border: 2px dashed #aaa; text-align: center; padding: 70px 0;">
+            Drop files here to upload
+        </div>
+        <br>
+        <input type="button" id="browseButton" value="Browse Files">
+    </div>
+
+    <script>
+        let r = new Resumable({
+            target: '/upload_chunk/',
+            chunkSize: 4 * 1024 * 1024,
+            simultaneousUploads: 3,
+            testChunks: false,
+            throttleProgressCallbacks: 1,
+        });
+
+        r.assignDrop(document.getElementById('dropTarget'));
+        r.assignBrowse(document.getElementById('browseButton'));
+
+        r.on('fileAdded', function(file, event) {
+            r.upload();
+        });
+
+        r.on('fileSuccess', function(file, message) {
+            console.log('File upload completed');
+            console.log(file.chunks.length)
+            var file_name = file.file.name
+            trigger_url(`/merge_chunks/`, file.uniqueIdentifier, file.chunks.length, file_name)
+            // location.replace("/merge_chunks/")
+
+        });
+
+        r.on('fileProgress', function(file) {
+            console.log('File progress:', file.progress());
+        });
+
+        function trigger_url(url, file_id, total_chunck, file_name){
+
+            console.log("OKddd")
+            fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken'), // Fetch and include the CSRF token
+            },
+            body: JSON.stringify({ 'file_id': file_id, 'total_chunck':total_chunck, 'file_name':file_name })
+            })
+            .then(response => {
+                if (response.ok) {
+            
+                return response.json();
+                }
+                throw new Error('Error:' + response.status);
+            })
+            .then(responseData => {
+                console.log('Response:', responseData);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                console.log("error")
+            });
+        }
+
+        function getCookie(name) {
+            const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+            return cookieValue ? cookieValue.pop() : '';
+  }
+
+
+    </script>
+
+
+{% endblock %}

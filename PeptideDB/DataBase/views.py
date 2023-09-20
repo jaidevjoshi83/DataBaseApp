@@ -1,17 +1,23 @@
-from django.shortcuts import render
+import os
 from .forms import  dabase_form, UploadFileForm, BugReportingForm
 from django.contrib.auth import logout
-import os
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse,  HttpResponse
 from django.contrib.admin.views.decorators import staff_member_required
 from datetime import datetime
-from .models import UploadedData, BugReporting, PeptideSeq, DataBaseVersion
+from .models import UploadedData, BugReporting, PeptideSeq, DataBaseVersion, File
 from django.core import serializers
 import pandas as  pd
 import json
 from .utils import write_metadata_json, return_metadata, time_stamp
-from django.shortcuts import redirect
+from io import StringIO
+from django.core.management import call_command
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 # from .utils import return_merge_peptidedata
+
+def errors(request):
+    return render(request, 'DataBase/error.html')
 
 def contact(request):
     logout(request)
@@ -48,7 +54,7 @@ def DB(request):
                 return render(request, 'DataBase/table.html', param)
 
             elif description == '' and accession == '':
-                render(request, 'DataBase/index.html', {'form': form, 'acv':acv, 'clv':clv, 'formb':formb, 'is_authenticated':request.user.is_authenticated})
+                render(request, 'DataBase/index.html', {'form': form, 'acv':acv, 'clv':clv, 'formb':formb, 'is_authenticated':request.user.is_authenticated, 'host_name': request.get_host()})
 
         elif formb.is_valid():
 
@@ -76,7 +82,7 @@ def DB(request):
                 "release_date": DataBaseVersion.objects.latest('time_stamp').time_stamp.split('.')[0],
                 }
 
-    return render(request, 'DataBase/index.html', {'form': form, 'acv':acv, 'clv':clv, 'meta_data':meta_data, 'is_authenticated':request.user.is_authenticated})
+    return render(request, 'DataBase/index.html', {'form': form, 'acv':acv, 'clv':clv, 'meta_data':meta_data, 'is_authenticated':request.user.is_authenticated, 'host_name': request.get_host()})
 
 @staff_member_required
 def data_upload(request):
@@ -86,11 +92,8 @@ def data_upload(request):
             now = datetime.now()
             dt_string = now.strftime("%d_%m_%Y__%H_%M_%S")
             file_name = "CleavageDB_"+dt_string+'_data_file.csv'
-
             # objs = UploadedData.objects.all()
             validation_pass = handle_uploaded_file(request, request.FILES['file'], file_name, form.cleaned_data['reference_number'], form.cleaned_data['reference_link'])
-            
-            print(validation_pass)
 
             if validation_pass['validation']:
                 a = UploadedData.objects.create(
@@ -110,7 +113,6 @@ def data_upload(request):
                 return HttpResponseRedirect('/data_upload')
             else:
                 return render(request, 'DataBase/validation_error.html', {'data': validation_pass['error_column'] })
-                 
     else:
         form = UploadFileForm()
     return render(request, 'DataBase/upload.html', {'form': form})
@@ -150,7 +152,6 @@ def bugs(request):
         email  = data['email'],
         types = data['type']
     )
-
     a.save()
 
     return JsonResponse(data, safe=False)  
@@ -377,3 +378,122 @@ def suggestion_list(request):
 def logout_view(request):
     logout(request)
     return redirect('/') 
+
+@staff_member_required
+def load_data(request):
+    return render(request, 'DataBase/load_data_from_backup_file.html', {})
+
+@staff_member_required
+def download_backup(request):
+
+    h = DataBaseVersion.objects.latest('time_stamp')
+    f_name = h.version.replace('.', '_')+"_back_up.json"
+
+    output = StringIO()
+    call_command('dumpdata', stdout=output)
+    response = HttpResponse(output.getvalue(), content_type='application/json')
+    response['Content-Disposition'] = 'attachment; filename='+f_name
+    return response
+
+@staff_member_required
+def upload_backup(request):
+    if request.method == 'POST' and request.FILES.get('backup_file'):
+        backup_file = request.FILES['backup_file']
+        call_command('loaddata', backup_file.temporary_file_path())
+        messages.success(request, 'Data successfully restored!')
+        return redirect('some_view_name')  # replace with a view name where you want to redirect after loading data
+    return render(request, 'load_data_from_backup_file.html')
+    
+def fileUploader(request):
+    if request.method == 'POST':  
+        file = request.FILES['file'].read()
+        fileName= request.POST['filename']
+        existingPath = request.POST['existingPath']
+        end = request.POST['end']
+        nextSlice = request.POST['nextSlice']
+
+        if file=="" or fileName=="" or existingPath=="" or end=="" or nextSlice=="":
+            res = JsonResponse({'data':'Invalid Request'})
+            return res
+        else:
+            if existingPath == 'null':
+                path = 'backupdata/' + fileName
+                with open(path, 'wb+') as destination: 
+                    destination.write(file)
+
+                FileFolder = File()
+
+                FileFolder.existingPath = fileName
+                FileFolder.eof = end
+                FileFolder.name = fileName
+
+                try:
+                    FileFolder.save()
+                except:
+                    return HttpResponseRedirect('/errors')
+                if int(end):
+                    res = JsonResponse({'data':'Uploaded Successfully','existingPath': fileName})
+                else:
+                    res = JsonResponse({'existingPath': fileName})
+                return res
+
+            else:
+                path = 'backupdata/' + existingPath
+                model_id = File.objects.get(existingPath=existingPath)
+                if model_id.name == fileName:
+                    if not model_id.eof:
+                        with open(path, 'ab+') as destination: 
+                            destination.write(file)
+                        if int(end):
+                            model_id.eof = int(end)
+                            model_id.save()
+                            res = JsonResponse({'data':'Uploaded Successfully','existingPath':model_id.existingPath})
+                        else:
+                            res = JsonResponse({'existingPath':model_id.existingPath})    
+                        return res
+                    else:
+                        res = JsonResponse({'data':'EOF found. Invalid request'})
+                        return res
+                else:
+                    res = JsonResponse({'data':'No such file exists in the existingPath'})
+                    return res
+    return render(request, 'load_data_from_backup_file.html')
+
+
+def UploadedView(request):
+    return render(request, 'DataBase/load_data_from_backup_file.html', {})
+
+@csrf_exempt
+def upload_chunk(request):
+
+    file = request.FILES['file']
+
+    file_id = request.POST['resumableIdentifier']
+    chunk_number = request.POST['resumableChunkNumber']
+    total_chunks = int(request.POST['resumableTotalChunks'])
+    
+    with open(f'tmp/{file_id}_{chunk_number}', 'wb') as f:
+        for chunk in file.chunks():
+            f.write(chunk)
+    
+    return JsonResponse({'status': 'success'})
+
+@csrf_exempt
+def merge_chunks(request):
+
+    data = json.loads(request.body) 
+
+    file_id = data['file_id']
+    total_chunks = data['total_chunck']
+    file_name = data['file_name']
+    
+    with open(f'uploads/{file_name}', 'wb') as final_file:
+        for i in range(1, total_chunks + 1):
+            with open(f'tmp/{file_id}_{i}', 'rb') as chunk:
+                final_file.write(chunk.read())
+            os.remove(f'tmp/{file_id}_{i}')
+
+    return JsonResponse({'status': 'success'})
+
+def upload_page(request):
+    return render(request, 'DataBase/backup_upload.html')
