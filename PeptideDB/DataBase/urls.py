@@ -25,6 +25,8 @@ urlpatterns = [
     path('upload_chunk/', views.upload_chunk, name='upload_chunk'),
     path('merge_chunks/', views.merge_chunks, name='merge_chunks'),
     path('upload_page/', views.upload_page, name='upload_page'),
+    path('upload_complete/', views.upload_complete, name='upload_complete'),
+    path('load_backupdata/', views.load_backupdata, name='load_backupdata'),
 
     
 ]

@@ -147,9 +147,6 @@ def bugs(request):
         report_date = now.strftime("%Y-%m-%d"),
         report_time = now.strftime("%H:%M:%S"),
         bug_description = data['details'],
-        user_name = data['name'],
-        institute = data['institution'],
-        email  = data['email'],
         types = data['type']
     )
     a.save()
@@ -481,7 +478,7 @@ def upload_chunk(request):
 @csrf_exempt
 def merge_chunks(request):
 
-    data = json.loads(request.body) 
+    data = json.loads(request.body)
 
     file_id = data['file_id']
     total_chunks = data['total_chunck']
@@ -495,5 +492,124 @@ def merge_chunks(request):
 
     return JsonResponse({'status': 'success'})
 
+@staff_member_required
 def upload_page(request):
     return render(request, 'DataBase/backup_upload.html')
+@staff_member_required
+def upload_complete(request):
+    file_name = request.GET.get('file_name', None)
+
+    return render(request, 'DataBase/upload_complete.html', {'file_name': request.GET.get('file_name', None)})
+
+@staff_member_required
+def load_backupdata(request):
+    file_name = request.GET.get('file_name', None)
+
+    with open(f'uploads/{file_name}', 'r') as file:
+        data = json.load(file)
+
+    p_count = PeptideSeq.objects.all().count()
+    # b_count = BugReporting.objects.all().count()
+
+    for i in data:
+        if  'DataBase.peptideseq' == i['model']:
+
+            # count = PeptideSeq.objects.all().count()
+            p_count = p_count + 1
+
+            if not PeptideSeq.objects.filter( 
+                        accession=i['fields']['accession'],
+                        gene_symbol=i['fields']['gene_symbol'],
+                        protein_name=i['fields']['protein_name'],
+                        cleavage_site=i['fields']['cleavage_site'],
+                        peptide_sequence=i['fields']['peptide_sequence'],
+                        annotated_sequence=i['fields']['annotated_sequence'],
+                        cellular_compartment=i['fields']['cellular_compartment'],
+                        species=i['fields']['species'],
+                        database_identified=i['fields']['database_identified'],
+                        description=i['fields']['description'],
+                        reference_number=i['fields']['reference_number'],
+                        reference_link=i['fields']['reference_link'],
+                        data_file_name= i['fields']['data_file_name'],
+
+                ).exists():
+
+                new_obj = PeptideSeq.objects.create(
+
+                    db_id='DBS0'+str(p_count),
+                    accession=i['fields']['accessopm'],
+                    gene_symbol=i['fields']['gene_symbol'],
+                    protein_name=i['fields']['protein_name'],
+                    cleavage_site=i['fields']['cleavage_site'],
+                    peptide_sequence=i['fields']['peptide_sequence'],
+                    annotated_sequence=i['fields']['annotated_sequence'],
+                    cellular_compartment=i['fields']['cellular_compartment'],
+                    species=i['fields']['species'],
+                    database_identified=i['fields']['database_identified'],
+                    description=i['fields']['description'],
+                    reference_number=i['fields']['reference_number'],
+                    reference_link=i['fields']['reference_link'],
+                    data_file_name= i['fields']['file_name'],
+                )
+
+                new_obj.save()
+            else:
+                pass
+
+        elif 'DataBase.bugreporting' == i['model']:
+
+            if not BugReporting.objects.filter( 
+                        title=i['fields']['title'],
+                        report_date=i['fields']['report_date'],
+                        report_time=i['fields']['report_time'],
+                        bug_description=i['fields']['bug_description'],
+                        types=i['fields']['types'],
+
+                ).exists():
+
+                new_obj = BugReporting.objects.create(
+                        title=i['fields']['title'],
+                        report_date=i['fields']['report_date'],
+                        report_time=i['fields']['report_time'],
+                        bug_description=i['fields']['bug_description'],
+                        types=i['fields']['types'],
+                )
+
+                new_obj.save()
+            else:
+                pass
+
+        elif 'DataBase.DataBaseVersion' == i['model']:
+            if not DataBaseVersion.objects.filter( 
+                        version=ii['fields']['version'],
+                        time_stamp=ii['fields']['time_stamp'],
+
+                ).exists():
+
+                new_obj = DataBaseVersion.objects.create(
+
+                        version=i['fields']['version'],
+                        time_stamp=i['fields']['time_stamp'],
+                )
+
+                new_obj.save()
+            else:
+                pass
+
+        elif 'DataBase.file' == i['model']:
+            if not File.objects.filter( 
+                        name=i['fields']['name'],
+                ).exists():
+
+                new_obj = PeptideSeq.objects.create(
+                    name=i['fields']['name'],
+                )
+
+                new_obj.save()
+            else:
+                pass
+
+
+    os.remove(f'uploads/{file_name}')
+
+    return render(request, 'DataBase/load_backupdata.html', {'file_name': file_name})
