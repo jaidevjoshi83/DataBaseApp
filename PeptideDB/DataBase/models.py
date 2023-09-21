@@ -1,57 +1,63 @@
 from django.db import models
+from .utils import  time_stamp
 
-# Create your models here.
-
-
-#class ProteinID(models.Model):
-#   ProtID = models.CharField(max_length=30)
-#
-#   def __str__(self):
-#      return "%s" % (self.ProtID)
 
 class PeptideSeq(models.Model):
+       
+    db_id = models.CharField(max_length=15,  null=True)
+    accession = models.CharField(max_length=20,  null=True)
+    gene_symbol = models.CharField(max_length=15,  null=True)
+    protein_name = models.CharField(max_length=100,  null=True)
+    cleavage_site = models.CharField(max_length=20,  null=True)
+    peptide_sequence = models.CharField(max_length=130,  null=True)
+    annotated_sequence = models.CharField(max_length=130,  null=True)
+    cellular_compartment = models.CharField(max_length=100,  null=True)
+    species = models.CharField(max_length=50,  null=True)
+    database_identified = models.CharField(max_length=50,  null=True)
+    description = models.CharField(max_length=200,  null=True)
+    reference_number = models.CharField(max_length=4,  null=True)
+    reference_link = models.CharField(max_length=200,  null=True)
+    data_file_name = models.CharField(max_length=60, null=True)
+    
+    class Meta:
+        ordering = ['db_id']
 
-    Protein_found =models.CharField(max_length=10)
-    Recommended_Protein_Name = models.CharField(max_length=200)
-    Species = models.CharField(max_length=50)
-    Chromosome = models.CharField(max_length=10)
-    Accession = models.CharField(max_length=30)
-    Input_Sequence = models.CharField(max_length=100)
-    P1_Position = models.CharField(max_length=4)
-    Cleaving_proteases = models.CharField(max_length=4)
-
-    def __str__(self):
-        return "%s %s %s %s %s %s %s %s " % (self.Input_Sequence, self.P1_Position, self.Accession, self.Protein_found, self.Recommended_Protein_Name, self.Species, self.Cleaving_proteases, self.Chromosome )
+class UploadedData(models.Model):
+       
+    datafile_index = models.CharField(max_length=20,  null=True)
+    experiment_name = models.CharField(max_length=100,  null=True)
+    data_upload_time = models.TimeField(null=True)
+    data_upload_date = models.DateField(null=True)
+    user_name = models.CharField(max_length=100,  null=True)
+    data_description = models.CharField(max_length=200,  null=True)
+    data_file_name = models.CharField(max_length=100,  null=True)
+    experiment_type = models.CharField(max_length=20,  null=True)
+    reference_number = models.CharField(max_length=20,  null=True)
+    reference_link = models.CharField(max_length=300,  null=True)
 
     class Meta:
-        ordering = ['Input_Sequence']
+        ordering = ['datafile_index']
 
+class BugReporting(models.Model):
+       
+    title = models.CharField(max_length=100,  null=True)
+    report_date = models.DateField( null=True)
+    report_time = models.TimeField( null=True)
+    bug_description = models.CharField(max_length=200,  null=True)
+    types = models.CharField(max_length=100,  null=True)
 
+    class Meta:
+        ordering = ['report_date']
 
+class DataBaseVersion(models.Model):
+       
+    version = models.CharField(max_length=100,  null=True)
+    time_stamp = models.CharField(max_length=100,  null=True)
 
-#PeptideSeq.objects.filter(protein_id__ProtID='A0A0B4J1X5')
+    class Meta:
+        ordering = ['time_stamp']
 
-#ProteinID.objects.filter(peptideseq__sequence='YELTQPPSTAR')
-"""
-class Peptide(models.Model):
-
-    peptide  = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.peptide
-
-class PeptideInfo(models.Model):
-
-    pep = models.ForeignKey(Peptide, on_delete=models.CASCADE)
-    AnnotatedSequence = models.CharField(default= 'No Data',max_length=254)
-    CleavageSites = models.CharField(default= 'No Data', max_length=254)
-    PreObsCleavageSites = models.CharField(default= 'No Data', max_length=254)
-    IsoFormInformation = models.CharField(default= 'No Data',max_length=254)
-    AltStartInfo = models.CharField(default= 'No Data',max_length=254)
-    KnownProtease = models.CharField(default= 'No Data', max_length=254)
-    PeptideSeq = models.CharField(default= 'No Data', max_length=254)
-    
-    def __str__(self):
-        return self.PeptideSeq
-
-"""
+class File(models.Model):
+    existingPath = models.CharField(unique=True, max_length=100)
+    name = models.CharField(max_length=50)
+    eof = models.BooleanField()
