@@ -76,6 +76,10 @@ def DB(request):
         form = dabase_form(initial={'Sequence':Fasta,'Accession':Acc})
         
     meta_data = DataBaseVersion.objects.latest('time_stamp')
+ 
+
+    print(meta_data.version)
+    print(meta_data.time_stamp)
 
     meta_data = {
                 "version": DataBaseVersion.objects.latest('time_stamp').version,
@@ -164,6 +168,8 @@ def download_data_report(request):
 def import_data_to_model(file_name, ref_num, ref_link):
     f = open(os.path.join(os.getcwd(), 'datafiles', file_name))
     lines = f.readlines()
+
+    print(lines)
 
     count = PeptideSeq.objects.all().count()
     start = count
@@ -456,7 +462,6 @@ def fileUploader(request):
                     return res
     return render(request, 'load_data_from_backup_file.html')
 
-
 def UploadedView(request):
     return render(request, 'DataBase/load_data_from_backup_file.html', {})
 
@@ -472,33 +477,31 @@ def upload_chunk(request):
     with open(f'tmp/{file_id}_{chunk_number}', 'wb') as f:
         for chunk in file.chunks():
             f.write(chunk)
-    
+
     return JsonResponse({'status': 'success'})
 
 @csrf_exempt
 def merge_chunks(request):
 
-    data = json.loads(request.body)
-
-    file_id = data['file_id']
-    total_chunks = data['total_chunck']
-    file_name = data['file_name']
+    file_id = request.GET.get('file_id', None)
+    total_chunck = request.GET.get('total_chunck', None)
+    file_name = request.GET.get('file_name', None)
     
     with open(f'uploads/{file_name}', 'wb') as final_file:
-        for i in range(1, total_chunks + 1):
+        for i in range(1, int(total_chunck) + 1):
             with open(f'tmp/{file_id}_{i}', 'rb') as chunk:
                 final_file.write(chunk.read())
             os.remove(f'tmp/{file_id}_{i}')
 
-    return JsonResponse({'status': 'success'})
+    return HttpResponseRedirect('/load_backupdata/?&file_name='+file_name)
 
 @staff_member_required
 def upload_page(request):
     return render(request, 'DataBase/backup_upload.html')
+
 @staff_member_required
 def upload_complete(request):
     file_name = request.GET.get('file_name', None)
-
     return render(request, 'DataBase/upload_complete.html', {'file_name': request.GET.get('file_name', None)})
 
 @staff_member_required
@@ -530,14 +533,14 @@ def load_backupdata(request):
                         description=i['fields']['description'],
                         reference_number=i['fields']['reference_number'],
                         reference_link=i['fields']['reference_link'],
-                        data_file_name= i['fields']['data_file_name'],
+                        # data_file_name= i['fields']['data_file_name'],
 
                 ).exists():
 
                 new_obj = PeptideSeq.objects.create(
 
                     db_id='DBS0'+str(p_count),
-                    accession=i['fields']['accessopm'],
+                    accession=i['fields']['accession'],
                     gene_symbol=i['fields']['gene_symbol'],
                     protein_name=i['fields']['protein_name'],
                     cleavage_site=i['fields']['cleavage_site'],
@@ -549,7 +552,8 @@ def load_backupdata(request):
                     description=i['fields']['description'],
                     reference_number=i['fields']['reference_number'],
                     reference_link=i['fields']['reference_link'],
-                    data_file_name= i['fields']['file_name'],
+                    data_file_name= file_name,
+                    # data_file_name= i['fields']['file_name'],
                 )
 
                 new_obj.save()
@@ -579,15 +583,15 @@ def load_backupdata(request):
             else:
                 pass
 
-        elif 'DataBase.DataBaseVersion' == i['model']:
+        elif 'databaseversion' in i['model']:
+          
             if not DataBaseVersion.objects.filter( 
-                        version=ii['fields']['version'],
-                        time_stamp=ii['fields']['time_stamp'],
+                        version=i['fields']['version'],
+                        # time_stamp=i['fields']['time_stamp'],
 
                 ).exists():
 
                 new_obj = DataBaseVersion.objects.create(
-
                         version=i['fields']['version'],
                         time_stamp=i['fields']['time_stamp'],
                 )
@@ -612,4 +616,5 @@ def load_backupdata(request):
 
     os.remove(f'uploads/{file_name}')
 
-    return render(request, 'DataBase/load_backupdata.html', {'file_name': file_name})
+    # return render(request, 'DataBase/load_backupdata.html', {'file_name': file_name})
+    return JsonResponse({'status': 'success'})

@@ -39,17 +39,12 @@
 
         r.on('fileSuccess', function(file, message) {
             console.log('File upload completed');
-            console.log(file.chunks.length)
             var file_name = file.file.name
-            trigger_url(`/merge_chunks/`, file.uniqueIdentifier, file.chunks.length, file_name)
-            window.location.href = `/upload_complete?file_name=${file_name}`;
-            // triggerCompleteStatus(file_name)
-            // // location.replace("/merge_chunks/")
-
+            console.log(file.uniqueIdentifier)
+            window.location.href = `/merge_chunks/?file_id=${file.uniqueIdentifier}&total_chunck=${file.chunks.length}&file_name=${file_name}`
         });
 
         r.on('fileProgress', function(file) {
-
             let progress = parseFloat(file.progress() * 100).toFixed(2);
             console.log('File progress:', progress);
             document.querySelector('#file-upload-progress').textContent = `${progress}% Uploaded`
@@ -57,29 +52,30 @@
         });
 
         function trigger_url(url, file_id, total_chunck, file_name){
-
             fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken'), // Fetch and include the CSRF token
-            },
-            body: JSON.stringify({ 'file_id': file_id, 'total_chunck':total_chunck, 'file_name':file_name })
-            })
-            .then(response => {
-                if (response.ok) {
-            
-                return response.json();
-                }
-                throw new Error('Error:' + response.status);
-            })
-            .then(responseData => {
-                console.log('Response:', responseData);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                console.log("error")
-            });
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken'), // Fetch and include the CSRF token
+                },
+                body: JSON.stringify({ 'file_id': file_id, 'total_chunck':total_chunck, 'file_name':file_name })
+
+                })
+
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+
+                    throw new Error('Error:' + response.status);
+                })
+                .then(responseData => {
+                    console.log('Response:', responseData);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    console.log("error")
+                });
         }
 
         function getCookie(name) {
