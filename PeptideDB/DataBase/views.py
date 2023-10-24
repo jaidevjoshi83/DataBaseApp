@@ -76,10 +76,15 @@ def DB(request):
         form = dabase_form(initial={'Sequence':Fasta,'Accession':Acc})
         
     meta_data = DataBaseVersion.objects.latest('time_stamp')
- 
 
-    print(meta_data.version)
-    print(meta_data.time_stamp)
+    if len(DataBaseVersion.objects.all()) == 0:
+        now = datetime.now()
+        new_obj = DataBaseVersion.objects.create(
+                version='0.0.0',
+                time_stamp= now.strftime("%Y-%m-%d"),
+            )
+        new_obj.save()
+
 
     meta_data = {
                 "version": DataBaseVersion.objects.latest('time_stamp').version,
@@ -351,7 +356,7 @@ def return_merge_peptidedata(retrived_peps):
     return updated_pep_records
 
 @staff_member_required
-def admin_activity(request):
+def user_activity(request):
 
     bugs =  BugReporting.objects.all().filter(types="bug")
     suggestions = BugReporting.objects.all().filter(types="suggestion")
@@ -366,7 +371,7 @@ def admin_activity(request):
                 "release_date": metadata.time_stamp.split('.')[0],
                 }
 
-    return render(request, 'DataBase/admin_activity.html', {'data':json_data, 'bugs':bugs, 'suggestions':suggestions, 'n_bugs':n_bugs, 'n_suggestions': n_suggestions, 'db':db, 'is_authenticated':True})
+    return render(request, 'DataBase/user_activity.html', {'data':json_data, 'bugs':bugs, 'suggestions':suggestions, 'n_bugs':n_bugs, 'n_suggestions': n_suggestions, 'db':db, 'is_authenticated':True})
 
 @staff_member_required
 def bug_list(request):

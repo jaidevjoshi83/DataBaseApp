@@ -65,7 +65,7 @@
                 <a href="#Statistics" class="nav-item nav-link">About</a>
                 <a href="#contact-us" class="nav-item nav-link">Contact</a>
                 <a href="#our-team" class="nav-item nav-link">Our Team</a>
-                <a href="{% url 'admin_activity' %}" class="nav-item nav-link">Admin</a>
+                <a href="{% url 'user_activity' %}" class="nav-item nav-link">User</a>
                 {% if is_authenticated %}
                 <a href="{% url 'logout_view' %}" class="nav-item nav-link">Log Out</a>
                 {% endif %}
