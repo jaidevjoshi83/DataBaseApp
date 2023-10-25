@@ -51,68 +51,10 @@
 
         });
 
-        function trigger_url(url, file_id, total_chunck, file_name){
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': getCookie('csrftoken'), // Fetch and include the CSRF token
-                },
-                body: JSON.stringify({ 'file_id': file_id, 'total_chunck':total_chunck, 'file_name':file_name })
-
-                })
-
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    }
-
-                    throw new Error('Error:' + response.status);
-                })
-                .then(responseData => {
-                    console.log('Response:', responseData);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    console.log("error")
-                });
-        }
-
         function getCookie(name) {
             const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
             return cookieValue ? cookieValue.pop() : '';
-           }
-
-        // function triggerCompleteStatus(file_name) {
-
-        //     fetch('/upload_complete/', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             'X-CSRFToken': getCookie('csrftoken') // Assuming you have getCookie function to fetch CSRF token
-        //         },
-        //         body: JSON.stringify({
-        //             message: file_name,
-        //             // Add any other data you'd like to send to the view
-        //         })
-        //     })
-        //     .then(response => {
-        //         if (response.ok) {
-
-        //         delete response.headers
-            
-        //         return response.json();
-        //         }
-        //         throw new Error('Error:' + response.status);
-        //     })
-        //     .then(responseData => {
-        //         console.log('Response:', responseData);
-        //     })
-        //     .catch(error => {
-        //         console.error('Error:', error);
-        //         console.log("error")
-        //     });
-        // }
+        }
 
     </script>
 

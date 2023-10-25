@@ -136,6 +136,9 @@ def handle_uploaded_file(request, f, file_name, ref_number, ref_link):
             pass
         else:
             return {"validation": False, "error_column": h}
+    
+    if not os.path.exists(os.path.join(os.getcwd(), 'datafiles')):
+        os.makedirs(os.path.join(os.getcwd(), 'datafiles'))
 
     with open(os.path.join(os.getcwd(), 'datafiles', file_name), 'wb+') as destination:
         for chunk in f.chunks():
@@ -478,6 +481,9 @@ def upload_chunk(request):
     file_id = request.POST['resumableIdentifier']
     chunk_number = request.POST['resumableChunkNumber']
     total_chunks = int(request.POST['resumableTotalChunks'])
+
+    if not os.path.exists('tmp'):
+        os.makedirs('tmp')
     
     with open(f'tmp/{file_id}_{chunk_number}', 'wb') as f:
         for chunk in file.chunks():
@@ -491,6 +497,11 @@ def merge_chunks(request):
     file_id = request.GET.get('file_id', None)
     total_chunck = request.GET.get('total_chunck', None)
     file_name = request.GET.get('file_name', None)
+
+
+    if not os.path.exists( 'uploads'):
+        os.makedirs( 'uploads')
+
     
     with open(f'uploads/{file_name}', 'wb') as final_file:
         for i in range(1, int(total_chunck) + 1):
