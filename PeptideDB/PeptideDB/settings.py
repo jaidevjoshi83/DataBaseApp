@@ -1,3 +1,4 @@
+
 """
 Django settings for PeptideDB project.
 
@@ -12,10 +13,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^eyo%=p&gu5g!5r^rzh*%ij3au==xz74ly4&_jeb_rvulz&w##'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -76,15 +77,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'PeptideDB.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 
 DATABASES = {
     'default': {
@@ -134,6 +126,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# CORS_ALLOW_ALL_ORIGINS = True
 
