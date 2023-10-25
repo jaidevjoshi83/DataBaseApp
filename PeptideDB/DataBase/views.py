@@ -632,5 +632,4 @@ def load_backupdata(request):
 
     os.remove(f'uploads/{file_name}')
 
-    # return render(request, 'DataBase/load_backupdata.html', {'file_name': file_name})
-    return JsonResponse({'status': 'success'})
+    return render(request, 'DataBase/upload_complete.html', {})
