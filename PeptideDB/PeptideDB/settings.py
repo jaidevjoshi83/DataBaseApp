@@ -23,7 +23,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = '' # Require
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -80,11 +80,11 @@ WSGI_APPLICATION = 'PeptideDB.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',  
-        'HOST': '',
-        'PORT': '',
+        'NAME': '', # Require
+        'USER': '', # Require
+        'PASSWORD': '', # Require
+        'HOST': '', # Require
+        'PORT': '', # Require
     }
 }
 
