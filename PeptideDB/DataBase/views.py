@@ -505,27 +505,44 @@ def upload_chunk(request):
 
 @csrf_exempt
 def merge_chunks(request):
+    try:
+        file_id = request.GET.get('file_id', None)
+        total_chunk = request.GET.get('total_chunk', None)
+        file_name = request.GET.get('file_name', None)
 
-    file_id = request.GET.get('file_id', None)
-    total_chunck = request.GET.get('total_chunck', None)
-    file_name = request.GET.get('file_name', None)
+        if not all([file_id, total_chunk, file_name]):
+            raise SuspiciousOperation("Missing required parameters")
 
+        # Sanitize file_name to prevent directory traversal
+        file_name = os.path.basename(file_name)
 
-    directory_path = os.path.join(str(settings.BASE_DIR), 'media', 'uploads')
-    if not os.path.exists(directory_path):
-        os.makedirs(directory_path)
+        # Check file extension
+        allowed_extensions = ['txt', 'csv', 'json', 'xml']  # Add other allowed extensions as needed
+        extension = file_name.split('.')[-1].lower()
+        if extension not in allowed_extensions:
+            raise SuspiciousOperation(f"Disallowed file type: {extension}")
 
-    print("##################################################")
-    print(os.path.join(settings.BASE_DIR, 'media', 'uploads'))
-    print("##################################################")
-  
-    with open(os.path.join(settings.BASE_DIR, 'media', 'uploads', file_name), 'wb') as final_file:
-        for i in range(1, int(total_chunck) + 1):
-            with open(os.path.join(settings.BASE_DIR, 'media', 'tmp', file_id+'_'+str(i)), 'rb') as chunk:
-                final_file.write(chunk.read())
-            os.remove(os.path.join(settings.BASE_DIR, 'media', 'tmp', file_id+'_'+str(i)))
+        directory_path = os.path.join(settings.BASE_DIR, 'media', 'uploads')
+        os.makedirs(directory_path, exist_ok=True)
 
-    return HttpResponseRedirect('/load_backupdata/?&file_name='+file_name)
+        final_file_path = os.path.join(directory_path, file_name)
+        with open(final_file_path, 'wb') as final_file:
+            for i in range(1, int(total_chunk) + 1):
+                chunk_path = os.path.join(settings.BASE_DIR, 'media', 'tmp', f"{file_id}_{i}")
+                if os.path.exists(chunk_path):
+                    with open(chunk_path, 'rb') as chunk:
+                        final_file.write(chunk.read())
+                    os.remove(chunk_path)
+                else:
+                    logger.error(f"Missing chunk: {chunk_path}")
+                    # Handle missing chunk appropriately
+
+        return HttpResponseRedirect('/load_backupdata/?&file_name=' + file_name)
+
+    except Exception as e:
+        logger.error(f"Error merging chunks: {e}")
+        # Handle the error appropriately
+        raise
 
 @staff_member_required
 def upload_page(request):
@@ -536,12 +553,43 @@ def upload_complete(request):
     file_name = request.GET.get('file_name', None)
     return render(request, 'DataBase/upload_complete.html', {'file_name': request.GET.get('file_name', None)})
 
+def load_file(file_name):
+    try:
+        # Sanitize file_name to prevent directory traversal
+        base_filename = os.path.basename(file_name)
+
+        # Check if the sanitized filename is empty or has changed (indicating a traversal attempt)
+        if not base_filename or base_filename != file_name:
+            raise SuspiciousOperation("Invalid file name")
+
+        # Check file extension
+        allowed_extensions = ['json','csv']  # Add other allowed extensions as needed
+        if not base_filename.lower().endswith(tuple(allowed_extensions)):
+            raise SuspiciousOperation(f"Disallowed file type: {os.path.splitext(base_filename)[1]}")
+
+        # Construct the full file path
+        file_path = os.path.join(settings.BASE_DIR, 'media', 'uploads', base_filename)
+
+        # Ensure the file is within the specified subdirectory
+        expected_directory = os.path.join(settings.BASE_DIR, 'media', 'uploads')
+        if not os.path.commonpath([expected_directory, file_path]) == expected_directory:
+            raise SuspiciousOperation("Access to the specified file is not allowed")
+
+        # Read and load the file
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+
+        return data
+
+    except Exception as e:
+        # Handle exceptions appropriately
+        raise e
+
 @staff_member_required
 def load_backupdata(request):
     file_name = request.GET.get('file_name', None)
 
-    with open(os.path.join(settings.BASE_DIR, 'media', 'uploads', file_name), 'r') as file:
-        data = json.load(file)
+    data = load_file(file_name);
 
     p_count = PeptideSeq.objects.all().count()
     # b_count = BugReporting.objects.all().count()
