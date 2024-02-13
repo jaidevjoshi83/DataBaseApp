@@ -514,6 +514,13 @@ def merge_chunks(request):
     directory_path = os.path.join(str(settings.BASE_DIR), 'media', 'uploads')
     if not os.path.exists(directory_path):
         os.makedirs(directory_path)
+<<<<<<< HEAD
+=======
+
+    print("##################################################")
+    print(os.path.join(settings.BASE_DIR, 'media', 'uploads'))
+    print("##################################################")
+>>>>>>> 5b71ea3030c00cdf449f1f2183a31884418a0ff8
   
     with open(os.path.join(settings.BASE_DIR, 'media', 'uploads', file_name), 'wb') as final_file:
         for i in range(1, int(total_chunck) + 1):
