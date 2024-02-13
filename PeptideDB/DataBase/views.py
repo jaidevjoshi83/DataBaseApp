@@ -15,6 +15,11 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 # from .utils import return_merge_peptidedata
+from pathlib import Path
+from django.conf import settings
+
+
+base_dir = settings.MEDIA_ROOT
 
 def errors(request):
     return render(request, 'DataBase/error.html')
@@ -137,10 +142,11 @@ def handle_uploaded_file(request, f, file_name, ref_number, ref_link):
         else:
             return {"validation": False, "error_column": h}
     
-    if not os.path.exists(os.path.join(os.getcwd(), 'datafiles')):
-        os.makedirs(os.path.join(os.getcwd(), 'datafiles'))
+    directory_path = os.path.join(str(settings.BASE_DIR), 'media', 'datafiles')
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
 
-    with open(os.path.join(os.getcwd(), 'datafiles', file_name), 'wb+') as destination:
+    with open(os.path.join(settings.BASE_DIR, 'media', 'datafiles', file_name), 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
 
@@ -174,7 +180,7 @@ def download_data_report(request):
     return render(request,  'DataBase/uploaded_data_report.html', {})
 
 def import_data_to_model(file_name, ref_num, ref_link):
-    f = open(os.path.join(os.getcwd(), 'datafiles', file_name))
+    f = open(os.path.join(settings.BASE_DIR, 'media', 'datafiles', file_name))
     lines = f.readlines()
 
     print(lines)
@@ -428,7 +434,12 @@ def fileUploader(request):
             return res
         else:
             if existingPath == 'null':
-                path = 'backupdata/' + fileName
+
+                directory_path = os.path.join(str(settings.BASE_DIR), 'media', 'backupdata')
+                if not os.path.exists(directory_path):
+                    os.makedirs(directory_path)
+
+                path = os.path.join(directory_path, fileName)
                 with open(path, 'wb+') as destination: 
                     destination.write(file)
 
@@ -449,7 +460,7 @@ def fileUploader(request):
                 return res
 
             else:
-                path = 'backupdata/' + existingPath
+                path = os.path.join('backupdata', existingPath)
                 model_id = File.objects.get(existingPath=existingPath)
                 if model_id.name == fileName:
                     if not model_id.eof:
@@ -482,10 +493,11 @@ def upload_chunk(request):
     chunk_number = request.POST['resumableChunkNumber']
     total_chunks = int(request.POST['resumableTotalChunks'])
 
-    if not os.path.exists('tmp'):
-        os.makedirs('tmp')
+    directory_path = os.path.join(str(settings.BASE_DIR), 'media', 'tmp')
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
     
-    with open(f'tmp/{file_id}_{chunk_number}', 'wb') as f:
+    with open(os.path.join(settings.BASE_DIR, 'media', 'tmp',file_id+"_"+chunk_number), 'wb') as f:
         for chunk in file.chunks():
             f.write(chunk)
 
@@ -499,15 +511,15 @@ def merge_chunks(request):
     file_name = request.GET.get('file_name', None)
 
 
-    if not os.path.exists( 'uploads'):
-        os.makedirs( 'uploads')
-
-    
-    with open(f'uploads/{file_name}', 'wb') as final_file:
+    directory_path = os.path.join(str(settings.BASE_DIR), 'media', 'uploads')
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
+  
+    with open(os.path.join(settings.BASE_DIR, 'media', 'uploads', file_name), 'wb') as final_file:
         for i in range(1, int(total_chunck) + 1):
-            with open(f'tmp/{file_id}_{i}', 'rb') as chunk:
+            with open(os.path.join(settings.BASE_DIR, 'media', 'tmp', file_id+'_'+str(i)), 'rb') as chunk:
                 final_file.write(chunk.read())
-            os.remove(f'tmp/{file_id}_{i}')
+            os.remove(os.path.join(settings.BASE_DIR, 'media', 'tmp', file_id+'_'+str(i)))
 
     return HttpResponseRedirect('/load_backupdata/?&file_name='+file_name)
 
@@ -524,7 +536,7 @@ def upload_complete(request):
 def load_backupdata(request):
     file_name = request.GET.get('file_name', None)
 
-    with open(f'uploads/{file_name}', 'r') as file:
+    with open(os.path.join(settings.BASE_DIR, 'media', 'uploads', file_name), 'r') as file:
         data = json.load(file)
 
     p_count = PeptideSeq.objects.all().count()
@@ -555,7 +567,7 @@ def load_backupdata(request):
 
                 new_obj = PeptideSeq.objects.create(
 
-                    db_id='DBS0'+str(p_count),
+                    db_id='DuploadsuploadsuploadsBS0'+str(p_count),
                     accession=i['fields']['accession'],
                     gene_symbol=i['fields']['gene_symbol'],
                     protein_name=i['fields']['protein_name'],
@@ -630,6 +642,6 @@ def load_backupdata(request):
                 pass
 
 
-    os.remove(f'uploads/{file_name}')
+    os.remove(os.path.join(base_dir, 'uploads', file_name))
 
     return render(request, 'DataBase/upload_complete.html', {})
