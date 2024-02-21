@@ -3,7 +3,9 @@
 {% block content %}
 
 
-<div class='table-div'  style="background-color: rgb(219,220,214);padding: 5px; margin-top:5px; width: 100%; overflow:scroll;">
+<h1>{{ param }}</h1>
+
+<div class='table-div' id="hostname" data-hostname="{{host_name}}" data-acc="{{acc }}"  data-des="{{ des }}"  style="background-color: rgb(219,220,214);padding: 5px; margin-top:5px; width: 100%; overflow:scroll;">
     <table  id="#someTable" class="table table-sm" data-replace="jtable" id="example" aria-label="JS Datatable" data-locale="en" data-search="true">
         <thead class="thead-dark">
             <tr>
@@ -29,7 +31,7 @@
     <div id="page-menu">
         <label for="pages">Select a Page:</label>
         <select id="pages" name="page">
-            <!-- Define the options using option elements -->
+
         </select>
     </div>
 
@@ -39,7 +41,11 @@
             <option value="all">Export All</option>
         </select>
     </div>  
-</div >
+</div > 
 
-<script src="{% static 'js/table.js' %}"></script>
+
+
+<script src="{% static 'js/table.js' %}"></script> 
+
+
 {% endblock %}

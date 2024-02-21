@@ -19,15 +19,24 @@
         <input type="button" id="browseButton" value="Browse Files">
     </div>
 
+    <!-- CSRF token -->
     <script>
+        const csrftoken = getCookie('csrftoken');
 
-        let status
+        function getCookie(name) {
+            const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+            return cookieValue ? cookieValue.pop() : '';
+        }
+    </script>
+
+    <script>
         let r = new Resumable({
             target: '/upload_chunk/',
             chunkSize: 4 * 1024 * 1024,
             simultaneousUploads: 3,
             testChunks: false,
             throttleProgressCallbacks: 1,
+            headers: { 'X-CSRFToken': csrftoken }
         });
 
         r.assignDrop(document.getElementById('dropTarget'));
@@ -51,12 +60,6 @@
 
         });
 
-        function getCookie(name) {
-            const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
-            return cookieValue ? cookieValue.pop() : '';
-        }
-
     </script>
-
 
 {% endblock %}

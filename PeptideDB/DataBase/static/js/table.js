@@ -13,14 +13,18 @@ var getJSON = function(url, callback) {
     xhr.send();
 };
 
-var table_data 
+var hostname = document.getElementById('hostname').getAttribute('data-hostname');
+var query_acc = document.getElementById('hostname').getAttribute('data-acc');
+var query_des = document.getElementById('hostname').getAttribute('data-des');
 
-if (temp_acc != 'undefined' && temp_des == 'undefined'){
-    var link = `http://${host_name}/PepView/?acc=${temp_acc}`
-} else if (temp_acc == 'undefined' && temp_des != 'undefined'){
-   var link = `http://${host_name}/PepView/?des=${temp_des}`
-} else if (temp_acc != 'undefined' && temp_des != 'undefined'){
-   var link = `http://${host_name}/PepView/?acc=${temp_acc}&des=${temp_des}`
+// var table_data 
+
+if (query_acc != 'undefined' && query_des == 'undefined'){
+    var link = `http://${hostname}/PepView/?acc=${query_acc}`
+} else if (query_acc== 'undefined' && query_des != 'undefined'){
+   var link = `http://${hostname}/PepView/?des=${query_des}`
+} else if (query_acc != 'undefined' && query_des != 'undefined'){
+   var link = `http://${hostname}/PepView/?acc=${query_acc}&des=${query_des}`
 }
 
 getJSON(link,
@@ -59,7 +63,7 @@ function table_content(data){
         var ref_list = []
 
         for (var j = 0; j < data[i].reference_link.length;  j++) {
-            ref_list.push(`<a href=${data[i].reference_link[j]} target="_blank" >${data[i].reference_number[j]}</a>`)
+            ref_list.push(`<a href=${data[i].reference_link[j]} target="_blank" rel="noopener noreferrer" >${data[i].reference_number[j]}</a>`)
         }
        
         row.innerHTML  =   `<td>${i+1}</td>
@@ -139,31 +143,30 @@ function JSONToCSVConvertor(JSONData, ReportTitle) {
     document.body.removeChild(link);
 }
 
-$(document).ready(function(){
+// $(document).ready(function(){
 
-    console.log("ok")
-    $('#data').after('<div id="nav"></div>');
-    var rowsShown = 4;
-    var rowsTotal = $('#data tbody tr').length;
-    var numPages = rowsTotal/rowsShown;
-    for(i = 0;i < numPages;i++) {
-        var pageNum = i + 1;
-        $('#nav').append('<a href="#" rel="'+i+'">'+pageNum+'</a> ');
-    }
-    $('#data tbody tr').hide();
-    $('#data tbody tr').slice(0, rowsShown).show();
-    $('#nav a:first').addClass('active');
-    $('#nav a').bind('click', function(){
+//     $('#data').after('<div id="nav"></div>');
+//     var rowsShown = 4;
+//     var rowsTotal = $('#data tbody tr').length;
+//     var numPages = rowsTotal/rowsShown;
+//     for(i = 0;i < numPages;i++) {
+//         var pageNum = i + 1;
+//         $('#nav').append('<a href="#" rel="'+i+'">'+pageNum+'</a> ');
+//     }
+//     $('#data tbody tr').hide();
+//     $('#data tbody tr').slice(0, rowsShown).show();
+//     $('#nav a:first').addClass('active');
+//     $('#nav a').bind('click', function(){
 
-        $('#nav a').removeClass('active');
-        $(this).addClass('active');
-        var currPage = $(this).attr('rel');
-        var startItem = currPage * rowsShown;
-        var endItem = startItem + rowsShown;
-        $('#data tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
-        css('display','table-row').animate({opacity:1}, 300);
-    });
-});
+//         $('#nav a').removeClass('active');
+//         $(this).addClass('active');
+//         var currPage = $(this).attr('rel');
+//         var startItem = currPage * rowsShown;
+//         var endItem = startItem + rowsShown;
+//         $('#data tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
+//         css('display','table-row').animate({opacity:1}, 300);
+//     });
+// });
 
 
 //#######################################################################
