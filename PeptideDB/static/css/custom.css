@@ -82,4 +82,33 @@ article .img-responsive {
     width: 150px;
 }
 
-
+.container-fluid .overflow-hidden .py-5 .px-lg-0 .submit-button {
+    background-color: #ea4749; /* Green */
+    border: none;
+    color: white;
+    padding-top: 5px ;
+    padding-bottom: 5px ;
+    padding-right: 10px ;
+    padding-left: 10px ;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 5px;
+  }
+  
+  .container-fluid .overflow-hidden .py-5 .px-lg-0 .submit-button:hover  {
+    background-color: #ff3e41; /* Green */
+    border: none;
+    color: white;
+    padding-top: 5px ;
+    padding-bottom: 5px ;
+    padding-right: 10px ;
+    padding-left: 10px ;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 5px;
+      
+  }
