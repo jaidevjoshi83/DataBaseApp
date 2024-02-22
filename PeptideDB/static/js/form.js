@@ -38,7 +38,9 @@ document.querySelectorAll('button')[2].addEventListener('click', ()=>{
         'Content-Type': 'application/json',
         'X-CSRFToken': getCookie('csrftoken'), // Fetch and include the CSRF token
     },
-    body: JSON.stringify({ jai: 'hi' })
+
+    // body: JSON.stringify({ jai: 'hi' })
+
     })
     .then(response => {
         if (response.ok) {
@@ -57,6 +59,5 @@ document.querySelectorAll('button')[2].addEventListener('click', ()=>{
 })
 
 document.querySelector('#bug-title').addEventListener('click', ()=>{
-    console.log("OK")
     document.querySelector('#post-error').innerHTML =  ''
 })

@@ -18,8 +18,6 @@ from pathlib import Path
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-print('21',BASE_DIR)
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -139,6 +137,5 @@ UPLOAD_BACKUP = os.path.join(BASE_DIR, "media", 'uploads')
 CSP_FONT_SRC = ("'self'", 'fonts.gstatic.com', 'cdnjs.cloudflare.com', 'cdn.jsdelivr.net')
 CSP_IMG_SRC = ("'self'", 'https://www.lerner.ccf.org')
 CSP_SCRIPT_SRC = ("'self'", 'https://code.jquery.com', 'cdn.jsdelivr.net', 'cdn.datatables.net', 'cdnjs.cloudflare.com', 'cdn.rawgit.com')
-CSP_STYLE_SRC = ("'self'",  'https://cdn.jsdelivr.net/', 'fonts.googleapis.com', 'cdnjs.cloudflare.com', 'cdn.datatables.net')
+CSP_STYLE_SRC = ("'self'",  'https://cdn.jsdelivr.net/', 'fonts.googleapis.com', 'cdnjs.cloudflare.com', 'cdn.datatables.net',"'unsafe-inline'")
 
-print(MEDIA_ROOT, '132')

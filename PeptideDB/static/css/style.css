@@ -474,3 +474,30 @@
 .footer .copyright a {
     color: var(--light);
 }
+
+.spinner-grow .text-primary{
+    width: 3rem; 
+    height: 3rem;
+}
+
+/* .col-12 .d-flex .align-items-center{
+    margin: 5px;
+}
+
+.btn .btn-primary .w-40 .py-3{
+    margin-left: 5px;
+}
+
+
+.col-lg-3{
+    margin:0%;
+    width: 20%;
+}
+
+.row .justify-content-center{
+    margin-top: 10px;
+} */
+
+.container-fluid .bg-dark .text-light .footer .pt-5 .wow .fadeIn{
+    margin-top: 6rem;
+}
