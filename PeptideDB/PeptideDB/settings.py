@@ -26,12 +26,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'asfdasfdasfsdf' # Require
+SECRET_KEY = '' # Require
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.135'] #Change Accordingly 
+ALLOWED_HOSTS = [''] #Change Accordingly 
 
 
 # Application definition
@@ -85,8 +85,7 @@ WSGI_APPLICATION = 'PeptideDB.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+      
     }
 }
 
@@ -122,7 +121,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
@@ -132,10 +130,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 UPLOAD_DATA = os.path.join(BASE_DIR, "media", 'datafiles')
 UPLOAD_BACKUP = os.path.join(BASE_DIR, "media", 'uploads')
 
-
 # Content Security Policy
 CSP_FONT_SRC = ("'self'", 'fonts.gstatic.com', 'cdnjs.cloudflare.com', 'cdn.jsdelivr.net')
 CSP_IMG_SRC = ("'self'", 'https://www.lerner.ccf.org')
-CSP_SCRIPT_SRC = ("'self'", 'https://code.jquery.com', 'cdn.jsdelivr.net', 'cdn.datatables.net', 'cdnjs.cloudflare.com', 'cdn.rawgit.com')
+CSP_SCRIPT_SRC = ("'self'", 'https://code.jquery.com', 'cdn.jsdelivr.net', 'cdn.datatables.net', 'cdnjs.cloudflare.com', 'cdn.rawgit.com', 'https://cdn.rawgit.com' )
 CSP_STYLE_SRC = ("'self'",  'https://cdn.jsdelivr.net/', 'fonts.googleapis.com', 'cdnjs.cloudflare.com', 'cdn.datatables.net',"'unsafe-inline'")
-

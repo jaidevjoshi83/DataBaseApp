@@ -10,9 +10,6 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
-    <!-- Favicon -->
-    <!-- <link href="img/favicon.ico" rel="icon"> -->
-
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,7 +49,7 @@
             <img class="img-fluid" src="{% static 'img/logo.png' %}" alt="">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
+            <span><i class="fas fa-bars"></i></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
@@ -116,7 +113,7 @@
                                             {{form.Sequence}}
                                             <!-- <i class="fa fa-search fa-2x" ></i> -->
                                         </div>
-                                        <button class="btn btn-primary w-40 py-3" style="margin-left: 5px;" type="submit"> Submit</button>
+                                        <button class="btn btn-danger" style="margin-left: 5px;" type="submit"> Submit</button>
                                     </div>
                                 </div>
                             </form>
