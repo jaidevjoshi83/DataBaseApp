@@ -1,30 +1,10 @@
 from django.db import models
 from .utils import  time_stamp
 
-
-class PeptideSeq(models.Model):
-       
-    db_id = models.CharField(max_length=15,  null=True)
-    accession = models.CharField(max_length=20,  null=True)
-    gene_symbol = models.CharField(max_length=15,  null=True)
-    protein_name = models.CharField(max_length=100,  null=True)
-    cleavage_site = models.CharField(max_length=20,  null=True)
-    peptide_sequence = models.CharField(max_length=130,  null=True)
-    annotated_sequence = models.CharField(max_length=130,  null=True)
-    cellular_compartment = models.CharField(max_length=100,  null=True)
-    species = models.CharField(max_length=50,  null=True)
-    database_identified = models.CharField(max_length=50,  null=True)
-    description = models.CharField(max_length=200,  null=True)
-    reference_number = models.CharField(max_length=4,  null=True)
-    reference_link = models.CharField(max_length=200,  null=True)
-    data_file_name = models.CharField(max_length=60, null=True)
-    
-    class Meta:
-        ordering = ['db_id']
-
 class UploadedData(models.Model):
-       
-    datafile_index = models.CharField(max_length=20,  null=True)
+
+    upload_type = models.CharField(max_length=50,  null=True) 
+    datafile_index = models.CharField(max_length=50,  null=True)
     experiment_name = models.CharField(max_length=100,  null=True)
     data_upload_time = models.TimeField(null=True)
     data_upload_date = models.DateField(null=True)
@@ -32,11 +12,33 @@ class UploadedData(models.Model):
     data_description = models.CharField(max_length=200,  null=True)
     data_file_name = models.CharField(max_length=100,  null=True)
     experiment_type = models.CharField(max_length=20,  null=True)
-    reference_number = models.CharField(max_length=20,  null=True)
     reference_link = models.CharField(max_length=300,  null=True)
 
     class Meta:
         ordering = ['datafile_index']
+
+class PeptideSeq(models.Model):
+       
+    db_id = models.CharField(max_length=50,  null=True)
+    accession = models.CharField(max_length=50,  null=True)
+    gene_symbol = models.CharField(max_length=100,  null=True)
+    protein_name = models.CharField(max_length=300,  null=True)
+    cleavage_site = models.CharField(max_length=200,  null=True)
+    peptide_sequence = models.CharField(max_length=300,  null=True)
+    annotated_sequence = models.CharField(max_length=300,  null=True)
+    cellular_compartment = models.CharField(max_length=300,  null=True)
+    species = models.CharField(max_length=100,  null=True)
+    database_identified = models.CharField(max_length=100,  null=True)
+    description = models.CharField(max_length=300,  null=True)
+    reference_link = models.CharField(max_length=300,  null=True)
+    data_file_name = models.CharField(max_length=100, null=True)
+
+    # This creates the foreign key relationship with cascade delete
+    uploaded_data = models.ForeignKey(UploadedData, on_delete=models.CASCADE, null=False)
+    
+    class Meta:
+        ordering = ['db_id']
+
 
 class BugReporting(models.Model):
        
@@ -51,8 +53,8 @@ class BugReporting(models.Model):
 
 class DataBaseVersion(models.Model):
        
-    version = models.CharField(max_length=100,  null=True)
-    time_stamp = models.CharField(max_length=100,  null=True)
+    version = models.CharField(max_length=100,  null=False)
+    time_stamp = models.CharField(max_length=100,  null=False)
 
     class Meta:
         ordering = ['time_stamp']

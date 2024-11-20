@@ -45,7 +45,6 @@ def time_stamp():
     local_time = utc_time.astimezone(local_time_zone)
     return str(local_time)
 
-
 def upload_data_from_backup_file(file_path):
 
     with open(file_path) as f:
@@ -173,3 +172,8 @@ def upload_data_from_backup_file(file_path):
                 )
 
                 fl.save()
+
+def return_object_count(database_model):
+    return database_model.objects.all().count()
+
+    

@@ -26,12 +26,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '' # Require
+
+# Add a secret key..
+#SECRET_KEY = '' # Require
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [''] #Change Accordingly 
+ALLOWED_HOSTS = ['*'] #Change Accordingly 
 
 
 # Application definition
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
     'DataBase',
     'import_export',
     'corsheaders',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -82,13 +85,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'PeptideDB.wsgi.application'
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': '',
+#         'USER': '',
+#         'PASSWORD': '',
+#         'HOST': '',  # or use the Docker container name if running in Docker Compose
+#         'PORT': '',
+#     }
+# }
 
 DATABASES = {
     'default': {
-      
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # Path to the SQLite database file
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -130,8 +143,31 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 UPLOAD_DATA = os.path.join(BASE_DIR, "media", 'datafiles')
 UPLOAD_BACKUP = os.path.join(BASE_DIR, "media", 'uploads')
 
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': MEDIA_ROOT+'/logs/logfile.log',
+            'mode': 'w',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}
+
+
 # Content Security Policy
 CSP_FONT_SRC = ("'self'", 'fonts.gstatic.com', 'cdnjs.cloudflare.com', 'cdn.jsdelivr.net')
-CSP_IMG_SRC = ("'self'", 'https://www.lerner.ccf.org')
-CSP_SCRIPT_SRC = ("'self'", 'https://code.jquery.com', 'cdn.jsdelivr.net', 'cdn.datatables.net', 'cdnjs.cloudflare.com', 'cdn.rawgit.com', 'https://cdn.rawgit.com' )
-CSP_STYLE_SRC = ("'self'",  'https://cdn.jsdelivr.net/', 'fonts.googleapis.com', 'cdnjs.cloudflare.com', 'cdn.datatables.net',"'unsafe-inline'")
+CSP_IMG_SRC = ("'self'", 'https://www.lerner.ccf.org', 'https://cdn.datatables.net')
+CSP_SCRIPT_SRC = ("'self'", 'https://code.jquery.com', 'cdn.jsdelivr.net', 'cdn.datatables.net', 'cdnjs.cloudflare.com', 'cdn.rawgit.com', 'https://cdn.rawgit.com')
+CSP_STYLE_SRC = ("'self'", 'https://cdn.jsdelivr.net/', 'fonts.googleapis.com', 'cdnjs.cloudflare.com', 'cdn.datatables.net', "'unsafe-inline'")

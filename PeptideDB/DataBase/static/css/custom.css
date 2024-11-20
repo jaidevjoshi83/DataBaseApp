@@ -112,3 +112,7 @@ article .img-responsive {
     margin-left: 5px;
       
   }
+
+.dataTables_wrapper {
+    margin: 5px;
+}

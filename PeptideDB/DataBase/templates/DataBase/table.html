@@ -2,23 +2,32 @@
 {% load static %}
 {% block content %}
 
-
 <h1>{{ param }}</h1>
 
-<div class='table-div' id="hostname" data-hostname="{{host_name}}" data-acc="{{acc }}"  data-des="{{ des }}"  style="background-color: rgb(219,220,214);padding: 5px; margin-top:5px; width: 100%; overflow:scroll;">
-    <table  id="#someTable" class="table table-sm" data-replace="jtable" id="example" aria-label="JS Datatable" data-locale="en" data-search="true">
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+
+<!-- jQuery (required by DataTables) -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+<!-- DataTables JS -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+
+<div class='table-div' id="hostname" data-hostname="{{host_name}}" data-acc="{{acc }}"  data-des="{{ des }}"  data-pep="{{ pep }}">
+
+    <table id="sampleTable" class="display" style="width:100%">
         <thead class="thead-dark">
             <tr>
-                <th >ID</th>
-                <th >Peptide Sequence</th>
+                <th>ID</th>
+                <th>Peptide Sequence</th>
                 <th>Accession</th>
-                <th >Gene Symbol</th>
+                <th>Gene Symbol</th>
                 <th>Protein Name</th>
-                <th>Cleavage Side</th>
+                <th>Cleavage Site P1 Residue</th>
                 <th>Annotated Sequence</th>
                 <th>Cellular Compartment</th>
                 <th>Species</th>
-                <th>Database Identified</th>
+                <th>Source</th>
                 <th>Description</th>
                 <th>Reference</th>
             </tr>
@@ -27,25 +36,17 @@
 
         </tbody>
     </table>
+</div>
 
-    <div id="page-menu">
-        <label for="pages">Select a Page:</label>
-        <select id="pages" name="page">
+<div id="toolbar" style="border-top: 1px solid black">
+    <button class="btn btn-danger" id="export_data" style="margin: 5px;" type="submit"> Export Data as TSV File</button>
+</div>  
 
-        </select>
-    </div>
 
-    <div id="toolbar" style="border-top: 1px solid black">
-        <select class="form-control dt-tb" style="width:180px;margin-top: 5px;">
-            <option value="selected">Download Data</option>
-            <option value="all">Export All</option>
-        </select>
-    </div>  
+
+
 </div > 
 
-
-
-<script src="{% static 'js/table.js' %}"></script> 
-
+<script src="{% static 'js/table.js' %}"></script>
 
 {% endblock %}

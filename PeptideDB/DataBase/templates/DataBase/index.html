@@ -113,6 +113,11 @@
                                             {{form.Sequence}}
                                             <!-- <i class="fa fa-search fa-2x" ></i> -->
                                         </div>
+                                        <div class="col-12  d-flex align-items-center" style="margin: 5px;">
+                                            <!-- <input type="text" class="form-control border-0" placeholder="Protein name; Ex. Tropomyosin beta chain" style="height: 55px;margin-right: 1px;"> -->
+                                            {{form.Peptide}}
+                                            <!-- <i class="fa fa-search fa-2x" ></i> -->
+                                        </div>
                                         <button class="btn btn-danger" style="margin-left: 5px;" type="submit"> Submit</button>
                                     </div>
                                 </div>
@@ -126,7 +131,7 @@
                                 </div>
                                 <div class="col-lg-3" style="margin:0%; width: 20%;">
                                     <div style="margin-left: 20px;"><a href="https://www.lerner.ccf.org/biomedical-engineering/apte/#lab-publications"><i class="fa fa-book fa-2x"></i></a></div>
-                                    <p><b>Publication</b></p>
+                                    <p><b>Publications</b></p>
                                 </div>
                                 <div class="col-lg-3" style="margin:0%; width: 20%; ">
                                     <div style="margin-left: 15px;"><a href="#contact-us"><i class="fa fa-envelope fa-2x" ></i></a></div>
@@ -150,7 +155,7 @@
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                     <h6 class="text-secondary text-uppercase mb-3">Database Facts</h6>
                     <h1 class="mb-5">N-terminomics Data Statistics</h1>
-                    <p class="mb-5"> This web interface offers a user-friendly portal to N-terminomics data produced by Sumeet Bhutada, Daniel Martin, and Suneel Apte at the Cleveland Clinic.</p>            
+                    <p class="mb-5"> This web interface offers a user-friendly portal to N-terminomics data produced by Sumit Bhutada, Daniel Martin, and Suneel Apte at the Cleveland Clinic.</p>            
                     <div class="d-flex align-items-center">
                         <div class="ps-4">
                         <i class="fa fa-code-branch fa-2x"></i>
@@ -171,16 +176,16 @@
                 <div class="col-lg-6">
                     <div class="row g-4 align-items-center">
                         <div class="col-sm-6">
-                            <div class="bg-primary p-4 mb-4 wow fadeIn" data-wow-delay="0.3s">
+                            <div class="bg-primary p-4 mb-0 wow fadeIn" data-wow-delay="0.3s">
                                 <i class="fa fa-database fa-2x text-white mb-3"></i>
                                 <h2 class="text-white mb-2" data-toggle="counter-up">{{acv}}</h2>
                                 <p class="text-white mb-0">Proteins</p>
                             </div>
-                            <div class="bg-secondary p-4 wow fadeIn" data-wow-delay="0.5s">
+                            {% comment %} <div class="bg-secondary p-4 wow fadeIn" data-wow-delay="0.5s">
                                 <i class="fa fa-database fa-2x text-white mb-3"></i>
                                 <h2 class="text-white mb-2" data-toggle="counter-up">3</h2>
                                 <p class="text-white mb-0">Diseases</p>
-                            </div>
+                            </div> {% endcomment %}
                         </div>
                         <div class="col-sm-6">
                             <div class="bg-success p-4 wow fadeIn" data-wow-delay="0.7s">
@@ -208,52 +213,67 @@
                     <div class="d-flex mb-5 wow fadeInUp" data-wow-delay="0.3s">
                         <i class="fa fa-lightbulb text-primary fa-3x flex-shrink-0"></i>
                         <div class="ms-4">
-                            <h5>Any Suggestions</h5>
-                            <p class="mb-0">We welcome any suggestions. Please fill out this form and submit it.</p>
+                            <h5>Suggestions/Queries</h5>
+                            {% comment %} <p class="mb-0">We welcome suggestions and queries. Please submit the form.</p> {% endcomment %}
                         </div>
                     </div>
                     <div class="d-flex mb-5 wow fadeIn" data-wow-delay="0.5s">
                         <i class="fa fa-bug text-primary fa-3x flex-shrink-0"></i>
                         <div class="ms-4">
                             <h5>Report a Bug</h5>
-                            <p class="mb-0">Please fill out this form and submit it to report a bug.</p>
+                            {% comment %} <p class="mb-0">Please submit the form to report a bug.</p> {% endcomment %}
                         </div>
                     </div>
 
                 </div>
+
                 <div class="col-lg-6 pe-lg-0 wow fadeInRight" data-wow-delay="0.1s" style="min-height: 400px;">
-                        {% csrf_token %}
-                        <div class="bg-light text-center p-5 wow fadeIn" data-wow-delay="0.5s">
-                            {% csrf_token %}
-                            <form>
-                                <div class="row g-3" id="bugs-form">
-                                    <div class="col-12 col-sm-6 w-100">
-                                        <h5 id="post-error"> </h5>
-                                    </div>
+                        <div class="" data-wow-delay="0.5s">
+ 
 
-                                    <div class="col-12 col-sm-6 w-100">
-                                        <select class="form-select border-0" name="type" style="height: 55px;">
-                                            <option value="bug">Bug</option>
-                                            <option value="suggestion">Suggestions</option>
-                                        </select>
-                                    </div>
+                            {% if status %}
+                            <span class="ingredient">{{status}}</span>
+                            {%endif%}
 
-                                    <div class="col-12 col-sm-6 w-100">
-                                        <input type="text" name="title" id="bug-title" class="form-control border-0" placeholder="Subject" style="height: 55px;">
-                                    </div>
-
+                            <form action="/#contact-us" method="POST" class="form-contact" >
+                                <div class="row justify-content-center">
                                     <div class="col-12">
-                                        <textarea class="form-control border-0" name="details" placeholder="Note"></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-primary w-100 py-3" id="bugs-form-button" type="button">Submit</button>
+                                        {%csrf_token%}
+                                        {% for error in formb.non_field_errors %}
+                                        <div class="form-group has-errors text-danger small">
+                                            {{error}}
+                                        </div>
+                                        {% endfor %}
+                                    
+                                        {% for field in formb %}
+                                        <div class="form-group has-errors text-danger small">
+                                            {{field.errors}}
+                                        </div>
+                                        {% endfor %}
+                                        <div class="col-12  d-flex align-items-center" style="margin: 5px;">
+                                            <!-- <input type="text" class="form-control border-0" placeholder="Protein name; Ex. Tropomyosin beta chain" style="height: 55px;margin-right: 1px;"> -->
+                                            {{formb.issue_type}}
+                                            <!-- <i class="fa fa-search fa-2x" ></i> -->
+                                        </div>
+                                        <div class="col-12 d-flex align-items-center" style="margin: 5px;">
+                                            <!-- <input type="text" class="form-control border-0" placeholder="Uniprot ID; Ex. P02671" style="height: 55px; margin-right: 1px;"> -->
+                                            {{formb.subject}}
+                                            <!-- <i class="fa fa-search fa-2x "></i> -->
+                                        </div>
+                                        <div class="col-12  d-flex align-items-center" style="margin: 5px;">
+                                            <!-- <input type="text" class="form-control border-0" placeholder="Protein name; Ex. Tropomyosin beta chain" style="height: 55px;margin-right: 1px;"> -->
+                                            {{formb.description}}
+                                            <!-- <i class="fa fa-search fa-2x" ></i> -->
+                                        </div>
+ 
+                                        <button class="btn btn-danger" style="margin-left: 5px;" type="submit"> Submit</button>
                                     </div>
                                 </div>
                             </form>
+
                         </div>
-                    <!-- </div> -->
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
     <!-- Feature End -->
@@ -266,44 +286,28 @@
                 <!-- <h1 class="mb-5">Expert Team Members</h1> -->
             </div>
             <div class="row g-4">
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.9s">
                     <div class="team-item p-4">
                         <div class="overflow-hidden mb-4">
-                            <img class="img-fluid" src="https://www.lerner.ccf.org/images/people/aptes.jpg" alt="">
+                            <img class="img-fluid" src="{% static 'img/Joshi_Jayadev.JPG' %}" alt="">
                         </div>
-                        <h5 class="mb-0">Dr. Suneel Apte, PhD</h5>
-                        <p>Staff</p>
-                        <p style="height: 30px;" >Biomedical Engineering</p>
+                        <p class="mb-0"> <b>Jayadev Joshi, PhD</b></p>
+                        <p>Research Associate</p>
+                        <p style="height: 30px;">Center for Comp. Life Sciences</p>
                         <div class="btn-slide mt-1">
                             <i class="fa fa-share"></i>
                             <span>
-                                <a href="https://www.lerner.ccf.org/biomedical-engineering/apte/"><i class="fa fa-globe" aria-hidden="true"></i></a>
+                                <a href="https://www.lerner.ccf.org/genomic-medicine/blankenberg/#lab-people"><i class="fa fa-globe" aria-hidden="true"></i></a>
                             </span>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.9s">
-                    <div class="team-item p-4">
-                        <div class="overflow-hidden mb-4">
-                            <img class="img-fluid" src="https://www.lerner.ccf.org/images/people/blanked2.jpg" alt="">
-                        </div>
-                        <h5 class="mb-0">Dr. Daniel Blankenberg, PhD</h5>
-                        <p>Assistant Staff</p>
-                        <p style="height: 30px;" >Center for Comp. Life Sciences</p>
-                        <div class="btn-slide mt-1">
-                            <i class="fa fa-share"></i>
-                            <span>
-                                <a href="https://www.lerner.ccf.org/genomic-medicine/blankenberg/"><i class="fa fa-globe" aria-hidden="true"></i></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="team-item p-4">
                         <div class="overflow-hidden mb-4">
                             <img class="img-fluid" src="https://www.lerner.ccf.org/images/people/bhutads.jpg" alt="">
                         </div>
-                        <h5 class="mb-0">Dr. Sumit Bhutada, PhD</h5>
+                        <p class="mb-0"> <b>Dr. Sumit Bhutada, PhD</b></p>
                         <p>Research Associate</p>
                         <p style="height: 30px;" >Biomedical Engineering</p>
                         <div class="btn-slide mt-1">
@@ -314,13 +318,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
                     <div class="team-item p-4">
                         <div class="overflow-hidden mb-4">
                             <img class="img-fluid" src="https://www.lerner.ccf.org/images/people/martind4.jpg" alt="">
                         </div>
-                        <h5 class="mb-0">Dr. Daniel Martin, PhD</h5>
-                        <p>Postdoctoral Fellow</p>
+                        <p class="mb-0"> <b>Dr. Daniel Martin, PhD</b></p>
+                        <p>Research Associate</p>
                         <p style="height: 30px;">Biomedical Engineering </p>
                         <div class="btn-slide mt-1">
                             <i class="fa fa-share"></i>
@@ -330,24 +334,38 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.9s">
+                <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.9s">
                     <div class="team-item p-4">
                         <div class="overflow-hidden mb-4">
-                            <img class="img-fluid" src="{% static 'img/Joshi_Jayadev.JPG' %}" alt="">
+                            <img class="img-fluid" src="https://www.lerner.ccf.org/images/people/blanked2.jpg" alt="">
                         </div>
-                        <h5 class="mb-0">Jayadev Joshi, PhD</h5>
-                        <p>Postdoctoral Fellow</p>
-                        <p style="height: 30px;">Center for Comp. Life Sciences</p>
+                        <p class="mb-0"> <b>Dr. Daniel Blankenberg, PhD</b></p>
+                        <p>Assistant Staff</p>
+                        <p style="height: 30px;" >Center for Comp. Life Sciences</p>
                         <div class="btn-slide mt-1">
                             <i class="fa fa-share"></i>
                             <span>
-                                <a href="https://www.lerner.ccf.org/genomic-medicine/blankenberg/#lab-people"><i class="fa fa-globe" aria-hidden="true"></i></a>
+                                <a href="https://www.lerner.ccf.org/genomic-medicine/blankenberg/"><i class="fa fa-globe" aria-hidden="true"></i></a>
                             </span>
                         </div>
                     </div>
                 </div>
-
+                <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="team-item p-4">
+                        <div class="overflow-hidden mb-4">
+                            <img class="img-fluid" src="https://www.lerner.ccf.org/images/people/aptes.jpg" alt="">
+                        </div>
+                        <p class="mb-0"> <b>Dr. Suneel Apte, PhD</b></p>
+                        <p>Staff</p>
+                        <p style="height: 30px;" >Biomedical Engineering</p>
+                        <div class="btn-slide mt-1">
+                            <i class="fa fa-share"></i>
+                            <span>
+                                <a href="https://www.lerner.ccf.org/biomedical-engineering/apte/"><i class="fa fa-globe" aria-hidden="true"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -376,6 +394,5 @@
 
     <!-- Template Javascript -->
     <script src="{% static 'js/main.js' %}"></script>
-    <script src="{% static 'js/form.js' %}"></script>
 </body>
 </html>
