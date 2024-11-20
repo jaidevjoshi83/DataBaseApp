@@ -1,0 +1,30 @@
+{% extends 'DataBase/base.html' %}
+{% load static %}
+
+{% block title %}Protease Definitions and Datasets | DICED{% endblock %}
+{% block cononical %}https://diced.lerner.ccf.org/details{% endblock %}
+{% block metatag %}More information about available datasets and definitions including extracellular matrix, degradomics and more.{% endblock %}
+
+
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-lg-10 wow fadeInUp" data-wow-delay="0.1s">
+                <!-- <h6 class="text-secondary text-uppercase mb-3">Database Facts</h6> -->
+                <h1 class="mb-5">Degradomics, extracellular matrix and disease</h1>
+                <p class="mb-5">
+                    <ul>
+                        <li><b><p class="text-muted justify-text" style="font-size: 20px;text-align: justify;">Uncovering the proteolytic landscape of disease state by forward degradomics:</b> Proteins are extracted from tissues followed by labeling of the protein N-termini, digestion with trypsin, enrichment of the labeled/blocked N-termini and sequence determination by mass spectrometry. It is important that the proteins be in their native state to the extent possible, without reduction of disulfide bonds. The current datasets provide proteolytic and natural peptides identified in human arthritis cartilage and synovial fluid, human aortic aneurysms and human infective endocarditis.</p> <br></li>
+                        <li><b><p class="text-muted justify-text" style="font-size: 20px;text-align: justify;">Defining protease activity by reverse degradomics:</b> A mixture of proteins or intact tissue pulverized to expose the widest surface area for digestion, is incubated with a protease of interest (and compared with a control without protease or inactivated protease) and a similar TAILS procedure conducted as for forward degradomics. Currently, we seek specific targets and cleavage sites of a variety of metalloproteinases (ADAMTS proteases and matrix metalloproteinases (MMPs), serine proteases and cysteine proteases, with a focus on extracellular matrix (ECM) targets of these proteases.</p> <br></li>
+                        <li><b><p class="text-muted justify-text" style="font-size: 20px;text-align: justify;">Matrix and the matrisome:</b> Extracellular matrix is the structural and regulatory macromolecular material between cells. It is most abundant in connective tissues such as cartilage, tendon and bone but is an innate, crucial component of every organ and tissue other than blood. The molecular composition of a tissue or organ is referred to as its matrisome.</p> <br></li>
+                        <li><b><p class="text-muted justify-text" style="font-size: 20px;text-align: justify;">Osteoarthritis (OA):</b> This is one of the most common musculoskeletal disorders, especially seen in people who are over 60 or have had severe joint injuries. One of its hallmarks is breakdown of joint cartilage, and many of the breakdown products find their way into synovial fluid, which bathes the joint. These breakdown products could be useful biomarkers for early diagnosis and for assessing response to treatment. Datasets from OA cartilage and synovial fluid are accessible in DICED.</p> <br></li>
+                        <li><b><p class="text-muted justify-text" style="font-size: 20px;text-align: justify;">Aneurysm:</b> A serious condition in which the aorta, the largest blood vessel in the body, enlarges owing to defects in its cells or weakness in its connective tissue. It is dangerous because of a higher probability of catastrophic rupture of the aneurysm. Accessible datasets are from healthy (donor) ascending aorta and abdominal aorta, ascending aortic aneurysms from patients with Marfan syndrome and infrarenal abdominal aortic aneurysms.</p> <br></li>
+                        <li><b><p class="text-muted justify-text" style="font-size: 20px;text-align: justify;">Endocarditis:</b> In this serious, but fortunately rare condition, bacterial or fungal growths (vegetations) may occur on the surface of the heart valves. The accessible dataset is obtained from vegetations and include both human and microbial peptides.</p> <br></li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

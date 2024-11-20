@@ -1,10 +1,5 @@
 {% extends 'DataBase/base.html' %}
 {% load static %}
-
-{% block title %} DICED user dashboard | DICED {% endblock %}
-{% block cononical %}https://diced.lerner.ccf.org/user_activity{% endblock %}
-{% block metatag %}A submission site for user comments, feedback and bug reports in  DICED{% endblock %}
-
 {% block content %}
 <div class="container-xxl py-5">
     <div class="container py-5">
@@ -12,7 +7,7 @@
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                 <h6 class="text-secondary text-uppercase mb-3">Database Facts</h6>
                 <h1 class="mb-5">N-terminomics Data Statistics</h1>
-                <p class="text-muted justify-text" style="font-size: 20px;text-align: justify;">This web interface provides user-friendly access to N-terminomics data generated at the Cleveland Clinic by Sumit Bhutada, Daniel Martin and Suneel Apte</p>
+                <p class="mb-5">This web interface provides user-friendly access to N-terminomics data generated at the Cleveland Clinic by Sumit Bhutada, Daniel Martin and Suneel Apte</p>
                 <div class="d-flex align-items-center">
                     <div class="ps-4">
                     <i class="fa fa-code-branch fa-2x"></i>
@@ -47,6 +42,7 @@
                     <h6 style="margin-top: 5px;"> <p>Download the server error log from <a href="{% url 'download_log_file' filename='logfile.txt' %}">here</a>.</p></h6>
                     </div>
                 </div>
+
         
                 <div class="container py-5">
                     <div class="row g-5">

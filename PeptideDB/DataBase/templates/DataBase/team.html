@@ -1,0 +1,68 @@
+{% extends 'DataBase/base.html' %}
+{% load static %}
+
+{% block title %}Contact Diced Team | DICED {% endblock %}
+{% block metatag %}Contact the Diced Team for more information. {% endblock %}
+{% block cononical %}https://diced.lerner.ccf.org/team{% endblock %}
+
+
+
+{% block content %}
+<h1 style="margin: 20px;">Please use the form below to submit inquiries about specific degradomics projects, proteolysis, report bugs, suggest improvements to the site, etc.</h1>
+<div class="team-row" >
+    <div class="col-md-12" >
+        <div class="d-flex align-items-center" style="margin-top: 10px;">
+            <div class="ps-4">
+                <i class="fa fa-lightbulb text-primary fa-2x flex-shrink-0"></i>
+            </div>
+            <div class="ps-4">
+                <h6 style="margin-top: 5px;">Suggestions</h6>
+            </div>
+        </div>
+        <div class="d-flex align-items-center" style="margin-top: 10px;">
+            <div class="ps-4">
+                <i class="fa fa-bug text-primary fa-2x flex-shrink-0"></i>
+            </div>
+            <div class="ps-4">
+            <h6 style="margin-top: 5px;">Bug report</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="team-row" >
+
+    <div class="col-md-7"style="margin: 10px;" >
+        {% if status %}
+        <span class="ingredient">{{status}}</span>
+        {%endif%}
+
+        <form action="/team/" method="POST" class="form-contact" >
+            <div class="col-8 ">
+                {%csrf_token%}
+                {% for error in formb.non_field_errors %}
+                <div class="form-group has-errors text-danger small">
+                    {{error}}
+                </div>
+                {% endfor %}
+            
+                {% for field in formb %}
+                <div class="form-group has-errors text-danger small">
+                    {{field.errors}}
+                </div>
+                {% endfor %}
+                <div class="col-12  d-flex align-items-center" style="margin: 5px;">
+                    {{formb.issue_type}}
+                </div>
+                <div class="col-12 d-flex align-items-center" style="margin: 5px;">
+                    {{formb.subject}}
+                </div>
+                <div class="col-12  d-flex align-items-center" style="margin: 5px;">
+                    {{formb.description}}
+                </div>
+                <button class="btn btn-danger" style="margin-left: 5px;" type="submit"> Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

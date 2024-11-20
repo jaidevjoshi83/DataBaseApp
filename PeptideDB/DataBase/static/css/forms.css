@@ -1,5 +1,14 @@
-.form-control{
-    margin-bottom: 10px;
+/* .form-control{
+    margin-bottom: 6px;
+} */
+
+.form-control {
+    height: 50px;
+}
+
+
+.form-control::placeholder {
+    font-size: 20px;
 }
 
 

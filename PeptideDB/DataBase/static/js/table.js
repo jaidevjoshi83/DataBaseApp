@@ -13,6 +13,7 @@ var getJSON = function(url, callback) {
     xhr.send();
 };
 
+
 var hostname = document.getElementById('hostname').getAttribute('data-hostname');
 var query_acc = document.getElementById('hostname').getAttribute('data-acc');
 var query_des = document.getElementById('hostname').getAttribute('data-des');
@@ -54,6 +55,8 @@ function(err, data) {
 });
 
 function table_content(data){
+
+    console.log("OK", data)
 
     var table_body = document.querySelector('tbody')
     removeAllChildNodes(table_body)

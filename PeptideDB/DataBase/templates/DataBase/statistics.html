@@ -1,0 +1,57 @@
+{% extends 'DataBase/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- Fact Start -->
+    <div class="container-xxl py-5" id="Statistics">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <h6 class="text-secondary text-uppercase mb-3">Database Facts</h6>
+                    <h1 class="mb-5">N-terminomics Data Statistics</h1>
+                    <p class="mb-5"> This web interface offers a user-friendly portal to N-terminomics data produced by Sumit Bhutada, Daniel Martin, and Suneel Apte at the Cleveland Clinic.</p>            
+                    <div class="d-flex align-items-center">
+                        <div class="ps-4">
+                        <i class="fa fa-code-branch fa-2x"></i>
+                        </div>
+                        <div class="ps-4">
+                            <h6 style="margin-top: 5px;">DB Version: DICED_{{meta_data.version}}</h6>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="ps-4">
+                           <i class="fas fa-calendar fa-2x"></i>
+                        </div>
+                        <div class="ps-4">
+                        <h6 style="margin-top: 5px;">Updated on: {{meta_data.release_date}}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-sm-6">
+                            <div class="bg-primary p-4 mb-0 wow fadeIn" data-wow-delay="0.3s">
+                                <i class="fa fa-database fa-2x text-white mb-3"></i>
+                                <h2 class="text-white mb-2" data-toggle="counter-up">{{acv}}</h2>
+                                <p class="text-white mb-0">Proteins</p>
+                            </div>
+                            {% comment %} <div class="bg-secondary p-4 wow fadeIn" data-wow-delay="0.5s">
+                                <i class="fa fa-database fa-2x text-white mb-3"></i>
+                                <h2 class="text-white mb-2" data-toggle="counter-up">3</h2>
+                                <p class="text-white mb-0">Diseases</p>
+                            </div> {% endcomment %}
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="bg-success p-4 wow fadeIn" data-wow-delay="0.7s">
+                                <i class="fa fa-database fa-2x text-white mb-3"></i>
+                             
+                                <h2 class="text-white mb-2" data-toggle="counter-up">{{clv}}</h2>
+                                <p class="text-white mb-0">Cleavage Sites</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fact End -->
+{% endblock %}

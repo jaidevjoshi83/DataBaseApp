@@ -1,0 +1,215 @@
+{% extends 'DataBase/base.html' %}
+{% load static %}
+{% block title %}About DICED | DICED {% endblock %}
+{% block metatag %}Learn more about why Diced was created and its team members. {% endblock %}
+{% block cononical %}https://diced.lerner.ccf.org/about{% endblock %}
+
+
+{% block content %}
+
+<div class="row align-items-center">
+    <div class="col-md-3 mt-1">
+        <img src="{% static 'img/side_logo.png' %}" alt="Image represents overview of degradomics"  class="img-fluid" >
+    </div>
+    <div class="col-md-9 mt-5" >
+        <div class="col-lg-10 wow fadeInUp" data-wow-delay="0.1s">
+            <!-- <h6 class="text-secondary text-uppercase mb-3">Database Facts</h6> -->
+            <h1 class="mb-5">Why and how was DICED developed? </h1>
+            <ul>
+                <li><p class="text-muted justify-text" style="font-size: 20px;text-align: justify;">Development of DICED was guided mainly by FAIR (Findable, Accessible, Interoperable, Reusable) principles for research data management. Another motivation was the ease of searching across multiple degradome datasets, not presently possible otherwise. Data from proteomics and degradomics analysis is traditionally deposited in ProteomeXchange, but analysis of the downloaded datasets requires expertise in proteomics data handling and is labor and time intensive. DICED makes it easy to access our degradomics data with a simple search interface using one of three search terms.</p> <br></li>
+                <li><p class="text-muted justify-text" style="font-size: 20px;text-align: justify;">DICED was built upon the Django framework and uses a PostgreSQL database for data management. </p><br></li>
+                <li><p class="text-muted justify-text" style="font-size: 20px;text-align: justify;">Whereas DICED is currently limited in its data holdings to datasets produced by the Apte Laboratory at Cleveland Clinic , it is a potential model for a future publicly maintained data access interface and repository for all curated, published degradome data. </p> <br></li>
+                <li><p class="text-muted justify-text" style="font-size: 20px;text-align: justify;"><b>Organisms:</b> The inclusion of datasets from non-human mammals embraces the One-Medicine concept, which is that human and veterinary medicine are interdependent and should therefore be used together to advance both human and animal health. At the present time, the databases that can be searched will include the human, bovine and equine species. </p> <br></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="team-row" style="margin: 10px;">
+    <div class="col-md-12" >
+        <p class="text-muted justify-text"  style="font-size: 20px;text-align: justify;" > DICED is a collaborative venture between independent groups at the Cleveland Clinic. Sumit Bhutada, Daniel Martin and Suneel Apte are members of a laboratory investigating proteases and proteolysis. Jayadev Joshi and Daniel Blankenberg are bioinformaticians and Joyce Guzowski is a web content manager. </p>
+    </div>
+</div>
+
+<div class="team-row" style="margin-left: 20px;">
+    <div class="col-md-5" >
+        <div class="row">
+            <div class="col-md-3" >
+                <div style="margin-top:20px; margin-left: 5px;margin-bottom: 10px;">
+                    <img class="img-fluid" src="{% static 'img/Joshi_Jayadev.png' %}" alt="Jayadev joshi is a bioinformatician working at the Center for Computational Life Sciences, Lerner Research Institue, Cleveland Clinic, as a Research Associate" >
+                </div>
+            </div>
+            <div class="col-md-8" >
+                <div class="card-body">
+                    <h4 class="card-title">Jayadev Joshi, PhD</h4>
+                    <span></span>
+                    <p class="card-text" style="font-size: 20px">
+                        Research Associate <br>
+                        Center for Computational Life Sciences<br>
+                        <span>
+                            <a href="https://www.lerner.ccf.org/genomic-medicine/blankenberg/#lab-people"><i class="fa fa-globe" aria-hidden="true"></i></a>
+                        </span>
+
+                        <a href="https://www.lerner.ccf.org/computational-medicine/blankenberg/#lab-people" target="_blank">Lab Profile</a>
+                        <i class="fa fa-share"></i>
+                        <a href="mailto:jungj@ccf.org">joshij@ccf.org</a>
+                        
+                    </p>
+                    <p  style="text-align: justify;font-size: 20px;">
+                        Jay is a bioinformatician working at the Center for Computational Life Sciences as a Research Associate, specializing in software and algorithm development for computational chemistry, drug discovery, and multi-omics data analysis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-5" >
+        <div class="row">
+            <div class="col-md-3">
+                <div style="margin-top:20px; margin-left: 5px;margin-bottom: 10px;">
+                    <img class="img-fluid" src="{% static 'img/bhutads.jpg' %}" alt="Submit Bhutada is an expert in proteomics working at the Biomedical Engineering, Lerner Research Institue, Cleveland Clinic, as a Research Associate">
+                </div>
+            </div>
+            <div class="col-md-8" >
+                <div class="card-body">
+                    <h4 class="card-title">Sumit Bhutada, PhD</h4>
+                    <span></span>
+                    <p class="card-text" style="font-size: 20px">
+                        Research Associate <br>
+                        Biomedical Engineering <br>
+
+                        <span>
+                            <a href="https://www.lerner.ccf.org/genomic-medicine/blankenberg/#lab-people"><i class="fa fa-globe" aria-hidden="true"></i></a>
+                        </span>
+
+                        <a href="https://www.lerner.ccf.org/biomedical-engineering/apte/#lab-people" target="_blank">Lab Profile</a>
+                        <i class="fa fa-share"></i>
+                        <a href="mailto:BHUTADS@ccf.org">BHUTADS@ccf.org</a>
+                    </p>
+                    <p style="text-align: justify;font-size: 20px;">
+                        Sumit is an expert in proteomics and degradomics workflows, working as a Research Associate in Biomedical Engineering, with a career interest in defining the roles of proteases in the progression of arthritis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="team-row" style="margin-left: 20px;">
+    <div class="col-md-5" >
+        <div class="row">
+            <div class="col-md-3">
+                <div style="margin-top:20px; margin-left: 5px;margin-bottom: 10px;">
+                    <img class="img-fluid" src="{% static 'img/martind4.jpg' %}" alt="Daniel Martin is a molecular biologist working at the Biomedical Engineering, Lerner Research Institue, Cleveland Clinic, as a Research Associate">
+                </div>
+            </div>
+            <div class="col-md-8" >
+                <div class="card-body">
+                    <h4 class="card-title">Daniel Martin, PhD </h4>
+                    <span></span>
+                    <p class="card-text" style="font-size: 20px">
+                        Research Associate <br>
+                        Biomedical Engineering<br>
+
+                        <span>
+                            <a href="https://www.lerner.ccf.org/genomic-medicine/blankenberg/#lab-people"><i class="fa fa-globe" aria-hidden="true"></i></a>
+                        </span>
+
+                        <a href="https://www.lerner.ccf.org/biomedical-engineering/apte/#lab-people" target="_blank">Lab Profile</a>
+                        <i class="fa fa-share"></i>
+                        <a href="mailto:martind4@ccf.org">martind4@ccf.org</a>
+                    </p>
+                    <p style="text-align: justify;font-size: 20px;">Daniel is a molecular biologist working as a Research Associate in Biomedical Engineering, specializing in mass spectrometry-based proteomics, including degradomics, with a career interest in cardiovascular disease.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5" >
+        <div class="row">
+            <div class="col-md-3">
+                <div style="margin-top:20px; margin-left: 5px;margin-bottom: 10px;">
+                    <img class="img-fluid" src="{% static 'img/blanked2.jpg' %}" alt="Daniel Blankenberg is a bioinformatician working at the Center for Computational Life Sciences, Lerner Research Institue, Cleveland Clinic.">
+                </div>
+            </div>
+            <div class="col-md-8" >
+                <div class="card-body">
+                    <h4 class="card-title">Daniel Blankenberg, PhD</h4>
+                    <span></span>
+                    <p class="card-text" style="font-size: 20px">
+                        Associate Staff <br>
+                        Biomedical Engineering<br>
+        
+                        <span>
+                            <a href="https://www.lerner.ccf.org/genomic-medicine/blankenberg/#lab-people"><i class="fa fa-globe" aria-hidden="true"></i></a>
+                        </span>
+                        <a href="https://www.lerner.ccf.org/computational-medicine/blankenberg/#lab-investigator" target="_blank">Lab Profile</a>
+                        <i class="fa fa-share"></i>
+                        <a href="mailto:blanked2@ccf.org">blanked2@ccf.org</a>
+                    
+                    <p  style="text-align: justify;font-size: 20px;">Daniel is a computational biologist working as an Associate Staff member at the Center for Computational Life Sciences. The goal of the Blankenberg Lab is to develop robust and accessible computational tools needed to analyze complex biomedical datasets.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="team-row" style="margin-left: 20px;">
+    <div class="col-md-5" >
+        <div class="row">
+            <div class="col-md-3">
+                <div style="margin-top:20px; margin-left: 5px;margin-bottom: 10px;">
+                    <img class="img-fluid" src="{% static 'img/aptes.jpg' %}" alt="Suneel Apte is working at the Biomedical Engineering, Lerner Research Institue, Cleveland Clinic, as a Research Associate">
+                </div>
+            </div>
+            <div class="col-md-8" >
+                <div class="card-body">
+                    <h4 class="card-title">Suneel Apte, MBBS, DPhil (MD, PhD)</h4>
+                    <span></span>
+                    <p class="card-text" style="font-size: 20px">
+                        Staff <br>
+                        Biomedical Engineering<br>
+
+                        <span>
+                            <a href="https://www.lerner.ccf.org/genomic-medicine/blankenberg/#lab-people"><i class="fa fa-globe" aria-hidden="true"></i></a>
+                        </span>
+
+                        <a href="https://www.lerner.ccf.org/biomedical-engineering/apte/" target="_blank">Lab Profile</a>
+                        <i class="fa fa-share"></i>
+                        <a href="mailto:APTES@ccf.org">APTES@ccf.org</a>
+                    </p>
+                    <p  style="text-align: justify;font-size: 20px;">Suneel is a former clinician trained in genetics, molecular biology, and biochemistry, working as a Staff member in Biomedical Engineering. He has a career interest in proteases and the extracellular matrix in morphogenesis and human disease.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5" >
+        <div class="row">
+            <div class="col-md-3">
+                <div style="margin-top:20px; margin-left: 5px; margin-bottom: 10px;">
+                    <img class="img-fluid" src="{% static 'img/Guzowski_Joyce.PNG' %}" alt="Joyce is a web content expert working at the Lerner Research Institute, Cleveland Clinic">
+                </div>
+            </div>
+            <div class="col-md-8" >
+                <div class="card-body">
+                    <h4 class="card-title">Joyce Guzowski</h4>
+                    <span></span>
+                    <p class="card-text" style="font-size: 20px">
+                        Web Content Manager <br>
+                        <span>
+                            <a href="https://www.lerner.ccf.org/genomic-medicine/blankenberg/#lab-people"><i class="fa fa-globe" aria-hidden="true"></i></a>
+                        </span>
+                        <a href="https://www.lerner.ccf.org/" target="_blank">Lab Profile</a>
+                        <i class="fa fa-share"></i>
+                        <a href="mailto:GUZOWSJ@ccf.org">GUZOWSJ@ccf.org</a>
+                    </p> 
+                    <p  style="text-align: justify;font-size: 20px;">Joyce is a web content expert working as a Web Content Manager at the Lerner Research Institute, where she implements content strategies for websites of all sizes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}						

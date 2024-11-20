@@ -33,6 +33,6 @@ class BugReportingForm(forms.Form):
     )
 
     description = forms.CharField(
-        widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter the description'}),
+        widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter the description', 'id':'contact-form-description'}),
         required=True,
     )

@@ -3,7 +3,7 @@
 }
 .overflow-hidden.px-lg-0 {
     background: rgb(199,224,241);
-    height: 700px;
+    /* height: 700px; */
     
 }
 .justify-content-center > .col-12 {
@@ -60,7 +60,7 @@
   }
 
   .mx-2 {
-    margin-top: 150px;
+    margin-top: 60px;
     background: rgb(255,255,255);
     padding: 40px;
 }

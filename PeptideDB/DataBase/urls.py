@@ -27,4 +27,12 @@ urlpatterns = [
     path('data_list/', views.data_list, name='data_list'),
     path('download_saved_data/', views.download_saved_data, name='download_saved_data'),
     path('download_log_file/<str:filename>/', views.download_log_file, name='download_log_file'),
+    path('about/', views.about, name='about'),
+    path('team/', views.team, name='team'),
+    path('details/', views.details, name='details'),
+    path('publication/', views.publication, name='publication'),
+    path('home/', views.home, name='home'),
+    path('statistics/', views.statistics, name='statistics'),
+    path('contact/', views.contact, name='contact'),
+    path('org/', views.org, name='org'),
 ]

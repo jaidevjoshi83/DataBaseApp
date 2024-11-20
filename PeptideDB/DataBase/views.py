@@ -1,31 +1,29 @@
 import os
-from .forms import  dabase_form, UploadFileForm, BugReportingForm
-from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth import logout
-from django.http import HttpResponseRedirect, JsonResponse,  HttpResponse
-from django.contrib.admin.views.decorators import staff_member_required
-from datetime import datetime
-from .models import UploadedData, BugReporting, PeptideSeq, DataBaseVersion, File
-from django.core import serializers
-import pandas as  pd
 import json
-from .utils import write_metadata_json, return_metadata, time_stamp, return_object_count
+import uuid
+import ijson
+import pandas as  pd
 from io import StringIO
-from django.core.management import call_command
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.views.decorators.csrf import csrf_exempt
-# from .utils import return_merge_peptidedata
 from pathlib import Path
+from datetime import datetime
+from urllib.parse import quote
 from django.conf import settings
 from django.db import transaction
-from datetime import datetime
-import uuid
+from django.contrib import messages
+from django.core import serializers
+from django.contrib.auth import logout
 from django.contrib.auth.models import User
-from urllib.parse import quote
-import ijson
+from django.shortcuts import render, redirect
+from django.core.management import call_command
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
-from urllib.parse import quote
+from .forms import  dabase_form, UploadFileForm, BugReportingForm
+from django.contrib.admin.views.decorators import staff_member_required
+from django.http import HttpResponseRedirect, JsonResponse,  HttpResponse
+from .models import UploadedData, BugReporting, PeptideSeq, DataBaseVersion, File
+from .utils import write_metadata_json, return_metadata, time_stamp, return_object_count
+
 
 all_users = User.objects.all()
 base_dir = settings.MEDIA_ROOT
@@ -46,82 +44,13 @@ def contact(request):
     logout(request)
     return render(request, 'DataBase/contact.html', {})
 
-# @csrf_protect
-# def DB(request):
-#     acv = len(set(list(PeptideSeq.objects.filter(accession__isnull=False).values_list('accession', flat=True))))
-#     clv = len((list(PeptideSeq.objects.filter(cleavage_site__isnull=False).values_list('cleavage_site', flat=True))))
-
-#     if request.method == 'POST':
-#         form = dabase_form(request.POST)
-#         formb = BugReportingForm(request.POST)
-
-#         print(formb)
-
-#         if form.is_valid():
-#             description = form.cleaned_data['Sequence']
-#             accession = form.cleaned_data['Accession']
-#             peptide = form.cleaned_data['Peptide']  
-            
-#             param = {
-#                 'acc': accession if accession else 'undefined',
-#                 'des': description if description else 'undefined',
-#                 'pep': peptide if peptide else 'undefined',  # Add other fields as needed
-#                 'host_name': request.get_host()
-#             }
-
-#             if description or accession or peptide:
-#                 return render(request, 'DataBase/table.html', param)
-            
-#         if formb.is_valid():
-
-#             now = datetime.now()
-#             a = BugReporting.objects.create(
-#                 title = formb.cleaned_data['title'],
-#                 report_date = now.strftime("%Y-%m-%d"),
-#                 report_time = now.strftime("%H:%M:%S"),
-#                 bug_description = formb.cleaned_data['bug_description'],
-#                 user_name  =  formb.cleaned_data['user_name'],
-#             )
-#             a.save()
-
-#             return render(request, 'DataBase/index.html', {'form': form, 'formb':formb,   'acv':acv, 'clv':clv, 'meta_data':meta_data, 'is_authenticated':request.user.is_authenticated, 'host_name': request.get_host()})
-
-#             # return HttpResponseRedirect('/success')
-#     else:
-#         Fasta = ''
-#         Acc = ''
-#         form = dabase_form(initial={'Sequence':Fasta,'Accession':Acc})
-
-
-#     if len(DataBaseVersion.objects.all()) == 0:
-#             v = DataBaseVersion.objects.create(
-#                     version = '0.0.0' ,
-#                     time_stamp = time_stamp(),
-#                 )
-            
-#             meta_data = {
-#                 "version": v.version,
-#                 "release_date": v.time_stamp
-#             }
-#     else:
-#         latest_objects = DataBaseVersion.objects.all().latest('time_stamp')
-#         meta_data = {
-#                 "version": latest_objects.version,
-#                 "release_date": latest_objects.time_stamp.split('.')[0]
-#          }
-
-#     return render(request, 'DataBase/index.html', {'form': form,    'acv':acv, 'clv':clv, 'meta_data':meta_data, 'is_authenticated':request.user.is_authenticated, 'host_name': request.get_host()})
-
-
-
 @csrf_protect
 def DB(request):
     acv = PeptideSeq.objects.filter(accession__isnull=False).values('accession').distinct().count()
     clv = PeptideSeq.objects.filter(cleavage_site__isnull=False).values('cleavage_site').count()
 
-    if request.method == 'POST' or  request.method == 'POST':
+    if request.method == 'POST' :
         form = dabase_form(request.POST)
-        formb = BugReportingForm(request.POST)
 
         if form.is_valid():
             description = form.cleaned_data.get('Sequence', '')
@@ -138,18 +67,6 @@ def DB(request):
             if description or accession or peptide:
                 return render(request, 'DataBase/table.html', param)
 
-        if formb.is_valid():
-
-            now = datetime.now()
-            a = BugReporting.objects.create(
-                title=formb.cleaned_data['subject'],
-                report_date=now.strftime("%Y-%m-%d"),
-                report_time=now.strftime("%H:%M:%S"),
-                bug_description=formb.cleaned_data['description'],
-                types=formb.cleaned_data['issue_type'],
-            )
-
-            a.save()
 
             latest_objects = DataBaseVersion.objects.all().latest('time_stamp')
             meta_data = {
@@ -157,13 +74,8 @@ def DB(request):
                     "release_date": latest_objects.time_stamp.split('.')[0]
             }
 
-            clean_form = BugReportingForm()
-
             return render(request, 'DataBase/index.html', {
                 'form': form,
-                'formb': clean_form,
-                'acv': acv,
-                'clv': clv,
                 'meta_data': meta_data,
                 'is_authenticated': request.user.is_authenticated,
                 'host_name': request.get_host(),
@@ -193,15 +105,10 @@ def DB(request):
 
     return render(request, 'DataBase/index.html', {
         'form': form,
-        'formb': formb,
-        'acv': acv,
-        'clv': clv,
         'meta_data': meta_data,
         'is_authenticated': request.user.is_authenticated,
         'host_name': request.get_host(),
     })
-
-
 
 def saveMetadata(metadata, file_name):
     now = datetime.now()
@@ -241,7 +148,6 @@ def validate_data_file(file_path):
                 return {"validation": False, "error_column": h}
         return {'validation': True, "error_column": None}
 
-  
 @csrf_protect
 def bugs(request):
 
@@ -344,18 +250,8 @@ def import_tsv_data_to_model(file_path, ref_link, uploaded_data):
         )
         v.save()
 
-
 def PepView(request):
     filters = {}
-
-    #Case sensitive filtering removed
-    
-    # if 'des' in request.GET:
-    #     filters['protein_name__contains'] = request.GET['des']
-    # if 'acc' in request.GET:
-    #     filters['accession__contains'] = request.GET['acc']
-    # if 'pep' in request.GET:
-    #     filters['peptide_sequence__startswith'] = request.GET['pep']
 
     if 'des' in request.GET:
         filters['protein_name__icontains'] = request.GET['des']  
@@ -365,7 +261,9 @@ def PepView(request):
         filters['peptide_sequence__istartswith'] = request.GET['pep']  
 
     if filters:
+        
         record = PeptideSeq.objects.filter(**filters)
+        print(record)
         qs = serializers.serialize('json', record)
         qs_json = return_merge_peptidedata(json.loads(qs))
         return JsonResponse(qs_json, safe=False)
@@ -380,14 +278,6 @@ def data_validation_error(request):
 
 def test_view(request):
     return render(request, 'DataBase/table_1.html')
-
-# @login_required
-# @staff_member_required
-# def top_bugs(request):
-#     # bugs = BugReporting.objects.all().order_by('-report_date').order_by('-report_time')
-#     bugs = BugReporting.objects.all().order_by('-report_date', '-report_time')
-    
-#     return render(request, 'DataBase/bug_list.html', {'bugs': bugs})
 
 def return_merge_peptidedata(retrived_peps):
     
@@ -455,7 +345,6 @@ def return_merge_peptidedata(retrived_peps):
         updated_pep_records.append(updated_pep_record)
 
     return updated_pep_records
-
 
 @staff_member_required
 def user_activity(request):
@@ -587,7 +476,6 @@ def fileUploader(request):
 @login_required
 def UploadedView(request):
     return render(request, 'DataBase/load_data_from_backup_file.html', {})
-
 
 @login_required
 @staff_member_required
@@ -742,7 +630,6 @@ def upload_complete(request):
 def import_json_data_to_model(filepath):
 
     backup_file_path = os.path.join('media','uploads',filepath)
-
     UploadedData.objects.all().delete()
     BugReporting.objects.all().delete()
     PeptideSeq.objects.all().delete()
@@ -826,7 +713,6 @@ def import_json_data_to_model(filepath):
 
     if new_peptides:
         BugReporting.objects.bulk_create(new_bugs)
-
 
 def import_json_data_to_modelOLD(file_name, uploaded_data):
 
@@ -941,18 +827,6 @@ def data_list(request):
         datasets.append({'id':i.datafile_index, 'file_name':i.data_file_name, 'upload_type':i.upload_type, 'user': i.user_name, 'type': i.experiment_type, 'date':i.data_upload_date })
     return render(request, 'DataBase/data_list.html', {'datasets': datasets})
 
-#Returning json file with incorrect extension
-# @login_required
-# @staff_member_required
-# def download_saved_data(request):
-#     f_name = request.GET.get('file_name')
-#     output = StringIO()
-#     call_command('dumpdata', stdout=output)
-#     response = HttpResponse(output.getvalue(), content_type='application/json')
-#     response['Content-Disposition'] = 'attachment; filename='+f_name
-#     return response
-
-
 @login_required
 @staff_member_required
 def download_saved_data(request):
@@ -981,8 +855,94 @@ def download_log_file(request, filename):
     else:
         return HttpResponseRedirect("/errors/?message= File Does't exist..") 
     
-
-
 def sample_table_view(request):
     return render(request, 'DataBase/test_table.html')
 
+def about(request):
+    return render(request, 'DataBase/about.html')
+
+def team(request):
+
+    if request.method == 'POST':
+        formb = BugReportingForm(request.POST)
+
+        if formb.is_valid():
+
+            now = datetime.now()
+            a = BugReporting.objects.create(
+                title=formb.cleaned_data['subject'],
+                report_date=now.strftime("%Y-%m-%d"),
+                report_time=now.strftime("%H:%M:%S"),
+                bug_description=formb.cleaned_data['description'],
+                types=formb.cleaned_data['issue_type'],
+            )
+
+            a.save()
+
+    clean_form = BugReportingForm()
+
+    return render(request, 'DataBase/team.html', {'formb': clean_form})
+
+def home(request):
+    return render(request, 'DataBase/home.html')
+
+def details(request):
+    return render(request, 'DataBase/details.html')
+
+def publication(request):
+    return render(request, 'DataBase/publication.html')
+
+def org(request):
+    return render(request, 'DataBase/organization.html')
+
+def statistics(request):
+    acv = PeptideSeq.objects.filter(accession__isnull=False).values('accession').distinct().count()
+    clv = PeptideSeq.objects.filter(cleavage_site__isnull=False).values('cleavage_site').count()
+
+    latest_objects = DataBaseVersion.objects.all().latest('time_stamp')
+
+    meta_data = {
+                    "version": latest_objects.version,
+                    "release_date": latest_objects.time_stamp.split('.')[0]
+            }
+
+    if len(DataBaseVersion.objects.all()) == 0:
+            v = DataBaseVersion.objects.create(
+                    version = '0.0.0' ,
+                    time_stamp = time_stamp(),
+                )
+            
+            meta_data = {
+                "version": v.version,
+                "release_date": v.time_stamp
+            }
+    else:
+        latest_objects = DataBaseVersion.objects.all().latest('time_stamp')
+        meta_data = {
+                "version": latest_objects.version,
+                "release_date": latest_objects.time_stamp.split('.')[0]
+         }
+
+    print(meta_data)
+    return render(request, 'DataBase/statistics.html', {'acv':acv, 'clv':clv, 'meta_data':meta_data})
+
+def contact(request):
+    if request.method == 'POST':
+        formb = BugReportingForm(request.POST)
+
+        if formb.is_valid():
+
+            now = datetime.now()
+            a = BugReporting.objects.create(
+                title=formb.cleaned_data['subject'],
+                report_date=now.strftime("%Y-%m-%d"),
+                report_time=now.strftime("%H:%M:%S"),
+                bug_description=formb.cleaned_data['description'],
+                types=formb.cleaned_data['issue_type'],
+            )
+
+            a.save()
+
+    clean_form = BugReportingForm()
+
+    return render(request, 'DataBase/contact.html', {'formb': clean_form})
